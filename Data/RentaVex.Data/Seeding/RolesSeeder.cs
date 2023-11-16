@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using RentaVex.Common;
-    using RentaVex.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using RentaVex.Common;
+    using RentaVex.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

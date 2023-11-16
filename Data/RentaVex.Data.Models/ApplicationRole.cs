@@ -3,9 +3,8 @@ namespace RentaVex.Data.Models
 {
     using System;
 
-    using RentaVex.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using RentaVex.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

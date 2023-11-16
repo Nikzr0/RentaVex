@@ -1,9 +1,8 @@
 ﻿namespace RentaVex.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

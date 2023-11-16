@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using RentaVex.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using RentaVex.Web.ViewModels;
 
     public class HomeController : BaseController
     {

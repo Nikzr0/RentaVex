@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using RentaVex.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

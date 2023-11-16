@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using RentaVex.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

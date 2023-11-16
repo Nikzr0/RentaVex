@@ -1,7 +1,14 @@
-﻿namespace RentaVex.Web
+﻿ namespace RentaVex.Web
 {
     using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using RentaVex.Data;
     using RentaVex.Data.Common;
     using RentaVex.Data.Common.Repositories;
@@ -12,14 +19,6 @@
     using RentaVex.Services.Mapping;
     using RentaVex.Services.Messaging;
     using RentaVex.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
 
     public class Program
     {

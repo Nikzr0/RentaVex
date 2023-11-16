@@ -4,9 +4,8 @@ namespace RentaVex.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using RentaVex.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using RentaVex.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
