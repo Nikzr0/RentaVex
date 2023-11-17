@@ -11,6 +11,12 @@
     // Camping equipement -->> (tent, sleeping bag and etc.)
     public class ProductItem
     {
+        public ProductItem()
+        {
+            this.UserInteractions = new HashSet<UserInteraction>();
+            this.Likes = new HashSet<Like>();
+        }
+
         public int ProductItemID { get; set; }
 
         public int ProductID { get; set; }

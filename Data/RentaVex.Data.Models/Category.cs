@@ -11,6 +11,12 @@
     public class Category : BaseDeletableModel<int>
     {
         // public int CategoryID { get; set; }
+        public Category()
+        {
+            this.Subcategories = new HashSet<Category>();
+            this.ProductCategories = new HashSet<ProductCategory>();
+            this.Products = new HashSet<Product>();
+        }
 
         public string Name { get; set; }
 

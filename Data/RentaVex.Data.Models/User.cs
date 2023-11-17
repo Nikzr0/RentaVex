@@ -10,6 +10,18 @@
 
     public class User : BaseDeletableModel<int>
     {
+        public User()
+        {
+            this.UserInteractions = new HashSet<UserInteraction>();
+            this.Transactions = new HashSet<Transaction>();
+            this.Likes = new HashSet<Like>();
+            this.Products = new HashSet<Product>();
+            this.Followers = new HashSet<Follow>();
+            this.Following = new HashSet<Follow>();
+            this.Sellers = new HashSet<Follow>();
+            this.LikedProducts = new HashSet<Product>();
+        }
+
         // public int UserID { get; set; }
         public string Username { get; set; }
 

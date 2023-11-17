@@ -10,6 +10,17 @@
 
     public class Product : BaseDeletableModel<int>
     {
+        public Product()
+        {
+            this.Images = new HashSet<Image>();
+            this.Availabilities = new HashSet<ProductAvailability>();
+            this.ProductCategories = new HashSet<ProductCategory>();
+            this.ProductItems = new HashSet<ProductItem>();
+            this.UserInteractions = new HashSet<UserInteraction>();
+            this.Transactions = new HashSet<Transaction>();
+            this.Likes = new HashSet<Like>();
+        }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
