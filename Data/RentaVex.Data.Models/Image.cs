@@ -15,11 +15,11 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public virtual Product Product { get; set; }
-
         public string Extention { get; set; } // What type is the image -->> (.png or etc.)
 
-        public int AddedByUserId { get; set; }
+        public int AddedByUserId { get; set; } // Niki said that it should be string but it didn't work so I changed it :)
+
+        public virtual Product Product { get; set; }
 
         public ApplicationUser AddedByUser { get; set; }
 

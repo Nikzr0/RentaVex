@@ -8,7 +8,6 @@
 
     using RentaVex.Data.Common.Models;
 
-    // There is ID in (BaseDeletableModel) so (BaseDeletableModel) us excessive
     public class Product : BaseDeletableModel<int>
     {
         public string Name { get; set; }
@@ -21,26 +20,25 @@
 
         public string Contact { get; set; }
 
-        // public string Category { get; set; } I create it with type Category
+        public int CategoryID { get; set; } // Foreign key to Category
+
+        public virtual Category Category { get; set; } // Navigation property
+
+
         public bool IsForSale { get; set; }
 
         public bool IsForRent { get; set; }
 
-        public int CategoryID { get; set; } // Foreign key to Category
-
-        public virtual Category Category { get; set; } // Navigation property
 
         // It will only work if the images are from the internet, but because real users will use the web app they will upload and we cannot do it like this.
         // public ICollection<string> Photos { get; set; } // Collection of photo URLs
         public ICollection<Image> Images { get; set; } // Collection of images
 
-        public ICollection<ProductAvailability> Availabilities { get; set; } // Availability information
+        public ICollection<ProductAvailability> Availabilities { get; set; } // must figure it out
 
-        public ICollection<ProductCategory> ProductCategories { get; set; } // Many-to-many relationship
+        public ICollection<ProductCategory> ProductCategories { get; set; } // Many-to-many relationship/ No idea :)
 
         //public ICollection<Category> Categories => ProductCategories.Select(pc => pc.Category).ToList(); // Convenience property for easy access to categories
-
-        public Category Categories { get; set; }
 
         public DateTime PickupTime { get; set; }
 
@@ -54,11 +52,10 @@
 
         public ICollection<ProductItem> ProductItems { get; set; } // Collection of items composing the product
 
-        public bool IsWarned { get; set; } // Indicates if the user has provided a warning
+        public bool IsWarned { get; set; }
 
-        public string WarningMessage { get; set; } // Message describing the warning
+        public string WarningMessage { get; set; }
 
-        // Navigation properties
         public ICollection<UserInteraction> UserInteractions { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }

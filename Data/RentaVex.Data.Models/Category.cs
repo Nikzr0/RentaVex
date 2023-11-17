@@ -6,19 +6,19 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Category
+    using RentaVex.Data.Common.Models;
+
+    public class Category : BaseDeletableModel<int>
     {
-        public int CategoryID { get; set; }
+        // public int CategoryID { get; set; }
 
         public string Name { get; set; }
 
-        //public int? ParentCategoryID { get; set; }
-        
         public virtual Category ParentCategory { get; set; }
 
-        public virtual ICollection<Category> Subcategories { get; set; } // Collection of subcategories
+        public virtual ICollection<Category> Subcategories { get; set; } // Not sure how it works.
 
-        public ICollection<ProductCategory> ProductCategories { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; } // I do not understand ProductCategory
 
         public virtual ICollection<Product> Products { get; set; }
     }

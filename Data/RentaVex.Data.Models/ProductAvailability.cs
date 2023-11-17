@@ -16,7 +16,6 @@
 
         public bool IsAvailable { get; set; }
 
-        // Navigation properties
         public Product Product { get; set; }
     }
 }

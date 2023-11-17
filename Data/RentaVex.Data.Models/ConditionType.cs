@@ -10,5 +10,6 @@
     {
         New,
         Used,
+        Damaged,
     }
 }

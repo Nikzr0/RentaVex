@@ -8,7 +8,7 @@
 
     public class Follow
     {
-        public int FollowID { get; set; }
+        public int FollowID { get; set; } // Do I even need that
 
         public int FollowerID { get; set; }
 

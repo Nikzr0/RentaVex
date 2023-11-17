@@ -6,16 +6,15 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    // No idea if I actually need this table :)
     public class ProductCategory
     {
         public int ProductID { get; set; }
 
         public int CategoryID { get; set; }
 
-        // Navigation properties
         public Product Product { get; set; }
 
         public Category Category { get; set; }
     }
-
 }

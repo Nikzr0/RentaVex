@@ -117,7 +117,7 @@
                 .HasForeignKey(pi => pi.ProductID);
 
             modelBuilder.Entity<Category>()
-                .HasKey(c => c.CategoryID);
+                .HasKey(c => c.Id);
 
             modelBuilder.Entity<ProductCategory>()
                 .HasKey(pc => new { pc.ProductID, pc.CategoryID });

@@ -15,15 +15,14 @@
         public int ProductID { get; set; }
 
         // public InteractionType Type { get; set; } enum for like -->> (no idea how it works)
-        public double Rating { get; set; } // Rating from 0 to 5
+        public ProductRating Rating { get; set; } // Rating from 0 to 5
 
         public string Comment { get; set; }
 
-        public bool HasWarning { get; set; } // Indicates if the user has provided a warning
+        public bool HasWarning { get; set; }
 
-        public string WarningMessage { get; set; } // Message describing the warning
+        public string WarningMessage { get; set; }
 
-        // Navigation properties
         public User User { get; set; }
 
         public Product Product { get; set; }
