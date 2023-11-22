@@ -1,4 +1,5 @@
-﻿@using RentaVex.Web.ViewModels.InputModel;
+﻿@using RentaVex.Data.Models;
+@using RentaVex.Web.ViewModels.InputModel;
 @model CreateProducInputModel;
 
 @{
@@ -78,6 +79,32 @@
         <input asp-for="CourierDelivery"/>
         <span class="text-danger" asp-validation-for="CourierDelivery"></span>
     </div>
+
+    <div class="form-group">
+        <label asp-for="Condition">Condition</label>
+        <select asp-for="Condition" asp-items="Html.GetEnumSelectList<ConditionType>()" class="form-control">
+            <option value="">Select Condition</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Condition"></span>
+    </div>
+
+    <div class="form-group">
+        <div>
+            <h8>Are there any warnings?</h8>
+        </div>
+        <label asp-for="IsWarned">Warned?</label>
+        <input asp-for="IsWarned" id="isWarnedCheckbox" />
+
+        <span class="text-danger" asp-validation-for="IsWarned"></span>
+    </div>
+
+    <div class="form-group" id="warningMessageGroup" style="display:none;">
+        <label asp-for="WarningMessage">Warning Message</label>
+        <textarea asp-for="WarningMessage" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="WarningMessage"></span>
+    </div>
+
+    <script src="~/js/WarningMessage.js"></script>
 
     <input type="submit" class="btn btn-primary" />
 </form>

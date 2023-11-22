@@ -31,14 +31,14 @@
         }
 
 
-        [HttpPost] // This method is invoked after the user submit the form!
+        [HttpPost]
         public async Task<IActionResult> Create(CreateProducInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetCategories();
 
-                return this.View(input);
+                return this.View();
             }
 
             this.rentOrSale.RentOrSale(input);
@@ -46,8 +46,6 @@
             await this.productService.CreateAsync(input);
 
             return this.Redirect("/");
-
-            // return this.Json(input);
         }
     }
 }

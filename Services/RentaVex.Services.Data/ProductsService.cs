@@ -21,9 +21,10 @@
 
         public async Task CreateAsync(CreateProducInputModel inputInfo)
         {
+            // Here I creat an object form the type Product
             var product = new Product();
 
-            product.Name = inputInfo.Name;
+            product.Name = inputInfo.Name; // Use my InputModel to use the data that I receive in the controller
             product.Description = inputInfo.Description;
             product.IsForRent = inputInfo.IsForRent;
             product.IsForSale = inputInfo.IsForSale;
@@ -39,8 +40,12 @@
 
             product.CourierDelivery = inputInfo.CourierDelivery;
 
-            // product.Condition = inputInfo.Condition; -->> TODO
             product.CategoryID = inputInfo.CategoryID;
+
+            product.Condition = inputInfo.Condition;
+
+            product.IsWarned = inputInfo.IsWarned;
+            product.WarningMessage = inputInfo.WarningMessage;
 
             await this.productRepository.AddAsync(product);
             await this.productRepository.SaveChangesAsync();

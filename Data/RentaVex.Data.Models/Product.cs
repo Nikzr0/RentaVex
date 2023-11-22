@@ -22,14 +22,10 @@
             this.Likes = new HashSet<Like>();
         }
 
-        [Required]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(1800)]
         public string Description { get; set; }
 
-        [Range(0, int.MaxValue)]
         public decimal Price { get; set; }
 
         public string Location { get; set; }
