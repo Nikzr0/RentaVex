@@ -25,12 +25,11 @@
         [Required]
         public string Name { get; set; }
 
-        // [MinLength(20)]
-        // [MaxLength(1800)]
+        [Required]
+        [MaxLength(1800)]
         public string Description { get; set; }
 
-        // [Range(0, int.MaxValue)]
-        // [Display(Name = "Product prive (in lev)")]
+        [Range(0, int.MaxValue)]
         public decimal Price { get; set; }
 
         public string Location { get; set; }

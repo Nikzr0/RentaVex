@@ -68,6 +68,7 @@
             services.AddTransient<IGetCountService, GetCountService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IRentOrSaleService, RentOrSaleService>();
         }
 
         private static void Configure(WebApplication app)

@@ -25,10 +25,21 @@
 
             product.Name = inputInfo.Name;
             product.Description = inputInfo.Description;
+            product.IsForRent = inputInfo.IsForRent;
+            product.IsForSale = inputInfo.IsForSale;
             product.Price = inputInfo.Price;
             product.Location = inputInfo.Location;
             product.Contact = inputInfo.Contact;
+            product.CategoryID = inputInfo.CategoryID;
 
+            // They should not be implemented here
+            // They will be moved in the future
+            product.PickupTime = inputInfo.PickupTime;
+            product.ReturnTime = inputInfo.ReturnTime;
+
+            product.CourierDelivery = inputInfo.CourierDelivery;
+
+            // product.Condition = inputInfo.Condition; -->> TODO
             product.CategoryID = inputInfo.CategoryID;
 
             await this.productRepository.AddAsync(product);

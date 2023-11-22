@@ -4,6 +4,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ActionConstraints;
+    using NuGet.Protocol.Core.Types;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.InputModel;
 
@@ -11,32 +12,36 @@
     {
         private readonly ICategoriesService categoriesService;
         private readonly IProductsService productService;
+        private readonly IRentOrSaleService rentOrSale;
 
-        public ProductsController(ICategoriesService categoriesService, IProductsService productService)
+        public ProductsController(ICategoriesService categoriesService, IProductsService productService,
+            IRentOrSaleService rentOrSale)
         {
             this.categoriesService = categoriesService;
             this.productService = productService;
+            this.rentOrSale = rentOrSale;
         }
 
         public IActionResult Create()
         {
             var viewModel = new CreateProducInputModel();
-            viewModel.CategoriesItems = this.categoriesService.GetCategories();
+            viewModel.CategoriesItems = this.categoriesService.GetCategories(); // category dropdown
 
             return this.View(viewModel);
         }
 
-        [HttpPost]
 
+        [HttpPost] // This method is invoked after the user submit the form!
         public async Task<IActionResult> Create(CreateProducInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetCategories();
 
-                // input.ConditionItems = this.conditionService.GetCondition(); // The condition service was deleted
                 return this.View(input);
             }
+
+            this.rentOrSale.RentOrSale(input);
 
             await this.productService.CreateAsync(input);
 

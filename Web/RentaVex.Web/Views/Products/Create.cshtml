@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name" />
+        <input asp-for="Name"/>
         <span asp-validation-for="Name"></span>
     </div>
 
@@ -26,20 +26,29 @@
     </div>
 
     <div class="form-group">
+        <div>
+            <h8>Is it for rent?</h8>
+        </div>
+        <label asp-for="IsForRent">Rent?</label>
+        <input asp-for="IsForRent" />
+        <span class="text-danger" asp-validation-for="IsForRent"></span>
+    </div>
+
+    <div class="form-group">
         <label asp-for="Price">Price</label>
-        <input asp-for="Price" />
+        <input asp-for="Price"/>
         <span class="text-danger" asp-validation-for="Price"></span>
     </div>
 
-      <div class="form-group">
+    <div class="form-group">
         <label asp-for="Location">Location</label>
-        <input asp-for="Location" />
+        <input asp-for="Location"/>
         <span class="text-danger" asp-validation-for="Location"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Contact">Contact</label>
-        <input asp-for="Contact" />
+        <input asp-for="Contact"/>
         <span class="text-danger" asp-validation-for="Contact"></span>
     </div>
 
@@ -47,6 +56,27 @@
         <label asp-for="CategoryID">Category</label>
         <select asp-for="CategoryID" class="form-control" asp-items="categoriesItems"></select>
         <span class="text-danger" asp-validation-for="CategoryID"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PickupTime">Pickup Time</label>
+        <input asp-for="PickupTime" type="datetime-local" class="form-control" />
+        <span class="text-danger" asp-validation-for="PickupTime"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReturnTime">Return Time</label>
+        <input asp-for="ReturnTime" type="datetime-local" class="form-control"/>
+        <span class="text-danger" asp-validation-for="ReturnTime"></span>
+    </div>
+
+    <div class="form-group">
+        <div>
+            <h8>Do you offer courier delivery?</h8>
+        </div>
+        <label asp-for="CourierDelivery">CourierDelivery</label>
+        <input asp-for="CourierDelivery"/>
+        <span class="text-danger" asp-validation-for="CourierDelivery"></span>
     </div>
 
     <input type="submit" class="btn btn-primary" />
