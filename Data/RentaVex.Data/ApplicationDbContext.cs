@@ -67,13 +67,14 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Here I define the Primery key UserInteractionId -->> (it can be done with attribute as well)
             modelBuilder.Entity<UserInteraction>()
                 .HasKey(x => x.UserInteractionID);
 
-            modelBuilder.Entity<UserInteraction>()
-                .HasOne(x => x.User)
-                .WithMany(y => y.UserInteractions)
-                .HasForeignKey(z => z.UserID);
+            modelBuilder.Entity<UserInteraction>() // specifies that you are configuring the entity mapping for the UserInteraction class.
+                .HasOne(x => x.User) // each UserInteraction is associated with one User.
+                .WithMany(y => y.UserInteractions) // User entity has a collection navigation property called UserInteractions
+                .HasForeignKey(z => z.UserID); // relationship between the UserInteraction entity and the User
 
             modelBuilder.Entity<UserInteraction>()
                 .HasOne(x => x.Product)
@@ -159,7 +160,6 @@
                 .WithMany(y => y.Followers)
                 .HasForeignKey(z => z.SellerID)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             // Needed for Identity models configuration
             base.OnModelCreating(modelBuilder);

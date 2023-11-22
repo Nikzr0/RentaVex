@@ -1,15 +1,30 @@
 ﻿namespace RentaVex.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
+    using RentaVex.Data;
+    using RentaVex.Data.Common.Repositories;
+    using RentaVex.Data.Models;
+    using RentaVex.Data.Repositories;
+    using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels;
+    using RentaVex.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
+        private readonly IGetCountService countService;
+
+        public HomeController(IGetCountService countService)
+        {
+            this.countService = countService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = this.countService.GetCounts();
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

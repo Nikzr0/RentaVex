@@ -1,4 +1,4 @@
-﻿namespace RentaVex.Data.Models
+﻿namespace RentaVex.Services.Data
 {
     using System;
     using System.Collections.Generic;
@@ -6,10 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public enum ConditionType
+    public interface ICategoriesService
     {
-        New = 1,
-        Used = 2,
-        Damaged = 3,
+        IEnumerable<KeyValuePair<string, string>> GetCategories(); 
     }
 }

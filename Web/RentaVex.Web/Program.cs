@@ -1,4 +1,4 @@
-﻿ namespace RentaVex.Web
+﻿  namespace RentaVex.Web
 {
     using System.Reflection;
 
@@ -64,6 +64,10 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+
+            services.AddTransient<IGetCountService, GetCountService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IProductsService, ProductsService>();
         }
 
         private static void Configure(WebApplication app)

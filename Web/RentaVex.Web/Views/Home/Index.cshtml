@@ -1,9 +1,28 @@
 ﻿@using RentaVex.Common
+
+@model RentaVex.Web.ViewModels.Home.IndexViewModel;
+
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>The number of products in the db is currently:</p>
+    @* grid system of bootstrap is 12, that is why we use 4*@
+    <div class="col-md-4 offset-md-4">
+        <ul>
+            <li class="list-group item">
+                Producs: @Model.ProductsCount
+            </li>
+
+            <li class="list-group item">
+                Categories: @Model.CategoriesCount
+            </li>
+
+            <li class="list-group item">
+                Images: @Model.ImgesCount
+            </li>
+        </ul>
+    </div>
 </div>

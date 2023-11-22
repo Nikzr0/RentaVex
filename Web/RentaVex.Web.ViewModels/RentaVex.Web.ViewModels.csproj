@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\RentaVex.Services.Mapping\RentaVex.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Administration\Dashboard\" />
+  </ItemGroup>
+
 </Project>

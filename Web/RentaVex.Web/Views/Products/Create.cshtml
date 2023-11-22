@@ -1,0 +1,53 @@
+﻿@using RentaVex.Web.ViewModels.InputModel;
+@model CreateProducInputModel;
+
+@{
+    this.ViewData["Title"] = "Add Ptoduct";
+    var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key)); // Value first, then the id
+}
+
+
+
+<form method="post" class="col-md-4 offset-4">
+    <h1>@this.ViewData["Title"]</h1>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" />
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+
+      <div class="form-group">
+        <label asp-for="Location">Location</label>
+        <input asp-for="Location" />
+        <span class="text-danger" asp-validation-for="Location"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Contact">Contact</label>
+        <input asp-for="Contact" />
+        <span class="text-danger" asp-validation-for="Contact"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryID">Category</label>
+        <select asp-for="CategoryID" class="form-control" asp-items="categoriesItems"></select>
+        <span class="text-danger" asp-validation-for="CategoryID"></span>
+    </div>
+
+    <input type="submit" class="btn btn-primary" />
+</form>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -21,35 +22,34 @@
             this.Likes = new HashSet<Like>();
         }
 
+        [Required]
         public string Name { get; set; }
 
+        // [MinLength(20)]
+        // [MaxLength(1800)]
         public string Description { get; set; }
 
+        // [Range(0, int.MaxValue)]
+        // [Display(Name = "Product prive (in lev)")]
         public decimal Price { get; set; }
 
         public string Location { get; set; }
 
         public string Contact { get; set; }
 
-        public int CategoryID { get; set; } // Foreign key to Category
+        public int CategoryID { get; set; }
 
-        public virtual Category Category { get; set; } // Navigation property
-
+        public virtual Category Category { get; set; }
 
         public bool IsForSale { get; set; }
 
         public bool IsForRent { get; set; }
 
+        public ICollection<Image> Images { get; set; }
 
-        // It will only work if the images are from the internet, but because real users will use the web app they will upload and we cannot do it like this.
-        // public ICollection<string> Photos { get; set; } // Collection of photo URLs
-        public ICollection<Image> Images { get; set; } // Collection of images
+        public ICollection<ProductAvailability> Availabilities { get; set; }
 
-        public ICollection<ProductAvailability> Availabilities { get; set; } // must figure it out
-
-        public ICollection<ProductCategory> ProductCategories { get; set; } // Many-to-many relationship/ No idea :)
-
-        //public ICollection<Category> Categories => ProductCategories.Select(pc => pc.Category).ToList(); // Convenience property for easy access to categories
+        public ICollection<ProductCategory> ProductCategories { get; set; }
 
         public DateTime PickupTime { get; set; }
 
@@ -57,11 +57,11 @@
 
         public bool CourierDelivery { get; set; }
 
-        public ConditionType Condition { get; set; } // Enum for condition (used, new, etc.)
+        public ConditionType Condition { get; set; }
 
-        public ProductRating ProductRating { get; set; } // Average rating from user interactions
+        public ProductRating ProductRating { get; set; }
 
-        public ICollection<ProductItem> ProductItems { get; set; } // Collection of items composing the product
+        public ICollection<ProductItem> ProductItems { get; set; }
 
         public bool IsWarned { get; set; }
 

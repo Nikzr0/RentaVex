@@ -2,7 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using RentaVex.Services.Data;
-    using RentaVex.Web.ViewModels.Administration.Dashboard;
+
+    // using RentaVex.Web.ViewModels.Administration.Dashboard;
+    using RentaVex.Web.ViewModels.Home;
 
     public class DashboardController : AdministrationController
     {
@@ -15,8 +17,8 @@
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
-            return this.View(viewModel);
+            //var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
+            return this.View(/*viewModel*/);
         }
     }
 }
