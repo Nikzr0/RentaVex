@@ -10,7 +10,6 @@
 
     public class Category : BaseDeletableModel<int>
     {
-        // public int CategoryID { get; set; }
         public Category()
         {
             this.Subcategories = new HashSet<Category>();
