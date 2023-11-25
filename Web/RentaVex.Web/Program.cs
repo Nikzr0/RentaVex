@@ -56,6 +56,9 @@
 
             services.AddSingleton(configuration);
 
+            // CORS
+            //services.AddCors();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -99,6 +102,16 @@
             app.UseCookiePolicy();
 
             app.UseRouting();
+
+            // CORS
+            {
+                //app.UseCors(policy =>
+                //{
+                //    // we can spesify for each domain different settings.
+                //    policy.WithOrigins("").AllowAnyMethod().AllowAnyMethod();
+                //    policy.WithOrigins("").WithMethods("POST").AllowAnyMethod();
+                //});
+            }
 
             app.UseAuthentication();
             app.UseAuthorization();
