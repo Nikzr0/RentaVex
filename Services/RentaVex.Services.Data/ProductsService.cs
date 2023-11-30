@@ -19,12 +19,11 @@
             this.productRepository = productRepository;
         }
 
-        public async Task CreateAsync(CreateProducInputModel inputInfo)
+        public async Task CreateAsync(CreateProducInputModel inputInfo, string userId)
         {
-            // Here I creat an object form the type Product
             var product = new Product();
 
-            product.Name = inputInfo.Name; // Use my InputModel to use the data that I receive in the controller
+            product.Name = inputInfo.Name;
             product.Description = inputInfo.Description;
             product.IsForRent = inputInfo.IsForRent;
             product.IsForSale = inputInfo.IsForSale;
@@ -32,9 +31,8 @@
             product.Location = inputInfo.Location;
             product.Contact = inputInfo.Contact;
             product.CategoryID = inputInfo.CategoryID;
+            product.AddedByUserId = userId;
 
-            // They should not be implemented here
-            // They will be moved in the future
             product.PickupTime = inputInfo.PickupTime;
             product.ReturnTime = inputInfo.ReturnTime;
 
@@ -49,6 +47,7 @@
 
             await this.productRepository.AddAsync(product);
             await this.productRepository.SaveChangesAsync();
+
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿@using RentaVex.Common
+
+@model RentaVex.Web.ViewModels.Home.IndexViewModel;
+
+@{
+    this.ViewData["Title"] = "Contact Us";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Contact us!</h1>
+    <div class="col-md-4 offset-md-4">
+        <ul>
+            <li class="list-group item">
+                Producs: @*@Model.ProductsCount*@
+            </li>
+
+            <li class="list-group item">
+                Categories: @*@Model.CategoriesCount*@
+            </li>
+
+            <li class="list-group item">
+                Images: @*@Model.ImgesCount*@
+            </li>
+        </ul>
+    </div>
+</div>
+

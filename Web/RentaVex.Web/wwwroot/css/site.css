@@ -7,7 +7,11 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
+/*
+.navbar-nav flex-grow-2 {
+    border: 2px solid;
+}*/
+
 a {
     color: #0366d6;
 }

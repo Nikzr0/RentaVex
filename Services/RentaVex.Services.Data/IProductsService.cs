@@ -10,6 +10,6 @@
 
     public interface IProductsService
     {
-        Task CreateAsync(CreateProducInputModel createProducts);
+        Task CreateAsync(CreateProducInputModel createProducts, string userId);
     }
 }

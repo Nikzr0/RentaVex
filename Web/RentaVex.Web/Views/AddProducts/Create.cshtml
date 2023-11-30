@@ -1,10 +1,12 @@
 ﻿@using RentaVex.Data.Models;
+
 @using RentaVex.Web.ViewModels.InputModel;
 @model CreateProducInputModel;
 
 @{
     this.ViewData["Title"] = "Add Ptoduct";
-    var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key)); // Value first, then the id
+
+    var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 

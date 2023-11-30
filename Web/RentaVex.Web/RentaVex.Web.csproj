@@ -9,6 +9,10 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\ContactUs.cshtml" />
+  </ItemGroup>
 	<ItemGroup>
 		<AdditionalFiles Include="..\..\stylecop.json" />
 	</ItemGroup>
@@ -43,5 +47,17 @@
     <ProjectReference Include="..\..\Services\RentaVex.Services\RentaVex.Services.csproj" />
     <ProjectReference Include="..\RentaVex.Web.Infrastructure\RentaVex.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\RentaVex.Web.ViewModels\RentaVex.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\ContactUs.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\ContactUs.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\ContactUs.cshtml" />
   </ItemGroup>
 </Project>
