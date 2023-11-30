@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -15,11 +16,7 @@
         {
             this.Images = new HashSet<Image>();
             this.Availabilities = new HashSet<ProductAvailability>();
-            this.ProductCategories = new HashSet<ProductCategory>();
-            this.ProductItems = new HashSet<ProductItem>();
             this.UserInteractions = new HashSet<UserInteraction>();
-            this.Transactions = new HashSet<Transaction>();
-            this.Likes = new HashSet<Like>();
         }
 
         public string Name { get; set; }
@@ -32,7 +29,13 @@
 
         public string Contact { get; set; }
 
-        public int CategoryID { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+
+        // [ForeignKey("User")] -->> Not sure if it should be int or string
+        public string UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual Category Category { get; set; }
 
@@ -44,8 +47,6 @@
 
         public ICollection<ProductAvailability> Availabilities { get; set; }
 
-        public ICollection<ProductCategory> ProductCategories { get; set; }
-
         public DateTime PickupTime { get; set; }
 
         public DateTime ReturnTime { get; set; }
@@ -54,18 +55,14 @@
 
         public ConditionType Condition { get; set; }
 
-        public ProductRating ProductRating { get; set; }
-
-        public ICollection<ProductItem> ProductItems { get; set; }
-
         public bool IsWarned { get; set; }
 
         public string WarningMessage { get; set; }
 
-        public ICollection<UserInteraction> UserInteractions { get; set; }
-
-        public ICollection<Transaction> Transactions { get; set; }
-
         public ICollection<Like> Likes { get; set; }
+
+        public ProductRating ProductRating { get; set; }
+
+        public ICollection<UserInteraction> UserInteractions { get; set; }
     }
 }

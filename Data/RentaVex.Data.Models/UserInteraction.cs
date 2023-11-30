@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -12,16 +13,16 @@
 
         public int UserID { get; set; }
 
+        [ForeignKey("Product")]
         public int ProductID { get; set; }
-
-        // public InteractionType Type { get; set; } enum for like -->> (no idea how it works)
-        public ProductRating Rating { get; set; } // Rating from 0 to 5
 
         public string Comment { get; set; }
 
         public bool HasWarning { get; set; }
 
         public string WarningMessage { get; set; }
+
+        public ProductRating Rating { get; set; }
 
         public User User { get; set; }
 

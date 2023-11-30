@@ -10,7 +10,7 @@
 
     public class ProductRating : BaseDeletableModel<int>
     {
-        public int RatingCount { get; set; } // TODO : Add to it
+        public int RatingCount { get; set; }
 
         public double Sum { get; set; }
 
