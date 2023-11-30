@@ -57,7 +57,7 @@
             services.AddSingleton(configuration);
 
             // CORS
-            //services.AddCors();
+            // services.AddCors();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

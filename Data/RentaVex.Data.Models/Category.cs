@@ -12,18 +12,10 @@
     {
         public Category()
         {
-            this.Subcategories = new HashSet<Category>();
-            this.ProductCategories = new HashSet<ProductCategory>();
             this.Products = new HashSet<Product>();
         }
 
         public string Name { get; set; }
-
-        public virtual Category ParentCategory { get; set; }
-
-        public virtual ICollection<Category> Subcategories { get; set; } // Not sure how it works.
-
-        public ICollection<ProductCategory> ProductCategories { get; set; } // I do not understand ProductCategory
 
         public virtual ICollection<Product> Products { get; set; }
     }

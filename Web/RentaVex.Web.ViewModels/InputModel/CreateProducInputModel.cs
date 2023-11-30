@@ -36,7 +36,7 @@
 
         public string Contact { get; set; }
 
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
 
         // Not for here | I need a availability calender instead | Those props should be whe user wants to rent something
         public DateTime PickupTime { get; set; }

@@ -30,15 +30,15 @@
             product.Price = inputInfo.Price;
             product.Location = inputInfo.Location;
             product.Contact = inputInfo.Contact;
-            product.CategoryID = inputInfo.CategoryID;
-            product.AddedByUserId = userId;
+            product.CategoryId = inputInfo.CategoryId;
+            product.UserId = userId;
 
             product.PickupTime = inputInfo.PickupTime;
             product.ReturnTime = inputInfo.ReturnTime;
 
             product.CourierDelivery = inputInfo.CourierDelivery;
 
-            product.CategoryID = inputInfo.CategoryID;
+            product.CategoryId = inputInfo.CategoryId;
 
             product.Condition = inputInfo.Condition;
 

@@ -23,26 +23,17 @@
         {
         }
 
-        // Could be removed
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ProductAvailability> ProductAvailabilities { get; set; }
 
-        public DbSet<ProductItem> ProductItems { get; set; }
-
         public DbSet<Category> Categories { get; set; }
-
-        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserInteraction> UserInteractions { get; set; }
-
-        public DbSet<Follow> Follows { get; set; }
-
-        public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<Image> Images { get; set; }
 
@@ -67,101 +58,6 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Here I define the Primery key UserInteractionId -->> (it can be done with attribute as well)
-            modelBuilder.Entity<UserInteraction>()
-                .HasKey(x => x.UserInteractionID);
-
-            modelBuilder.Entity<UserInteraction>() // specifies that you are configuring the entity mapping for the UserInteraction class.
-                .HasOne(x => x.User) // each UserInteraction is associated with one User.
-                .WithMany(y => y.UserInteractions) // User entity has a collection navigation property called UserInteractions
-                .HasForeignKey(z => z.UserID); // relationship between the UserInteraction entity and the User
-
-            modelBuilder.Entity<UserInteraction>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.UserInteractions)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<Transaction>()
-                .HasOne(x => x.User)
-                .WithMany(y => y.Transactions)
-                .HasForeignKey(z => z.UserID);
-
-            modelBuilder.Entity<Transaction>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.Transactions)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<Like>()
-                .HasOne(x => x.User)
-                .WithMany(y => y.Likes)
-                .HasForeignKey(z => z.UserID);
-
-            modelBuilder.Entity<Like>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.Likes)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<ProductAvailability>()
-                .HasKey(x => x.ProductAvailabilityID);
-
-            modelBuilder.Entity<ProductAvailability>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.Availabilities)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<ProductItem>()
-                .HasKey(x => x.ProductItemID);
-
-            modelBuilder.Entity<ProductItem>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.ProductItems)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<Category>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<ProductCategory>()
-                .HasKey(x => new { x.ProductID, x.CategoryID });
-
-            modelBuilder.Entity<ProductCategory>()
-                .HasOne(x => x.Product)
-                .WithMany(y => y.ProductCategories)
-                .HasForeignKey(z => z.ProductID);
-
-            modelBuilder.Entity<ProductCategory>()
-              .HasOne(x => x.Category)
-              .WithMany(y => y.ProductCategories)
-              .HasForeignKey(z => z.CategoryID);
-
-            modelBuilder.Entity<Image>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(x => x.Images)
-                .WithOne()
-                .HasForeignKey(y => y.AddedByUserId);
-
-            modelBuilder.Entity<Product>()
-               .HasOne(x => x.Category)
-               .WithMany(y => y.Products)
-               .HasForeignKey(z => z.CategoryID);
-
-            modelBuilder.Entity<Follow>()
-                .HasKey(x => new { x.FollowerID, x.SellerID });
-
-            modelBuilder.Entity<Follow>()
-                .HasOne(x => x.Follower)
-                .WithMany(y => y.Following)
-                .HasForeignKey(z => z.FollowerID)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Follow>()
-                .HasOne(x => x.Seller)
-                .WithMany(y => y.Followers)
-                .HasForeignKey(z => z.SellerID)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Needed for Identity models configuration
             base.OnModelCreating(modelBuilder);
 
             this.ConfigureUserIdentityRelations(modelBuilder);
