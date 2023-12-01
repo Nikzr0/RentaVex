@@ -6,10 +6,13 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.InputModel;
 
     public interface IProductsService
     {
         Task CreateAsync(CreateProducInputModel createProducts, string userId);
+
+        IEnumerable<ProductViewModel> GetAll(int page, int itemsPerPage);
     }
 }

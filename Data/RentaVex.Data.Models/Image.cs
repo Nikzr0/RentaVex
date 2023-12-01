@@ -12,7 +12,10 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Extention { get; set; } // Image type -->> (.png or etc.)
+        public string ImageUrl { get; set; }
+
+        // Image type -->> (.png or etc.)
+        public string Extention { get; set; } 
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }

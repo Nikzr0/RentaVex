@@ -8,6 +8,8 @@
 
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
+    using RentaVex.Services.Mapping;
+    using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.InputModel;
 
     public class ProductsService : IProductsService
@@ -47,7 +49,18 @@
 
             await this.productRepository.AddAsync(product);
             await this.productRepository.SaveChangesAsync();
+        }
 
+        public IEnumerable<ProductViewModel> GetAll(int page, int itemsPerPage)
+        {
+            var products = this.productRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<ProductViewModel>() // To() -->> For the extra logic for the image url.
+                .ToList();
+
+            return products;
         }
     }
 }

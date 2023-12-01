@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" />
 
-    @RenderSection("Scripts", required: false)  @*For some reasson a problem accured and I added that to fix it :)*@
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </head>
 <body>
     <header>
@@ -36,6 +40,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact us</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">Products</a>
+                        </li>
                     </ul>
 
                     <ul class="navbar-nav flex-grow-2">
@@ -46,23 +54,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Liked">Liked</a>
                         </li>
+
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AddProducts" asp-action="Create">Add Product</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Create">Add Product</a>
                             </li>
                         }
 
-
-                        @*Dropdown*@
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Liked">Liked</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Message">Message</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
                             </div>
                         </li>
                     </ul>
