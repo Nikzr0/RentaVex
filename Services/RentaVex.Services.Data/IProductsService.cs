@@ -13,6 +13,8 @@
     {
         Task CreateAsync(CreateProducInputModel createProducts, string userId);
 
-        IEnumerable<ProductViewModel> GetAll(int page, int itemsPerPage);
+        IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
+
+        int GetCount();
     }
 }

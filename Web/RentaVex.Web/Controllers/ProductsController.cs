@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ActionConstraints;
+    using Microsoft.Identity.Client;
     using NuGet.Protocol.Core.Types;
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
@@ -57,13 +58,22 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
-            // Here we controll the paging
+            const int itemsPerPage = 24;
+
+            if (id < 1)
+            {
+                return this.NotFound();
+            }
+
+
             var viewModel = new AllProductsViewModel
             {
+                ItemsPerPage = itemsPerPage,
                 PageNumber = id,
-                Products = this.productService.GetAll(id, 12),
+                Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
+                ProductsCount = this.productService.GetCount(),
             };
 
             return this.View(viewModel);

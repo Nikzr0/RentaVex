@@ -51,16 +51,21 @@
             await this.productRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<ProductViewModel> GetAll(int page, int itemsPerPage)
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             var products = this.productRepository.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
-                .To<ProductViewModel>() // To() -->> For the extra logic for the image url.
+                .To<T>() // To() -->> For the extra logic for the image url.
                 .ToList();
 
             return products;
+        }
+
+        public int GetCount()
+        {
+            return this.productRepository.All().Count();
         }
     }
 }

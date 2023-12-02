@@ -8,6 +8,6 @@
 
     public interface ICategoriesService
     {
-        IEnumerable<KeyValuePair<string, string>> GetCategories(); 
+        IEnumerable<KeyValuePair<string, string>> GetCategories();
     }
 }
