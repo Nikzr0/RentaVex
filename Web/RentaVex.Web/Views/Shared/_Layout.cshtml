@@ -30,29 +30,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Buy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Buy</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Rent">Rent</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Rent">Rent</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact us</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact us</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">Products</a>
+                            <a class="nav-link text-dark" asp-controller="Products" asp-action="All">Products</a>
                         </li>
                     </ul>
 
                     <ul class="navbar-nav flex-grow-2">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Message">Message</a>
+                            <a class="nav-link text-dark" asp-controller="User" asp-action="Message">Message</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Liked">Liked</a>
+                            <a class="nav-link text-dark" asp-controller="User" asp-action="Liked">Liked</a>
                         </li>
 
                         @if (this.User.Identity.IsAuthenticated)

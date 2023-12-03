@@ -1,8 +1,10 @@
 ﻿namespace RentaVex.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ActionConstraints;
@@ -19,14 +21,16 @@
         private readonly IProductsService productService;
         private readonly IRentOrSaleService rentOrSale;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IWebHostEnvironment environment;
 
         public ProductsController(ICategoriesService categoriesService, IProductsService productService,
-            IRentOrSaleService rentOrSale, UserManager<ApplicationUser> userManager)
+            IRentOrSaleService rentOrSale, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
         {
             this.categoriesService = categoriesService;
             this.productService = productService;
             this.rentOrSale = rentOrSale;
             this.userManager = userManager;
+            this.environment = environment;
         }
 
         [Authorize]
@@ -49,11 +53,18 @@
                 return this.View();
             }
 
-            // We difine usermanagerm, which can provide use info about the user.
             var user = await this.userManager.GetUserAsync(this.User);
             this.rentOrSale.RentOrSale(input);
 
-            await this.productService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.productService.CreateAsync(input, user.Id, $"{this.environment.ContentRootPath}/images");
+            }
+            catch (Exception ex)
+            {
+
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+            }
 
             return this.Redirect("/");
         }
@@ -66,7 +77,6 @@
             {
                 return this.NotFound();
             }
-
 
             var viewModel = new AllProductsViewModel
             {

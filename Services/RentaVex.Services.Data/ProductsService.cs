@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Hosting;
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
@@ -14,6 +17,8 @@
 
     public class ProductsService : IProductsService
     {
+        private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif" };
+
         private readonly IDeletableEntityRepository<Product> productRepository;
 
         public ProductsService(IDeletableEntityRepository<Product> productRepository)
@@ -21,7 +26,7 @@
             this.productRepository = productRepository;
         }
 
-        public async Task CreateAsync(CreateProducInputModel inputInfo, string userId)
+        public async Task CreateAsync(CreateProducInputModel inputInfo, string userId, string imagePath)
         {
             var product = new Product();
 
@@ -46,6 +51,33 @@
 
             product.IsWarned = inputInfo.IsWarned;
             product.WarningMessage = inputInfo.WarningMessage;
+
+            // image
+            Directory.CreateDirectory("{imagePath}/recipes/");
+            foreach (var image in inputInfo.Images)
+            {
+                var extention = Path.GetExtension(image.FileName);
+                if (!this.allowedExtentions.Any(x => extention.EndsWith(x)))
+                {
+                    throw new Exception($"Invalid image type extention: {extention}");
+                }
+
+                var dbImage = new Image
+                {
+                    AddedByUser = userId,
+                    Extention = extention,
+                };
+
+                product.Images.Add(dbImage);
+
+                var physicalPath = $"{imagePath}/images/proudcts/{dbImage.Id}.{extention}";
+
+                using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+
+            }
 
             await this.productRepository.AddAsync(product);
             await this.productRepository.SaveChangesAsync();

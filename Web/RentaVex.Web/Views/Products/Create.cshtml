@@ -9,12 +9,17 @@
     var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-
-
 <form method="post" class="col-md-4 offset-4">
     <h1>@this.ViewData["Title"]</h1>
 
     <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <div class="form-group">
+        <label asp-for="Images">Images</label>
+        <input asp-for="Images" />
+        <span asp-validation-for="Images"></span>
+    </div>
 
     <div class="form-group">
         <label asp-for="Name">Name</label>

@@ -4,9 +4,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Http;
     using RentaVex.Data.Models;
 
     public class CreateProducInputModel
@@ -38,19 +40,18 @@
 
         public int CategoryId { get; set; }
 
-        // Not for here | I need a availability calender instead | Those props should be whe user wants to rent something
         public DateTime PickupTime { get; set; }
 
-        // Not for here -->> I'll change it in the future
         public DateTime ReturnTime { get; set; }
 
         public Category Category { get; set; }
 
         public bool CourierDelivery { get; set; }
 
+        public IEnumerable<IFormFile> Images { get; set; }
+
         public ConditionType Condition { get; set; }
 
-        // Somethign with the product rating, but it is no early for that.
         public bool IsWarned { get; set; }
 
         public string WarningMessage { get; set; }

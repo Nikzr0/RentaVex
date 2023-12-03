@@ -12,6 +12,8 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        public string AddedByUser { get; set; }
+
         public string ImageUrl { get; set; }
 
         // Image type -->> (.png or etc.)
