@@ -53,10 +53,10 @@
             product.WarningMessage = inputInfo.WarningMessage;
 
             // image
-            Directory.CreateDirectory("{imagePath}/recipes/");
+            Directory.CreateDirectory($"{imagePath}/products/");
             foreach (var image in inputInfo.Images)
             {
-                var extention = Path.GetExtension(image.FileName);
+                var extention = Path.GetExtension(image.FileName).ToLower();
                 if (!this.allowedExtentions.Any(x => extention.EndsWith(x)))
                 {
                     throw new Exception($"Invalid image type extention: {extention}");
@@ -70,13 +70,12 @@
 
                 product.Images.Add(dbImage);
 
-                var physicalPath = $"{imagePath}/images/proudcts/{dbImage.Id}.{extention}";
+                var physicalPath = $"{imagePath}/products/{dbImage.Id}{extention}"; // images
 
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }
-
             }
 
             await this.productRepository.AddAsync(product);

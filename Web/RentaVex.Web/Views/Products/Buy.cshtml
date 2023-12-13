@@ -1,0 +1,44 @@
+﻿@using RentaVex.Web.ViewModels.AllProducts;
+
+@model AllProductsViewModel;
+
+@{
+    this.ViewData["Title"] = "Buy";
+    string myString = new string('_', 160);
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row mx-auto">
+        @foreach (var product in this.Model.Products)
+        {
+            <div class="card col-md-3">
+                <img src="@product.ImageUrl" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">@product.Title</h5>
+                    <p class="card-description">@product.Description</p>
+                    <p class="card-price">@product.Price</p>
+                    <a href="~/Products/ProductPage" class="btn btn-primary">Go to Product Page</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="text-center">
+        <p>@myString</p>
+    </div>
+
+    <div>
+        <h6>PageNumber: @Model.PageNumber</h6>
+        <h6>Products: @Model.ProductsCount</h6>
+        <h6>PageCount: @Model.PagesCount</h6>
+        <h6>NextPage: @Model.NextPage</h6>
+        <h6>PreviousPage: @Model.PreviousPage</h6>
+        <h6>HasNext: @Model.HasNextPage</h6>
+        <h6>HasPrevious: @Model.HasPreviousPage</h6>
+    </div>
+
+</div>
+<partial name="_PagingPartial" model="@Model"></partial>

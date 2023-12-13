@@ -60,6 +60,7 @@
             {
                 return this.NotFound();
             }
+
             this.db.Remove(category);
 
             await this.db.SaveChangesAsync();

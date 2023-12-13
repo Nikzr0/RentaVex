@@ -32,11 +32,6 @@
             return this.View();
         }
 
-        public IActionResult Rent()
-        {
-            return this.View();
-        }
-
         public IActionResult ContactUs()
         {
             return this.View();

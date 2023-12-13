@@ -59,9 +59,6 @@
 
   <ItemGroup>
     <None Include="Views\Home\ContactUs.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\products\" />
+    <None Include="wwwroot\fonts\.DS_Store" />
   </ItemGroup>
 </Project>

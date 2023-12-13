@@ -58,7 +58,7 @@
 
             try
             {
-                await this.productService.CreateAsync(input, user.Id, $"{this.environment.ContentRootPath}/images");
+                await this.productService.CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All(int id = 1)
+        public IActionResult Buy(int id = 1)
         {
             const int itemsPerPage = 24;
 
@@ -87,6 +87,31 @@
             };
 
             return this.View(viewModel);
+        }
+
+        public IActionResult Rent(int id = 1)
+        {
+            const int itemsPerPage = 24;
+
+            if (id < 1)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = new AllProductsViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
+                ProductsCount = this.productService.GetCount(),
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult ProductPage(int id)
+        {
+            return this.View();
         }
     }
 }

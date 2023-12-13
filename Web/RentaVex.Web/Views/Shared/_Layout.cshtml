@@ -30,20 +30,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Buy</a>
+                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Buy</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Rent">Rent</a>
+                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Rent</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact us</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Products" asp-action="All">Products</a>
-                        </li>
+                        @*  <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Products" asp-action="All">Products</a>
+                        </li> *@
                     </ul>
 
                     <ul class="navbar-nav flex-grow-2">
@@ -63,6 +63,27 @@
                         }
 
                         <li class="nav-item dropdown">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Products" && ViewContext.RouteData.Values["action"].ToString() == "ProductPage")
+                            {
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#!">Buy</a></li>
+                                    <li><a class="dropdown-item" href="#!">Rent</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                    <li><a class="dropdown-item" href="#!">New Added</a></li>
+                                    <li><a class="dropdown-item" href="#!">Close by</a></li>
+                                    <li><a class="dropdown-item" href="#!">Best deals</a></li>
+                                    <li><a class="dropdown-item" href="#!">Promoted</a></li>
+                                    <li><a class="dropdown-item" href="#!">Free</a></li>
+                                    <li><a class="dropdown-item" href="#!">Services</a></li>
+                                    <li><a class="dropdown-item" href="#!">Following</a></li>
+                                    <li><a class="dropdown-item" href="#!">Following</a></li>
+                                </ul>
+                            }
+                        </li>
+
+                        <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </a>
@@ -72,6 +93,7 @@
                                 <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
                             </div>
                         </li>
+
                     </ul>
 
                     <partial name="_LoginPartial" />
@@ -87,10 +109,17 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted bg-dark py-2">
+        <div class="container text-center">
+            <p class="m-0 text-white">
+                Copyright &copy;  @DateTime.Now.Year - @GlobalConstants.SystemName -
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white ms-2 me-2">Privacy</a>
+            </p>
         </div>
     </footer>
+
+
+
+
 </body>
 </html>
