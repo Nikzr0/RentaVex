@@ -4,13 +4,13 @@
 @model CreateProducInputModel;
 
 @{
-    this.ViewData["Title"] = "Add Ptoduct";
+    this.ViewData["Name"] = "Add Ptoduct";
 
     var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <form method="post" class="col-md-4 offset-4" enctype="multipart/form-data">
-    <h1>@this.ViewData["Title"]</h1>
+    <h1>@this.ViewData["Name"]</h1>
 
     <div asp-validation-summary="All" class="text-danger"></div>
 

@@ -56,7 +56,7 @@
             Directory.CreateDirectory($"{imagePath}/products/");
             foreach (var image in inputInfo.Images)
             {
-                var extention = Path.GetExtension(image.FileName).ToLower();
+                var extention = Path.GetExtension(image.FileName).TrimStart('.').ToLower();
                 if (!this.allowedExtentions.Any(x => extention.EndsWith(x)))
                 {
                     throw new Exception($"Invalid image type extention: {extention}");
@@ -70,7 +70,7 @@
 
                 product.Images.Add(dbImage);
 
-                var physicalPath = $"{imagePath}/products/{dbImage.Id}{extention}"; // images
+                var physicalPath = $"{imagePath}/products/{dbImage.Id}.{extention}"; // images
 
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
@@ -88,7 +88,7 @@
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
-                .To<T>() // To() -->> For the extra logic for the image url.
+                .To<T>()
                 .ToList();
 
             return products;
@@ -97,6 +97,16 @@
         public int GetCount()
         {
             return this.productRepository.All().Count();
+        }
+
+        public ProductViewModel GetProductById(int id)
+        {
+            var productEntity = this.productRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<ProductViewModel>()
+                .FirstOrDefault();
+
+            return productEntity;
         }
     }
 }

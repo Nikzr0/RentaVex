@@ -16,5 +16,7 @@
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 
         int GetCount();
+
+        ProductViewModel GetProductById(int id);
     }
 }

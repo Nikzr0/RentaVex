@@ -14,6 +14,7 @@
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.InputModel;
+    using RentaVex.Web.ViewModels.Products;
 
     public class ProductsController : Controller
     {
@@ -111,7 +112,12 @@
 
         public IActionResult ProductPage(int id)
         {
-            return this.View();
+            var product = new ProductPageViewModel
+            {
+                Product = this.productService.GetProductById(id),
+            };
+
+            return this.View(product);
         }
     }
 }

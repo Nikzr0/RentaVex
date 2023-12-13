@@ -3,11 +3,12 @@
 @model AllProductsViewModel;
 
 @{
-    this.ViewData["Title"] = "Buy";
+    this.ViewData["Name"] = "Buy";
     string myString = new string('_', 160);
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h1>@this.ViewData["Name"]</h1>
+
 
 <div class="container">
     <div class="row mx-auto">
@@ -17,10 +18,10 @@
                 <img src="@product.ImageUrl" class="card-img-top" alt="...">
 
                 <div class="card-body">
-                    <h5 class="card-title">@product.Title</h5>
+                    <h5 class="card-title">@product.Name</h5>
                     <p class="card-description">@product.Description</p>
                     <p class="card-price">@product.Price</p>
-                    <a href="~/Products/ProductPage" class="btn btn-primary">Go to Product Page</a>
+                    <a href="~/Products/ProductPage/@product.Id" class="btn btn-primary">Go to Product Page</a>
                 </div>
             </div>
         }

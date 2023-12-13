@@ -18,7 +18,7 @@
 
         public string Description { get; set; }
 
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public string Category { get; set; }
 
@@ -28,10 +28,9 @@
         {
             configuration.CreateMap<Product, ProductViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-
                 opt.MapFrom(x => x.Images.FirstOrDefault().ImageUrl != null ?
                 x.Images.FirstOrDefault().ImageUrl :
-                "images/recipes" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extention));
+                "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extention));
         }
     }
 }

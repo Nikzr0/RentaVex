@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <title>@this.ViewData["Name"] - @GlobalConstants.SystemName</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" />
@@ -33,20 +33,20 @@
                             <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Buy</a>
                         </li>
 
-                        <li class="nav-item">
+                     @*    <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Rent</a>
-                        </li>
+                        </li> *@
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact us</a>
                         </li>
-
-                        @*  <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Products" asp-action="All">Products</a>
-                        </li> *@
                     </ul>
 
                     <ul class="navbar-nav flex-grow-2">
+                        @*  <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="User" asp-action="MyProducts">My Products</a>
+                        </li> *@
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="User" asp-action="Message">Message</a>
                         </li>
@@ -58,7 +58,7 @@
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Create">Add Product</a>
+                                <a class="nav-link text-dark" asp-controller="Products" asp-action="Create">Add Product</a>
                             </li>
                         }
 
@@ -84,19 +84,31 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @* <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
-                            </div>
+                            </div> *@
+
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Buy</a></li>
+                                <li><a class="dropdown-item" href="#!">Rent</a></li>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
+                                <partial name="_LoginPartial"/>
+                            </ul>
+
+                              
                         </li>
 
                     </ul>
 
-                    <partial name="_LoginPartial" />
+
                 </div>
             </div>
         </nav>

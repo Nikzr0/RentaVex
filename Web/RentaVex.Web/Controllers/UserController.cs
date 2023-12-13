@@ -18,5 +18,10 @@
         {
             return this.View();
         }
+
+        public IActionResult MyProducts()
+        {
+            return this.View();
+        }
     }
 }
