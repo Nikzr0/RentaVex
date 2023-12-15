@@ -1,18 +1,14 @@
 ﻿namespace RentaVex.Services.Data.Tests
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
     using RentaVex.Data;
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
     using RentaVex.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
-
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class SettingsServiceTests

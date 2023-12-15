@@ -1,20 +1,16 @@
 ﻿namespace RentaVex.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ActionConstraints;
-    using Microsoft.Identity.Client;
-    using NuGet.Protocol.Core.Types;
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.InputModel;
     using RentaVex.Web.ViewModels.Products;
+    using System;
+    using System.Threading.Tasks;
 
     public class ProductsController : Controller
     {

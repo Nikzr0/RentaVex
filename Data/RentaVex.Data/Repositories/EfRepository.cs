@@ -1,11 +1,10 @@
 ﻿namespace RentaVex.Data.Repositories
 {
+    using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data.Common.Repositories;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
-    using RentaVex.Data.Common.Repositories;
 
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class

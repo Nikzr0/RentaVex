@@ -1,11 +1,10 @@
 ﻿namespace RentaVex.Data.Repositories
 {
-    using System;
-    using System.Linq;
-
     using Microsoft.EntityFrameworkCore;
     using RentaVex.Data.Common.Models;
     using RentaVex.Data.Common.Repositories;
+    using System;
+    using System.Linq;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity

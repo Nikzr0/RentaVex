@@ -1,13 +1,12 @@
 ﻿namespace RentaVex.Data.Seeding
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using RentaVex.Common;
     using RentaVex.Data.Models;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     internal class RolesSeeder : ISeeder
     {

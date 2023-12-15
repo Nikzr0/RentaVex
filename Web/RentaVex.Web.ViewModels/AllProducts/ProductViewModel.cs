@@ -1,10 +1,6 @@
 ﻿namespace RentaVex.Web.ViewModels.AllProducts
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using AutoMapper;
     using RentaVex.Data.Models;

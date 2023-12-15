@@ -1,16 +1,9 @@
 ﻿namespace RentaVex.Web.Controllers
 {
-    using System.Diagnostics;
-    using System.Linq;
-
     using Microsoft.AspNetCore.Mvc;
-    using RentaVex.Data;
-    using RentaVex.Data.Common.Repositories;
-    using RentaVex.Data.Models;
-    using RentaVex.Data.Repositories;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels;
-    using RentaVex.Web.ViewModels.Home;
+    using System.Diagnostics;
 
     public class HomeController : BaseController
     {

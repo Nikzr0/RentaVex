@@ -4,11 +4,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Hosting;
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
@@ -17,7 +14,7 @@
 
     public class ProductsService : IProductsService
     {
-        private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif" };
+        private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
 
         private readonly IDeletableEntityRepository<Product> productRepository;
 

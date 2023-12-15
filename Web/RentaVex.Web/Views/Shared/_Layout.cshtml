@@ -10,12 +10,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" />
 
-
     @RenderSection("Styles", required: false)
-@*     @section Styles {
-
-    } *@
-
+    @RenderSection("Scripts", required: false)
 </head>
 <body>
     <header>
@@ -31,12 +27,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Buy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                     @*    <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Rent</a>
-                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Buy</a>
+                        </li>  
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact us</a>
@@ -45,7 +41,7 @@
 
                     <ul class="navbar-nav flex-grow-2">
                         @*  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="MyProducts">My Products</a>
+                        <a class="nav-link text-dark" asp-controller="User" asp-action="MyProducts">My Products</a>
                         </li> *@
 
                         <li class="nav-item">
@@ -60,37 +56,36 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Products" asp-action="Create">Add Product</a>
-@*                                 @RenderSection("Scripts", required: false)
- *@                            </li>
+                            </li>
                         }
 
                         <li class="nav-item dropdown">
                             @* @if (ViewContext.RouteData.Values["controller"].ToString() == "Products" && ViewContext.RouteData.Values["action"].ToString() == "ProductPage") *@
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Buy</a></li>
-                                    <li><a class="dropdown-item" href="#!">Rent</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                    <li><a class="dropdown-item" href="#!">New Added</a></li>
-                                    <li><a class="dropdown-item" href="#!">Close by</a></li>
-                                    <li><a class="dropdown-item" href="#!">Best deals</a></li>
-                                    <li><a class="dropdown-item" href="#!">Promoted</a></li>
-                                    <li><a class="dropdown-item" href="#!">Free</a></li>
-                                    <li><a class="dropdown-item" href="#!">Services</a></li>
-                                    <li><a class="dropdown-item" href="#!">Following</a></li>
-                                    <li><a class="dropdown-item" href="#!">Following</a></li>
-                                </ul>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Buy</a></li>
+                                <li><a class="dropdown-item" href="#!">Rent</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Added</a></li>
+                                <li><a class="dropdown-item" href="#!">Close by</a></li>
+                                <li><a class="dropdown-item" href="#!">Best deals</a></li>
+                                <li><a class="dropdown-item" href="#!">Promoted</a></li>
+                                <li><a class="dropdown-item" href="#!">Free</a></li>
+                                <li><a class="dropdown-item" href="#!">Services</a></li>
+                                <li><a class="dropdown-item" href="#!">Following</a></li>
+                                <li><a class="dropdown-item" href="#!">Following</a></li>
+                            </ul>
                         </li>
 
                         <li class="nav-item dropdown">
                             @* <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Profile
+                            Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
-                                <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
-                                <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                            <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
+                            <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
                             </div> *@
 
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
@@ -100,8 +95,8 @@
                                 <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
-                                <partial name="_LoginPartial"/>
-                            </ul>                              
+                                <partial name="_LoginPartial" />
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -125,11 +120,9 @@
         </div>
     </footer>
 
-
-
-    @RenderSection("Scripts", required: false)
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -1,12 +1,10 @@
 ﻿namespace RentaVex.Web.Controllers
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using RentaVex.Data;
     using RentaVex.Data.Models;
+    using System.Threading.Tasks;
 
     [Route("api/[controller]")]
     [ApiController]
