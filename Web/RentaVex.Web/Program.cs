@@ -1,7 +1,10 @@
 ﻿namespace RentaVex.Web
 {
+    using System.Reflection;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -17,7 +20,6 @@
     using RentaVex.Services.Mapping;
     using RentaVex.Services.Messaging;
     using RentaVex.Web.ViewModels;
-    using System.Reflection;
 
     public class Program
     {
@@ -37,6 +39,10 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // Added for usermanager
+            services.AddDefaultIdentity<User>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<CookiePolicyOptions>(
                 options =>

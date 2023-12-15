@@ -8,18 +8,20 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            // If there are any -->> return
             if (dbContext.Categories.Any())
             {
                 return;
             }
 
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Vehicles" });
-
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Properties" });
-
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Electronics" });
-
-            await dbContext.Categories.AddAsync(new Models.Category { Name = "Camping Equipement" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Camping Equipment" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Clothing" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Books" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Furniture" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Sports Gear" });
 
             await dbContext.SaveChangesAsync();
         }

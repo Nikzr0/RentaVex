@@ -90,7 +90,7 @@
     <div class="form-group">
         <label asp-for="Condition">Condition</label>
         <select asp-for="Condition" asp-items="Html.GetEnumSelectList<ConditionType>()" class="form-control">
-            <option value="">Select Condition</option>
+            @* <option value="">Select Condition</option> Commented for development purposes *@
         </select>
         <span class="text-danger" asp-validation-for="Condition"></span>
     </div>
