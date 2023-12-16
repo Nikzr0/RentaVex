@@ -41,8 +41,8 @@
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Added for usermanager
-            services.AddDefaultIdentity<User>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<User>()
+            //.AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<CookiePolicyOptions>(
                 options =>

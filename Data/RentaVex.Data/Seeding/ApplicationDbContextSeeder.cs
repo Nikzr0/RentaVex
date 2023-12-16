@@ -27,7 +27,7 @@
                               new RolesSeeder(),
                               new SettingsSeeder(),
                               new CategoriesSeeder(),
-                              new UsersSeeder(),
+                              // new UsersSeeder(),
                               //new ProductsSeeder(),
                           };
 
