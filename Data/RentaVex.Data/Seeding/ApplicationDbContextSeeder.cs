@@ -26,10 +26,10 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+
                               new CategoriesSeeder(),
                               new UsersSeeder(),
                               new ProductsSeeder(),
-                              new ImagesSeeder(),
                           };
 
             foreach (var seeder in seeders)

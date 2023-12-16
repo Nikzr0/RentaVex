@@ -8,7 +8,6 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            // If there are any -->> return
             if (dbContext.Categories.Any())
             {
                 return;
