@@ -1,4 +1,8 @@
 ﻿@using RentaVex.Common
+@using RentaVex.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +36,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Products" asp-action="Buy">Buy</a>
-                        </li>  
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact us</a>
@@ -79,23 +83,27 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            @* <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Profile
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
-                            <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
-                            <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
-                            </div> *@
-
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="display: flex; flex-direction: column; align-items: flex-start;">
                                 <li><a class="dropdown-item" href="#!">Buy</a></li>
                                 <li><a class="dropdown-item" href="#!">Rent</a></li>
                                 <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Liked">Liked</a>
                                 <a class="dropdown-item" asp-controller="User" asp-action="Message">Message</a>
-                                <partial name="_LoginPartial" />
+
+                                @if (this.SignInManager.IsSignedIn(this.User))
+                                {
+                                    @this.User.Identity.Name
+
+                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                                        <button type="submit" class="btn btn-link text-dark" style="text-decoration: none;">Logout</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                                }
                             </ul>
                         </li>
                     </ul>
@@ -120,9 +128,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,16 +1,15 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.InputModel;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class ProductsService : IProductsService
     {

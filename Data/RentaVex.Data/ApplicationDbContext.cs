@@ -1,15 +1,14 @@
 ﻿namespace RentaVex.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data.Common.Models;
+    using RentaVex.Data.Models;
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
-    using RentaVex.Data.Common.Models;
-    using RentaVex.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
