@@ -1,10 +1,11 @@
 ﻿namespace RentaVex.Web.ViewModels.InputModel
 {
-    using Microsoft.AspNetCore.Http;
-    using RentaVex.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using RentaVex.Data.Models;
 
     public class CreateProducInputModel
     {
@@ -16,6 +17,7 @@
         }
 
         [Required]
+        [MaxLength(35)]
         public string Name { get; set; }
 
         [Required]
@@ -29,6 +31,7 @@
         [Range(0, int.MaxValue)]
         public decimal Price { get; set; }
 
+        [Required]
         public string Location { get; set; }
 
         public string Contact { get; set; }
@@ -43,6 +46,7 @@
 
         public bool CourierDelivery { get; set; }
 
+        [Required]
         public IEnumerable<IFormFile> Images { get; set; }
 
         public ConditionType Condition { get; set; }

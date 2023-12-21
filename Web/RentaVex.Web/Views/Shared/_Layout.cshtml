@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +12,9 @@
 
     <title>@this.ViewData["Name"] - @GlobalConstants.SystemName</title>
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/site.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="/css/site.min.css"/>
+
 
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -23,7 +25,7 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
 
-                <button class="navbar-toggler" type="button" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,10 +46,6 @@
                     </ul>
 
                     <ul class="navbar-nav flex-grow-2">
-                        @*  <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="User" asp-action="MyProducts">My Products</a>
-                        </li> *@
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="User" asp-action="Message">Message</a>
                         </li>
@@ -64,7 +62,6 @@
                         }
 
                         <li class="nav-item dropdown">
-                            @* @if (ViewContext.RouteData.Values["controller"].ToString() == "Products" && ViewContext.RouteData.Values["action"].ToString() == "ProductPage") *@
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">Buy</a></li>
@@ -84,7 +81,7 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="display: flex; flex-direction: column; align-items: flex-start;">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">Buy</a></li>
                                 <li><a class="dropdown-item" href="#!">Rent</a></li>
                                 <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>

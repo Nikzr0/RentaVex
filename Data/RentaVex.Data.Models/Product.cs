@@ -13,8 +13,9 @@
             this.Images = new HashSet<Image>();
             this.Availabilities = new HashSet<ProductAvailability>();
             this.UserInteractions = new HashSet<UserInteraction>();
-        }
 
+        }
+                
         public string Name { get; set; }
 
         public string Description { get; set; }
