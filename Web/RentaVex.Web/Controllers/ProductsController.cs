@@ -46,8 +46,7 @@
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetCategories();
-
-                return this.View();
+                return this.View(input);
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
@@ -59,11 +58,16 @@
             }
             catch (Exception ex)
             {
-
                 this.ModelState.AddModelError(string.Empty, ex.Message);
+                input.CategoriesItems = this.categoriesService.GetCategories();
+                return this.View(input);
             }
 
+            // return RedirectToAction(nameof(Index));
+
             return this.Redirect("/");
+
+            // return RedirectToAction("Index");
         }
 
         public IActionResult Buy(int id = 1)

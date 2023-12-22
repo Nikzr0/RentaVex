@@ -12,26 +12,25 @@
         public CreateProducInputModel()
         {
             this.PickupTime = DateTime.UtcNow.Date.AddDays(1);
-
             this.ReturnTime = DateTime.UtcNow.Date.AddDays(1);
         }
 
-        [Required]
-        [MaxLength(35)]
+        [Required(ErrorMessage = "The product name is required.")]
+        [MaxLength(35, ErrorMessage = "The product name must be no more than 35 characters.")]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(1800)]
+        [Required(ErrorMessage = "A description is required.")]
+        [MaxLength(1800, ErrorMessage = "The description must be no more than 1800 characters.")]
         public string Description { get; set; }
 
         public bool IsForRent { get; set; }
 
         public bool IsForSale { get; set; }
 
-        [Range(0, int.MaxValue)]
+        [Range(0, int.MaxValue, ErrorMessage = "The price must be a non-negative value.")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The location is required.")]
         public string Location { get; set; }
 
         public string Contact { get; set; }
@@ -46,7 +45,7 @@
 
         public bool CourierDelivery { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "At least one image is required.")]
         public IEnumerable<IFormFile> Images { get; set; }
 
         public ConditionType Condition { get; set; }

@@ -9,114 +9,104 @@
     var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<form method="post" class="col-md-4 offset-4" enctype="multipart/form-data">
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
     <h1>@this.ViewData["Name"]</h1>
 
     <div asp-validation-summary="All" class="text-danger"></div>
-    rie
 
     <div class="form-group">
         <label asp-for="Images">Images</label>
-        <input asp-for="Images" />
-        <span asp-validation-for="Images"></span>
+        <input asp-for="Images" type="file" class="form-control" multiple />
+        <span asp-validation-for="Images" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name"/>
-        <span asp-validation-for="Name"></span>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Description">Description</label>
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Description"></span>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <div>
-            <h8>Is it for rent?</h8>
-        </div>
-        <label asp-for="IsForRent">Rent?</label>
-        <input asp-for="IsForRent" />
-        <span class="text-danger" asp-validation-for="IsForRent"></span>
+        <label asp-for="IsForRent">Is it for rent?</label>
+        <input asp-for="IsForRent" type="checkbox" />
+        <span asp-validation-for="IsForRent" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Price">Price</label>
-        <input asp-for="Price"/>
-        <span class="text-danger" asp-validation-for="Price"></span>
+        <input asp-for="Price" type="number" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Location">Location</label>
-        <input asp-for="Location"/>
-        <span class="text-danger" asp-validation-for="Location"></span>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Contact">Contact</label>
-        <input asp-for="Contact"/>
-        <span class="text-danger" asp-validation-for="Contact"></span>
+        <input asp-for="Contact" class="form-control" />
+        <span asp-validation-for="Contact" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="categoriesItems"></select>
-        <span class="text-danger" asp-validation-for="CategoryId"></span>
+        <select asp-for="CategoryId" class="form-control" asp-items="categoriesItems">
+            <option value="">Select Category</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="PickupTime">Pickup Time</label>
         <input asp-for="PickupTime" type="datetime-local" class="form-control" />
-        <span class="text-danger" asp-validation-for="PickupTime"></span>
+        <span asp-validation-for="PickupTime" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="ReturnTime">Return Time</label>
-        <input asp-for="ReturnTime" type="datetime-local" class="form-control"/>
-        <span class="text-danger" asp-validation-for="ReturnTime"></span>
+        <input asp-for="ReturnTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="ReturnTime" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <div>
-            <h8>Do you offer courier delivery?</h8>
-        </div>
-        <label asp-for="CourierDelivery">CourierDelivery</label>
-        <input asp-for="CourierDelivery"/>
-        <span class="text-danger" asp-validation-for="CourierDelivery"></span>
+        <label asp-for="CourierDelivery">Courier Delivery?</label>
+        <input asp-for="CourierDelivery" type="checkbox" />
+        <span asp-validation-for="CourierDelivery" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Condition">Condition</label>
         <select asp-for="Condition" asp-items="Html.GetEnumSelectList<ConditionType>()" class="form-control">
-            <option value="">Select Condition</option> Commented for development purposes
+            <option value="">Select Condition</option>
         </select>
-        <span class="text-danger" asp-validation-for="Condition"></span>
+        <span asp-validation-for="Condition" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <div>
-            <h8>Are there any warnings?</h8>
-        </div>
-        <label asp-for="IsWarned">Warned?</label>
-        <input asp-for="IsWarned" id="isWarnedCheckbox" />
-
-        <span class="text-danger" asp-validation-for="IsWarned"></span>
+        <label asp-for="IsWarned">Are there any warnings?</label>
+        <input asp-for="IsWarned" type="checkbox" id="isWarnedCheckbox" />
+        <span asp-validation-for="IsWarned" class="text-danger"></span>
     </div>
 
     <div class="form-group" id="warningMessageGroup" style="display:none;">
         <label asp-for="WarningMessage">Warning Message</label>
         <textarea asp-for="WarningMessage" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="WarningMessage"></span>
+        <span asp-validation-for="WarningMessage" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" />
+    </div>
 
-@*     @section Scripts {
+    @section Scripts {
         <script src="~/js/WarningMessage.js"></script>
     }
- *@
-    <script src="~/js/WarningMessage.js"></script>
-
-    <input type="submit" class="btn btn-primary" />
 </form>
