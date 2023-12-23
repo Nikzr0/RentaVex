@@ -4,7 +4,7 @@
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
     using RentaVex.Web.ViewModels.AllProducts;
-    using RentaVex.Web.ViewModels.InputModel;
+    using RentaVex.Web.ViewModels.Products;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -22,7 +22,7 @@
             this.productRepository = productRepository;
         }
 
-        public async Task CreateAsync(CreateProducInputModel inputInfo, string userId, string imagePath)
+        public async Task CreateAsync(CreateProducViewModel inputInfo, string userId, string imagePath)
         {
             var product = new Product();
 

@@ -1,7 +1,8 @@
 ﻿namespace RentaVex.Web.ViewModels.AllProducts
 {
-    using RentaVex.Web.ViewModels;
     using System.Collections.Generic;
+
+    using RentaVex.Web.ViewModels;
 
     public class AllProductsViewModel : PagingViewModel
     {

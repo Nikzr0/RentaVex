@@ -1,4 +1,4 @@
-﻿namespace RentaVex.Web.ViewModels.InputModel
+﻿namespace RentaVex.Web.ViewModels.Products
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@
     using Microsoft.AspNetCore.Http;
     using RentaVex.Data.Models;
 
-    public class CreateProducInputModel
+    public class CreateProducViewModel
     {
-        public CreateProducInputModel()
+        public CreateProducViewModel()
         {
             this.PickupTime = DateTime.UtcNow.Date.AddDays(1);
             this.ReturnTime = DateTime.UtcNow.Date.AddDays(1);

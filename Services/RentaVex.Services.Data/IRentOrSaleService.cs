@@ -1,9 +1,9 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using RentaVex.Web.ViewModels.InputModel;
+    using RentaVex.Web.ViewModels.Products;
 
     public interface IRentOrSaleService
     {
-        void RentOrSale(CreateProducInputModel input);
+        void RentOrSale(CreateProducViewModel input);
     }
 }

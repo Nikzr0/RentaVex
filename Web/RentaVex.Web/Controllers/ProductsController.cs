@@ -7,7 +7,6 @@
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
-    using RentaVex.Web.ViewModels.InputModel;
     using RentaVex.Web.ViewModels.Products;
     using System;
     using System.Threading.Tasks;
@@ -33,7 +32,7 @@
         [Authorize]
         public IActionResult Create()
         {
-            var viewModel = new CreateProducInputModel();
+            var viewModel = new CreateProducViewModel();
             viewModel.CategoriesItems = this.categoriesService.GetCategories();
 
             return this.View(viewModel);
@@ -41,7 +40,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProducInputModel input)
+        public async Task<IActionResult> Create(CreateProducViewModel input)
         {
             if (!this.ModelState.IsValid)
             {

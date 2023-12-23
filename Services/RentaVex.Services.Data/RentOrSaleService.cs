@@ -1,10 +1,10 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using RentaVex.Web.ViewModels.InputModel;
+    using RentaVex.Web.ViewModels.Products;
 
     public class RentOrSaleService : IRentOrSaleService
     {
-        public void RentOrSale(CreateProducInputModel input)
+        public void RentOrSale(CreateProducViewModel input)
         {
             if (input.IsForRent)
             {
