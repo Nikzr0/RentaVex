@@ -34,7 +34,7 @@
         public IActionResult Create()
         {
             var viewModel = new CreateProducInputModel();
-            viewModel.CategoriesItems = this.categoriesService.GetCategories(); // category dropdown
+            viewModel.CategoriesItems = this.categoriesService.GetCategories();
 
             return this.View(viewModel);
         }
