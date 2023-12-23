@@ -12,9 +12,8 @@
 
     <title>@this.ViewData["Name"] - @GlobalConstants.SystemName</title>
 
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="/css/site.min.css"/>
-
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/site.min.css" />
 
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -124,8 +123,7 @@
             </p>
         </div>
     </footer>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     using RentaVex.Web.ViewModels;
     using System.Diagnostics;
 
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly IGetCountService countService;
 

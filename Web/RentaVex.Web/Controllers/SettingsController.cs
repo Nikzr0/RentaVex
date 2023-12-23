@@ -8,7 +8,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public class SettingsController : BaseController
+    public class SettingsController : Controller
     {
         private readonly ISettingsService settingsService;
 
