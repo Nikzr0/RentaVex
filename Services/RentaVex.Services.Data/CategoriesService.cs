@@ -1,9 +1,10 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using RentaVex.Data.Common.Repositories;
-    using RentaVex.Data.Models;
     using System.Collections.Generic;
     using System.Linq;
+
+    using RentaVex.Data.Common.Repositories;
+    using RentaVex.Data.Models;
 
     public class CategoriesService : ICategoriesService
     {

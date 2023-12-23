@@ -1,0 +1,36 @@
+﻿@using RentaVex.Data.Models;
+
+@using RentaVex.Web.ViewModels.Products;
+@model CreateProducViewModel;
+
+@{
+    // this.ViewData["Name"] = @Model.;
+}
+
+@section Styles {
+}
+
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
+    <h1>@this.ViewData["Name"]</h1>
+
+    <div asp-validation-summary="All" class="text-danger"></div>    
+
+    <div class="form-group">
+        <label asp-for="PickupTime">Pickup Time</label>
+        <input asp-for="PickupTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="PickupTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReturnTime">Return Time</label>
+        <input asp-for="ReturnTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="ReturnTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+}

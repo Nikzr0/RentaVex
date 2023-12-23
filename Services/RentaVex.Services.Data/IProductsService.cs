@@ -1,9 +1,10 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using RentaVex.Web.ViewModels.AllProducts;
-    using RentaVex.Web.ViewModels.Products;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using RentaVex.Web.ViewModels.AllProducts;
+    using RentaVex.Web.ViewModels.Products;
 
     public interface IProductsService
     {

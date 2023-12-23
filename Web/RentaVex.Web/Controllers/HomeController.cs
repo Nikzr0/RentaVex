@@ -1,9 +1,10 @@
 ﻿namespace RentaVex.Web.Controllers
 {
+    using System.Diagnostics;
+
     using Microsoft.AspNetCore.Mvc;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels;
-    using System.Diagnostics;
 
     public class HomeController : Controller
     {

@@ -1,7 +1,8 @@
 ﻿namespace RentaVex.Data.Models
 {
-    using RentaVex.Data.Common.Models;
     using System.Collections.Generic;
+
+    using RentaVex.Data.Common.Models;
 
     public class User : BaseDeletableModel<int>
     {

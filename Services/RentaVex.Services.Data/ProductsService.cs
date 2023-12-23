@@ -1,15 +1,16 @@
 ﻿namespace RentaVex.Services.Data
 {
-    using RentaVex.Data.Common.Repositories;
-    using RentaVex.Data.Models;
-    using RentaVex.Services.Mapping;
-    using RentaVex.Web.ViewModels.AllProducts;
-    using RentaVex.Web.ViewModels.Products;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using RentaVex.Data.Common.Repositories;
+    using RentaVex.Data.Models;
+    using RentaVex.Services.Mapping;
+    using RentaVex.Web.ViewModels.AllProducts;
+    using RentaVex.Web.ViewModels.Products;
 
     public class ProductsService : IProductsService
     {
@@ -66,7 +67,7 @@
 
                 product.Images.Add(dbImage);
 
-                var physicalPath = $"{imagePath}/products/{dbImage.Id}.{extention}"; // images
+                var physicalPath = $"{imagePath}/products/{dbImage.Id}.{extention}";
 
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
@@ -103,6 +104,31 @@
                 .FirstOrDefault();
 
             return productEntity;
+        }
+
+        public void SetProductUnavailableDates(int productId, DateTime start, DateTime end)
+        {
+            var product = this.GetProductById(productId);
+
+            public void SetUnavailableDates(DateTime start, DateTime end)
+            {
+                // Assuming Availabilities is initialized in the constructor
+                Availabilities ??= new HashSet<ProductAvailability>();
+
+                // Generate a list of dates between start and end (inclusive)
+                var unavailableDates = Enumerable.Range(0, (end - start).Days + 1)
+                                                 .Select(offset => start.AddDays(offset))
+                                                 .ToList();
+
+                // Remove existing availabilities within the selected range
+                Availabilities.RemoveWhere(avail => unavailableDates.Contains(avail.AvailableDate));
+
+                // Add new unavailability entries
+                foreach (var date in unavailableDates)
+                {
+                    Availabilities.Add(new ProductAvailability { AvailableDate = date });
+                }
+            }
         }
     }
 }

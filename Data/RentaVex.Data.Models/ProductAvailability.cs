@@ -1,17 +1,19 @@
 ﻿namespace RentaVex.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class ProductAvailability
     {
-        public int ProductAvailabilityID { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
 
-        public DayOfWeek DayOfWeek { get; set; }
-
-        public bool IsAvailable { get; set; }
-
+        [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
+
+        public DateTime AvailableDate { get; set; }
     }
 }

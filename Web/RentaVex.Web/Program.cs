@@ -1,5 +1,7 @@
 ﻿namespace RentaVex.Web
 {
+    using System.Reflection;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,6 @@
     using RentaVex.Services.Mapping;
     using RentaVex.Services.Messaging;
     using RentaVex.Web.ViewModels;
-    using System.Reflection;
 
     public class Program
     {

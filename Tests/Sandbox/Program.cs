@@ -1,5 +1,10 @@
 ﻿namespace Sandbox
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Threading.Tasks;
+
     using CommandLine;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -13,10 +18,6 @@
     using RentaVex.Data.Seeding;
     using RentaVex.Services.Data;
     using RentaVex.Services.Messaging;
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Threading.Tasks;
 
     public static class Program
     {

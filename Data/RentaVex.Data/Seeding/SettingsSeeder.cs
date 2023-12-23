@@ -1,9 +1,10 @@
 ﻿namespace RentaVex.Data.Seeding
 {
-    using RentaVex.Data.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using RentaVex.Data.Models;
 
     internal class SettingsSeeder : ISeeder
     {

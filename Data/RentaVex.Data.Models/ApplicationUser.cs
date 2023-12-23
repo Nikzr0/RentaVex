@@ -1,10 +1,11 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace RentaVex.Data.Models
 {
-    using Microsoft.AspNetCore.Identity;
-    using RentaVex.Data.Common.Models;
     using System;
     using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Identity;
+    using RentaVex.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

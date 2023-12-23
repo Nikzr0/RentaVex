@@ -1,8 +1,9 @@
 ﻿namespace RentaVex.Data.Models
 {
-    using RentaVex.Data.Common.Models;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using RentaVex.Data.Common.Models;
 
     public class Image : BaseDeletableModel<string>
     {

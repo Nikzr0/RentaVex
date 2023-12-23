@@ -1,5 +1,8 @@
 ﻿namespace RentaVex.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -8,8 +11,6 @@
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.Products;
-    using System;
-    using System.Threading.Tasks;
 
     public class ProductsController : Controller
     {
@@ -62,11 +63,7 @@
                 return this.View(input);
             }
 
-            // return RedirectToAction(nameof(Index));
-
-            return this.Redirect("/");
-
-            // return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Buy(int id = 1)
@@ -117,6 +114,11 @@
             };
 
             return this.View(product);
+        }
+
+        public IActionResult RentProduct()
+        {
+            return this.View();
         }
     }
 }

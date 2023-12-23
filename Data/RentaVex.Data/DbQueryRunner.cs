@@ -1,9 +1,10 @@
 ﻿namespace RentaVex.Data
 {
-    using Microsoft.EntityFrameworkCore;
-    using RentaVex.Data.Common;
     using System;
     using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {
