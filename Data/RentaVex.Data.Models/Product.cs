@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using Microsoft.EntityFrameworkCore;
+
     using RentaVex.Data.Common.Models;
 
     public class Product : BaseDeletableModel<int>
@@ -59,24 +57,5 @@
         public ICollection<Like> Likes { get; set; }
 
         public ICollection<UserInteraction> UserInteractions { get; set; }
-
-        public void SetUnavailableDates(DateTime pickUpTime, DateTime returnTime)
-        {
-            this.Availabilities ??= new HashSet<ProductAvailability>();
-
-            // Generate a list of dates between start and end (inclusive)
-            var unavailableDates = Enumerable.Range(0, (returnTime - pickUpTime).Days + 1)
-                                              .Select(offset => pickUpTime.AddDays(offset))
-                                              .ToList();
-
-            this.Availabilities = this.Availabilities
-                   .Where(avail => !unavailableDates.Contains(avail.AvailableDate))
-                   .ToHashSet();
-
-            foreach (var date in unavailableDates)
-            {
-                this.Availabilities.Add(new ProductAvailability { AvailableDate = date });
-            }
-        }
     }
 }

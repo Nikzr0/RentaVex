@@ -8,5 +8,14 @@
 
     public class RentProductViewModel
     {
+        public string UserName { get; set; }
+
+        public string UserEmail { get; set; }
+
+        public DateTime PickupTime { get; set; }
+
+        public DateTime ReturnTime { get; set; }
+
+        public int ProductId { get; set; }
     }
 }

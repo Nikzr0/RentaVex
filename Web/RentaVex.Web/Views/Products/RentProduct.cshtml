@@ -1,19 +1,15 @@
-﻿@using RentaVex.Data.Models;
-
-@using RentaVex.Web.ViewModels.Products;
-@model CreateProducViewModel;
+﻿@model RentaVex.Web.ViewModels.Products.RentProductViewModel;
 
 @{
-    // this.ViewData["Name"] = @Model.;
-}
-
-@section Styles {
+    ViewData["Title"] = "Rent Product";
 }
 
 <form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
-    <h1>@this.ViewData["Name"]</h1>
+    @Html.AntiForgeryToken()
 
-    <div asp-validation-summary="All" class="text-danger"></div>    
+    <h1>@this.ViewData["Title"]</h1>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
         <label asp-for="PickupTime">Pickup Time</label>
@@ -31,6 +27,3 @@
         <input type="submit" class="btn btn-primary" />
     </div>
 </form>
-
-@section Scripts {
-}
