@@ -63,7 +63,8 @@
                 return this.View(input);
             }
 
-            return this.RedirectToAction(nameof(Index));
+            // return this.RedirectToAction(nameof(Index));
+            return this.Redirect("/");
         }
 
         public IActionResult Buy(int id = 1)

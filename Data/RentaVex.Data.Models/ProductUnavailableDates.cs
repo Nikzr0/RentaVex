@@ -2,16 +2,15 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ProductAvailability
+    public class ProductUnavailableDates
     {
         [Key]
         public int Id { get; set; }
 
         public int ProductId { get; set; }
 
-        [ForeignKey(nameof(ProductId))]
+        // [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
 
         public DateTime UnavailableDate { get; set; }

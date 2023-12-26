@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using RentaVex.Data.Models;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.Products;
 
@@ -17,6 +18,6 @@
 
         ProductViewModel GetProductById(int id);
 
-        Task SetProductUnavailableDates(int productId, DateTime start, DateTime end);
+        Task SetProductUnavailableDates(Product product, DateTime start, DateTime end);
     }
 }

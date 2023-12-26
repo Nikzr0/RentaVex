@@ -106,47 +106,35 @@
             return productEntity;
         }
 
-        public async Task SetProductUnavailableDates(int productId, DateTime start, DateTime end)
+        public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
-            var product = this.productRepository.All()
-                .Include(p => p.Availabilities)
-                .FirstOrDefault(p => p.Id == productId);
-
             if (product == null)
             {
-                throw new InvalidOperationException($"Product with ID {productId} not found");
+                throw new ArgumentNullException(nameof(product), "The product is null.");
             }
 
-            // Assuming Availabilities is a property of the Product entity
-            product.Availabilities ??= new List<ProductAvailability>();
+            product ??= new List<ProductAvailability>();
 
-            // Generate a list of dates between start and end (inclusive)
-            var unavailableDates = Enumerable.Range(0, (end - start).Days + 1)
-                                             .Select(offset => start.AddDays(offset))
-                                             .ToList();
-
-            // Create a new collection with items not to be removed
+            var availableDates = Enumerable.Range(0, (end - start).Days + 1)
+                                            .Select(offset => start.AddDays(offset))
+                                            .ToList();
             var remainingAvailabilities = product.Availabilities
-                .Where(avail => !unavailableDates.Contains(avail.UnavailableDate))
+                .Where(avail => !availableDates.Contains(avail.AvailableDate))
                 .ToList();
 
-            // Clear the original collection
-            product.Availabilities.Clear();
+            product.AvaiUnavailabilitieslabilities.Clear();
 
-            // Add back the remaining items
             foreach (var remainingAvailability in remainingAvailabilities)
             {
                 product.Availabilities.Add(remainingAvailability);
             }
 
-            // Add new unavailability entries
-            foreach (var date in unavailableDates)
+            foreach (var date in availableDates)
             {
-                product.Availabilities.Add(new ProductAvailability { UnavailableDate = date });
+                product.Availabilities.Add(new ProductAvailability { AvailableDate = date });
             }
 
             await this.productRepository.SaveChangesAsync();
         }
     }
 }
-
