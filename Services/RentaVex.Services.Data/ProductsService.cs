@@ -1,4 +1,8 @@
-﻿namespace RentaVex.Services.Data
+﻿using Microsoft.EntityFrameworkCore;
+using RentaVex.Data.Models;
+using System;
+
+namespace RentaVex.Services.Data
 {
     using System;
     using System.Collections.Generic;
@@ -113,25 +117,15 @@
                 throw new ArgumentNullException(nameof(product), "The product is null.");
             }
 
-            product ??= new List<ProductAvailability>();
+            var unavailableDates = Enumerable.Range(0, (end - start).Days + 1)
+                                       .Select(offset => start.AddDays(offset))
+                                       .ToList();
 
-            var availableDates = Enumerable.Range(0, (end - start).Days + 1)
-                                            .Select(offset => start.AddDays(offset))
-                                            .ToList();
-            var remainingAvailabilities = product.Availabilities
-                .Where(avail => !availableDates.Contains(avail.AvailableDate))
-                .ToList();
+            product.UnavailableDates.Clear();
 
-            product.AvaiUnavailabilitieslabilities.Clear();
-
-            foreach (var remainingAvailability in remainingAvailabilities)
+            foreach (var date in unavailableDates)
             {
-                product.Availabilities.Add(remainingAvailability);
-            }
-
-            foreach (var date in availableDates)
-            {
-                product.Availabilities.Add(new ProductAvailability { AvailableDate = date });
+                product.UnavailableDates.Add(new UnavailableDate { Date = date });
             }
 
             await this.productRepository.SaveChangesAsync();

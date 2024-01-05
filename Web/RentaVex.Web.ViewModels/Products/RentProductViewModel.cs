@@ -1,21 +1,21 @@
 ﻿namespace RentaVex.Web.ViewModels.Products
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+
+    using RentaVex.Web.ViewModels.AllProducts;
 
     public class RentProductViewModel
     {
-        public string UserName { get; set; }
+        public RentProductViewModel()
+        {
+            this.PickupTime = DateTime.UtcNow.Date.AddDays(1);
+            this.ReturnTime = DateTime.UtcNow.Date.AddDays(1);
+        }
 
-        public string UserEmail { get; set; }
+        public ProductViewModel Product { get; set; }
 
         public DateTime PickupTime { get; set; }
 
         public DateTime ReturnTime { get; set; }
-
-        public int ProductId { get; set; }
     }
 }

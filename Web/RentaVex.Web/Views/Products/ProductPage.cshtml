@@ -2,13 +2,13 @@
 @model ProductPageViewModel;
 
 @{
-    // TODO - change the title
     this.ViewData["Name"] = @Model.Product.Name;
 }
 
 @section Styles {
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/> *@
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
 }
 
@@ -18,27 +18,20 @@
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.Product.ImageUrl" alt="..." /></div>
             <div class="col-md-6">
-                @* <div class="small mb-1">SKU: BST-498</div> *@
                 <h1 class="display-5 fw-bolder">@Model.Product.Name</h1>
                 <div class="fs-5 mb-5">
-                @*<span class="text-decoration-line-through">$45.00</span> // This is dedicated for sales only*@
                     <span>@Model.Product.Price</span>
                 </div>
-                <p class="lead">@Model.Product.Description</p> 
+                <p class="lead">@Model.Product.Description</p>
                 <div class="d-flex">
-                   @*  <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />  // TODO: to make a validation for quantity*@
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="redirectToPage()">
-                        <i class="bi-cart-fill me-1"></i>
-                        Rent
-                    </button>
+                    <a asp-action="RentProduct" asp-controller="Products" asp-route-id="@Model.Product.Id" class="btn btn-primary">
+                        Rent me
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 
 <!-- Related items section-->

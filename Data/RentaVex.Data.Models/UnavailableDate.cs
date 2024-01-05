@@ -3,16 +3,15 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class ProductUnavailableDates
+    public class UnavailableDate
     {
-        [Key]
         public int Id { get; set; }
 
+        public DateTime Date { get; set; }
+
+        // Foreign key to relate the UnavailableDate to a Product
         public int ProductId { get; set; }
 
-        // [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
-
-        public DateTime UnavailableDate { get; set; }
     }
 }

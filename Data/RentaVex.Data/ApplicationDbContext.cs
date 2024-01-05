@@ -27,7 +27,7 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<ProductAvailability> ProductAvailabilities { get; set; }
+        public DbSet<UnavailableDate> UnavailableDates { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -58,6 +58,11 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UnavailableDate>()
+           .HasOne(ud => ud.Product)
+           .WithMany(p => p.UnavailableDates)
+           .HasForeignKey(ud => ud.ProductId);
+
             base.OnModelCreating(modelBuilder);
 
             this.ConfigureUserIdentityRelations(modelBuilder);

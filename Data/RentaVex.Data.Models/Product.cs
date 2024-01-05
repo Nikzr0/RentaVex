@@ -11,8 +11,8 @@
         public Product()
         {
             this.Images = new HashSet<Image>();
-            this.Unavailabilities = new HashSet<ProductUnavailableDates>();
             this.UserInteractions = new HashSet<UserInteraction>();
+            this.UnavailableDates = new HashSet<UnavailableDate>();
         }
 
         public string Name { get; set; }
@@ -40,8 +40,6 @@
 
         public ICollection<Image> Images { get; set; }
 
-        public ICollection<ProductUnavailableDates> Unavailabilities { get; set; }
-
         public DateTime PickupTime { get; set; }
 
         public DateTime ReturnTime { get; set; }
@@ -57,5 +55,7 @@
         public ICollection<Like> Likes { get; set; }
 
         public ICollection<UserInteraction> UserInteractions { get; set; }
+
+        public ICollection<UnavailableDate> UnavailableDates { get; set; }
     }
 }

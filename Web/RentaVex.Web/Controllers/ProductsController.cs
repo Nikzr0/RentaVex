@@ -63,7 +63,6 @@
                 return this.View(input);
             }
 
-            // return this.RedirectToAction(nameof(Index));
             return this.Redirect("/");
         }
 
@@ -117,9 +116,26 @@
             return this.View(product);
         }
 
-        public IActionResult RentProduct()
+        [HttpGet]
+        public IActionResult RentProduct(int id)
         {
-            return this.View();
+            var product = new RentProductViewModel
+            {
+                Product = this.productService.GetProductById(id),
+            };
+
+            return this.View(product);
+        }
+
+        [HttpPost]
+        public IActionResult RentProduct(RentProductViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                return this.Redirect("/");
+            }
+
+            return this.View(model);
         }
     }
 }

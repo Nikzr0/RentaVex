@@ -1,13 +1,12 @@
-﻿@model RentaVex.Web.ViewModels.Products.RentProductViewModel;
+﻿@using RentaVex.Web.ViewModels.Products;
+@model RentProductViewModel;
 
 @{
-    ViewData["Title"] = "Rent Product";
+    this.ViewData["Name"] = Model.Product.Name;
 }
 
 <form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-
-    <h1>@this.ViewData["Title"]</h1>
 
     <div asp-validation-summary="All" class="text-danger"></div>
 

@@ -1,5 +1,4 @@
 ﻿@using RentaVex.Web.ViewModels.AllProducts;
-
 @model AllProductsViewModel;
 
 @{
@@ -21,13 +20,16 @@
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-description">@product.Description</p>
                     <p class="card-price">@product.Price</p>
-                    <a href="~/Products/ProductPage/@product.Id" class="btn btn-primary">Go to Product Page</a>
+
+                    <a asp-action="ProductPage" asp-controller="Products" asp-route-id="@product.Id" class="btn btn-primary">
+                        Go to Product Page
+                    </a>
                 </div>
             </div>
         }
     </div>
 
-    <div class="text-center">
+ @*    <div class="text-center">
         <p>@myString</p>
     </div>
 
@@ -39,7 +41,7 @@
         <h6>PreviousPage: @Model.PreviousPage</h6>
         <h6>HasNext: @Model.HasNextPage</h6>
         <h6>HasPrevious: @Model.HasPreviousPage</h6>
-    </div>
+    </div> *@
 
 </div>
 

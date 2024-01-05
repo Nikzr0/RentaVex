@@ -4,12 +4,12 @@
 
     public class UserInteraction
     {
-        public int UserInteractionID { get; set; }
+        public int UserInteractionId { get; set; }
 
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         [ForeignKey("Product")]
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
 
         public string Comment { get; set; }
 
