@@ -94,6 +94,74 @@
 
             await dbContext.Images.AddAsync(image2);
             await dbContext.SaveChangesAsync();
+
+            // Product 3
+            var product3 = new Product
+            {
+                Name = "A tent",
+                Description = "A great tent!",
+                Price = 150.00m,
+                Location = "Plovdiv",
+                Contact = "0893452019",
+                Category = category,
+                UserId = user.Id.ToString(),
+                IsForSale = true,
+                IsForRent = false,
+                PickupTime = DateTime.Now,
+                ReturnTime = DateTime.Now.AddDays(7),
+                CourierDelivery = true,
+                Condition = ConditionType.New,
+                IsWarned = true,
+                WarningMessage = "No warnings",
+            };
+
+            await dbContext.Products.AddAsync(product3);
+            await dbContext.SaveChangesAsync();
+
+            var image3 = new Image
+            {
+                AddedByUser = user.Username,
+                ImageUrl = "/images/products/b27f9d81-1cbb-4df3-9b20-53e0b254bd6c.jpg",
+                Extention = ".jpg",
+                ProductId = product3.Id,
+            };
+
+            await dbContext.Images.AddAsync(image3);
+            await dbContext.SaveChangesAsync();
+
+            // Product 4
+            var product4 = new Product
+            {
+                Name = "A tent",
+                Description = "A great tent!",
+                Price = 150.00m,
+                Location = "Plovdiv",
+                Contact = "0893452019",
+                Category = category,
+                UserId = user.Id.ToString(),
+                IsForSale = true,
+                IsForRent = false,
+                PickupTime = DateTime.Now,
+                ReturnTime = DateTime.Now.AddDays(7),
+                CourierDelivery = true,
+                Condition = ConditionType.New,
+                IsWarned = true,
+                WarningMessage = "No warnings",
+            };
+
+            await dbContext.Products.AddAsync(product4);
+            await dbContext.SaveChangesAsync();
+
+            var image4 = new Image
+            {
+                AddedByUser = user.Username,
+                ImageUrl = "/images/products/b27f9d81-1cbb-4df3-9b20-53e0b254bd6c.jpg",
+                Extention = ".jpg",
+                ProductId = product4.Id,
+            };
+
+            await dbContext.Images.AddAsync(image4);
+            await dbContext.SaveChangesAsync();
         }
     }
 }
