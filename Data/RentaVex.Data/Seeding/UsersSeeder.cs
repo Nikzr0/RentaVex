@@ -13,7 +13,8 @@
                 return;
             }
 
-            await dbContext.Users.AddAsync(new Models.User { Username = "user1", Password = "userpassword1", Email = "user1@gmail.com" });
+            await dbContext.Users.AddAsync(new Models.User { Username = "Selena", Password = "SelenaProdanovapassword1", Email = "selena@gmail.com" });
+            await dbContext.Users.AddAsync(new Models.User { Username = "Nikola", Password = "NIko2301321028", Email = "n@gpepelovmail.com" });
 
             await dbContext.SaveChangesAsync();
         }

@@ -1,11 +1,33 @@
-﻿@using RentaVex.Web.ViewModels.User;
-
-@model MyProductsViewModel;
+﻿@* @using RentaVex.Web.ViewModels
+@model MyProductsViewModel
 
 @{
-    this.ViewData["Name"] = "My Products";
+    this.ViewData["Name"] = "Buy";
+    string myString = new string('_', 160);
 }
 
-<p>Welcome to your products!</p>
+<h1>@this.ViewData["Name"]</h1>
+ *@
+@* 
+<div class="container">
+    <div class="row mx-auto">
+        @foreach (var product in this.Model.Products)
+        {
+            <div class="card col-md-3">
+                <img src="@product.ImageUrl" class="card-img-top" alt="...">
 
-<partial name="_PagingPartial" model="@Model"></partial>
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-description">@product.Description</p>
+                    <p class="card-price">@product.Price</p>
+
+                    <a asp-controller="Products" asp-action="ProductPage" asp-route-id="@product.Id" class="btn btn-primary">
+                        Go to Product Page
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<partial name="_PagingPartial" model="@Model"></partial> *@

@@ -11,6 +11,7 @@
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.Products;
+    using RentaVex.Web.ViewModels.User;
 
     public class ProductsController : Controller
     {
@@ -86,25 +87,26 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Rent(int id = 1)
-        {
-            const int itemsPerPage = 24;
 
-            if (id < 1)
-            {
-                return this.NotFound();
-            }
+        //public IActionResult Rent(int id = 1)
+        //{
+        //    const int itemsPerPage = 24;
 
-            var viewModel = new AllProductsViewModel
-            {
-                ItemsPerPage = itemsPerPage,
-                PageNumber = id,
-                Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
-                ProductsCount = this.productService.GetCount(),
-            };
+        //    if (id < 1)
+        //    {
+        //        return this.NotFound();
+        //    }
 
-            return this.View(viewModel);
-        }
+        //    var viewModel = new AllProductsViewModel
+        //    {
+        //        ItemsPerPage = itemsPerPage,
+        //        PageNumber = id,
+        //        Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
+        //        ProductsCount = this.productService.GetCount(),
+        //    };
+
+        //    return this.View(viewModel);
+        //}
 
         public IActionResult ProductPage(int id)
         {
@@ -116,26 +118,26 @@
             return this.View(product);
         }
 
-        [HttpGet]
-        public IActionResult RentProduct(int id)
-        {
-            var product = new RentProductViewModel
-            {
-                Product = this.productService.GetProductById(id),
-            };
+        //[HttpGet]
+        //public IActionResult RentProduct(int id)
+        //{
+        //    var product = new RentProductViewModel
+        //    {
+        //        Product = this.productService.GetProductById(id),
+        //    };
 
-            return this.View(product);
-        }
+        //    return this.View(product);
+        //}
 
-        [HttpPost]
-        public IActionResult RentProduct(RentProductViewModel model)
-        {
-            if (this.ModelState.IsValid)
-            {
-                return this.Redirect("/");
-            }
+        //[HttpPost]
+        //public IActionResult RentProduct(RentProductViewModel model)
+        //{
+        //    if (this.ModelState.IsValid)
+        //    {
+        //        return this.Redirect("/");
+        //    }
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
     }
 }

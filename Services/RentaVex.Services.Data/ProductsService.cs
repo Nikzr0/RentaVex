@@ -41,9 +41,6 @@ namespace RentaVex.Services.Data
             product.CategoryId = inputInfo.CategoryId;
             product.UserId = userId;
 
-            product.PickupTime = inputInfo.PickupTime;
-            product.ReturnTime = inputInfo.ReturnTime;
-
             product.CourierDelivery = inputInfo.CourierDelivery;
 
             product.CategoryId = inputInfo.CategoryId;

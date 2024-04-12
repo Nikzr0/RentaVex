@@ -33,9 +33,9 @@
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserInteraction> UserInteractions { get; set; }
-
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -58,10 +58,10 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // modelBuilder.Entity<UnavailableDate>()
-           //.HasOne(ud => ud.Product)
-           //.WithMany(p => p.UnavailableDates)
-           //.HasForeignKey(ud => ud.ProductId);
+            // modelBuilder.Entity<UnavailableDate>()
+            //.HasOne(ud => ud.Product)
+            //.WithMany(p => p.UnavailableDates)
+            //.HasForeignKey(ud => ud.ProductId);
 
             base.OnModelCreating(modelBuilder);
 

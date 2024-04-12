@@ -8,7 +8,7 @@
 
         public int ItemsPerPage { get; set; }
 
-        public int PageNumber { get; set; } // curr page
+        public int PageNumber { get; set; }
 
         public int PagesCount => (int)Math.Ceiling((double)this.ProductsCount / this.ItemsPerPage);
 

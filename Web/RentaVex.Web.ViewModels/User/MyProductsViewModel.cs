@@ -1,7 +1,12 @@
 ﻿namespace RentaVex.Web.ViewModels.User
 {
-    public class MyProductsViewModel
+    using System.Collections.Generic;
+
+    using RentaVex.Web.ViewModels.AllProducts;
+
+    public class MyProductsViewModel : PagingViewModel
     {
-        //TODO - Add my proudcts
+        public IEnumerable<ProductViewModel> Products { get; set; }
+
     }
 }

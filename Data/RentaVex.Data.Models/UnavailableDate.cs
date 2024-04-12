@@ -9,7 +9,6 @@
 
         public DateTime Date { get; set; }
 
-        // Foreign key to relate the UnavailableDate to a Product
         public int ProductId { get; set; }
 
         public Product Product { get; set; }

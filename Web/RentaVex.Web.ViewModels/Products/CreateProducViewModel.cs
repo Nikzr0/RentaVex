@@ -11,8 +11,7 @@
     {
         public CreateProducViewModel()
         {
-            this.PickupTime = DateTime.UtcNow.Date.AddDays(1);
-            this.ReturnTime = DateTime.UtcNow.Date.AddDays(1);
+
         }
 
         [Required(ErrorMessage = "The product name is required.")]
@@ -33,13 +32,9 @@
         [Required(ErrorMessage = "The location is required.")]
         public string Location { get; set; }
 
-        public string Contact { get; set; }
+        public string Contact { get; set; } 
 
         public int CategoryId { get; set; }
-
-        public DateTime PickupTime { get; set; }
-
-        public DateTime ReturnTime { get; set; }
 
         public Category Category { get; set; }
 

@@ -1,28 +1,57 @@
-﻿@using RentaVex.Web.ViewModels.Products;
+﻿@using Microsoft.AspNetCore.Identity
+@using RentaVex.Data.Models
+@using RentaVex.Web.ViewModels.Products;
 @model RentProductViewModel;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     this.ViewData["Name"] = Model.Product.Name;
 }
 
-<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center">Rent @Model.Product.Name.ToLower()</h2>
+            <hr />
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+            <form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <label asp-for="PickupTime">Pickup Time</label>
-        <input asp-for="PickupTime" type="datetime-local" class="form-control" />
-        <span asp-validation-for="PickupTime" class="text-danger"></span>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PickupTime">Pickup Time</label>
+                            <input asp-for="PickupTime" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="PickupTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ReturnTime">Return Time</label>
+                            <input asp-for="ReturnTime" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="ReturnTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary mt-3" type="button">Submit</button>
+                </div>
+                <hr />
+            </form>
+
+            @if (!this.SignInManager.IsSignedIn(this.User))
+            {
+                <div class="text-center">               
+                    <p>Don't have an account yet?<a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register" style="color: blue;">Sign up here.</a></p>
+                    <p>Already have an account?<a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login" style="color: blue;">Login here.</a></p>
+                </div>
+            }
+
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="ReturnTime">Return Time</label>
-        <input asp-for="ReturnTime" type="datetime-local" class="form-control" />
-        <span asp-validation-for="ReturnTime" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <input type="submit" class="btn btn-primary" />
-    </div>
-</form>
+</div>

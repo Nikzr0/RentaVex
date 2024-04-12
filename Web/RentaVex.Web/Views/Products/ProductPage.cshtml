@@ -2,27 +2,27 @@
 @model ProductPageViewModel;
 
 @{
-    this.ViewData["Name"] = @Model.Product.Name;
+    this.ViewData["Title"] = @Model.Product.Name;
 }
 
 @section Styles {
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/> *@
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
 }
 
-<!-- Product section-->
 <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.Product.ImageUrl" alt="..." /></div>
+    <div class="container">
+        <div class="row">
             <div class="col-md-6">
-                <h1 class="display-5 fw-bolder">@Model.Product.Name</h1>
-                <div class="fs-5 mb-5">
-                    <span>@Model.Product.Price</span>
-                </div>
+                <img class="img-fluid rounded" src="@Model.Product.ImageUrl" alt="Product Image" />
+            </div>
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">@Model.Product.Name</h1>
                 <p class="lead">@Model.Product.Description</p>
+                <div class="mb-4">
+                    <span class="h4">$@Model.Product.Price</span>
+                </div>
                 <div class="d-flex">
                     <a asp-action="RentProduct" asp-controller="Products" asp-route-id="@Model.Product.Id" class="btn btn-primary">
                         Rent me
@@ -32,6 +32,12 @@
         </div>
     </div>
 </section>
+
+
+@section Scripts {
+    <script src="~/js/product_page.js"></script>
+    <script src="~/js/rent_product.js"></script>
+}
 
 
 <!-- Related items section-->
@@ -143,8 +149,3 @@
     </section> *@
 
 </p>
-
-@section Scripts {
-    <script src="js/product_page.js"></script>
-    <script src="~/js/rent_product.js"></script>
-}
