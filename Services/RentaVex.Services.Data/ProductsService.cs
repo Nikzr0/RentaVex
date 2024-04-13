@@ -106,7 +106,12 @@ namespace RentaVex.Services.Data
             return productEntity;
         }
 
-        //Change logic
+        public Product GetProduct(int productId)
+        {
+            return this.productRepository.AllAsNoTracking()
+                                         .FirstOrDefault(x => x.Id == productId);
+        }
+
         public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
             if (product == null)

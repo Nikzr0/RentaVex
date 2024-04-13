@@ -18,6 +18,8 @@
 
         ProductViewModel GetProductById(int id);
 
+        Product GetProduct(int id);
+
         Task SetProductUnavailableDates(Product product, DateTime start, DateTime end);
     }
 }

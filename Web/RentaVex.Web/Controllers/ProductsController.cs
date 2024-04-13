@@ -144,7 +144,12 @@
         {
             if (this.ModelState.IsValid)
             {
-                var product = this.productService.GetProductById(model.Product.Id);
+                var product = this.productService.GetProduct(model.Product.Id);
+
+                if (product == null)
+                {
+                    return this.NotFound();
+                }
 
                 await this.productService.SetProductUnavailableDates(product, model.PickupTime, model.ReturnTime);
 
@@ -153,6 +158,5 @@
 
             return this.View(model);
         }
-
     }
 }
