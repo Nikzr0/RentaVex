@@ -39,19 +39,18 @@
                 </div>
 
                 <div class="d-grid gap-2">
+                    @* Add JS functionality *@
                     <button class="btn btn-primary mt-3" type="button">Submit</button>
                 </div>
-                <hr />
             </form>
-
             @if (!this.SignInManager.IsSignedIn(this.User))
             {
+                <hr/>
                 <div class="text-center">               
                     <p>Don't have an account yet?<a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register" style="color: blue;">Sign up here.</a></p>
                     <p>Already have an account?<a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login" style="color: blue;">Login here.</a></p>
                 </div>
             }
-
         </div>
     </div>
 </div>

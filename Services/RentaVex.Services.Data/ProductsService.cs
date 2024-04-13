@@ -50,7 +50,6 @@ namespace RentaVex.Services.Data
             product.IsWarned = inputInfo.IsWarned;
             product.WarningMessage = inputInfo.WarningMessage;
 
-            // image
             Directory.CreateDirectory($"{imagePath}/products/");
             foreach (var image in inputInfo.Images)
             {
@@ -107,6 +106,7 @@ namespace RentaVex.Services.Data
             return productEntity;
         }
 
+        //Change logic
         public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
             if (product == null)

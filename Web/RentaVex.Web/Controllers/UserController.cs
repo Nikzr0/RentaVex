@@ -37,7 +37,7 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Messages()
+        public IActionResult Message()
         {
             return this.View();
         }
@@ -48,11 +48,6 @@
         }
 
         public IActionResult AddProduct()
-        {
-            return this.View();
-        }
-
-        public IActionResult MyProducts()
         {
             return this.View();
         }

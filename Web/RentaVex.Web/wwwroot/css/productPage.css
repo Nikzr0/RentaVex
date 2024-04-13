@@ -1,0 +1,40 @@
+﻿.product-image {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-details {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    position: relative;
+}
+
+.btn-rent {
+    font-weight: bold;
+    background-color: #007bff;
+    border-color: #007bff;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+    .btn-rent:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.description-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+}

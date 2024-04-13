@@ -14,7 +14,7 @@
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet"/>
 
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -88,7 +88,7 @@
 
                                     <li><a class="dropdown-item" asp-controller="User" asp-action="MyProducts">My Products</a></li>
 
-                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><hr class="dropdown-divider" /></li>
 
                                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                                         <button type="submit" class="btn btn-link text-dark" style="text-decoration: none;">Logout</button>

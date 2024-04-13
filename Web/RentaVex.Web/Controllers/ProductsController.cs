@@ -87,7 +87,6 @@
             return this.View(viewModel);
         }
 
-
         //public IActionResult Rent(int id = 1)
         //{
         //    const int itemsPerPage = 24;
@@ -118,16 +117,16 @@
             return this.View(product);
         }
 
-        //[HttpGet]
-        //public IActionResult RentProduct(int id)
-        //{
-        //    var product = new RentProductViewModel
-        //    {
-        //        Product = this.productService.GetProductById(id),
-        //    };
+        [HttpGet]
+        public IActionResult RentProduct(int id)
+        {
+            var product = new RentProductViewModel
+            {
+                Product = this.productService.GetProductById(id),
+            };
 
-        //    return this.View(product);
-        //}
+            return this.View(product);
+        }
 
         //[HttpPost]
         //public IActionResult RentProduct(RentProductViewModel model)
@@ -139,5 +138,21 @@
 
         //    return this.View(model);
         //}
+
+        [HttpPost]
+        public async Task<IActionResult> RentProduct(RentProductViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var product = this.productService.GetProductById(model.Product.Id);
+
+                await this.productService.SetProductUnavailableDates(product, model.PickupTime, model.ReturnTime);
+
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            return this.View(model);
+        }
+
     }
 }

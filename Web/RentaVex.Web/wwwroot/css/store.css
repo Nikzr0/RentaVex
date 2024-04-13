@@ -1,0 +1,39 @@
+﻿.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-img-top {
+    max-height: 200px; /* Adjust the max height as needed */
+    object-fit: contain;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.card-price {
+    font-weight: bold;
+    color: #007bff; /* Change this to your desired price color */
+}
+
+.card-footer {
+    background-color: #f7f7f7;
+    padding: 0.5rem;
+    border-top: 1px solid #ddd;
+}
+
+.btn-block {
+    width: 100%;
+}
