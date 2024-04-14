@@ -14,7 +14,7 @@
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/styles.css" rel="stylesheet"/>
+    <link href="~/css/styles.css" rel="stylesheet" />
 
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -45,9 +45,11 @@
                                 <a class="nav-link text-dark" asp-controller="User" asp-action="Liked">Liked</a>
                             </li>
 
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="User" asp-action="Message">Message</a>
                             </li>
+
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Products" asp-action="Create">Add Product</a>
@@ -65,28 +67,31 @@
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Popular Items</a></li>
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Best deals</a></li>
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Close by</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Close by</a></li>
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Services</a></li>
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="Index">Free</a></li>
-
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="User" asp-action="Message">Account Settings</a>
-                                <li><hr class="dropdown-divider" /></li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact us</a>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
                                 @if (this.SignInManager.IsSignedIn(this.User))
                                 {
                                     <a class="dropdown-item">
-                                        @(this.User.Identity.Name.Substring(0, this.User.Identity.Name.IndexOf('@')))
+                                        <span>
+                                            Hello, @(char.ToUpper(this.User.Identity.Name[0]) + this.User.Identity.Name.Substring(1, this.User.Identity.Name.IndexOf('@') - 1))
+                                        </span>
                                     </a>
 
+                                    <li><hr class="dropdown-divider" /></li>
+
+                                    <a class="dropdown-item" asp-controller="User" asp-action="Message">Account Settings</a>
+
                                     <li><a class="dropdown-item" asp-controller="User" asp-action="MyProducts">My Products</a></li>
+
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact us</a>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
                                     <li><hr class="dropdown-divider" /></li>
 
@@ -96,9 +101,18 @@
                                 }
                                 else
                                 {
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Account Settings</a></li>
+
                                     <li><hr class="dropdown-divider" /></li>
+
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">Contact us</a>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                                    <li><hr class="dropdown-divider" /></li>
+
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+
                                 }
                             </ul>
                         </li>
@@ -127,3 +141,23 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 </body>
 </html>
+
+
+@* This should be added for mobile version only *@
+@*<li class="nav-item" style="margin-right: 10px;">
+<a class="nav-link text-dark" asp-controller="User" asp-action="Create">
+<img src="~/svg/like.svg" alt="Add Product" style="width: 20px; height: 20px;">
+</a>
+</li>
+
+<li class="nav-item" style="margin-right: 10px;">
+<a class="nav-link text-dark" asp-controller="User" asp-action="Message">
+<img src="~/svg/message.svg" alt="Message" style="width: 20px; height: 20px;">
+</a>
+</li>
+
+<li class="nav-item" style="margin-right: 10px;">
+<a class="nav-link text-dark" asp-controller="Products" asp-action="Create">
+<img src="~/svg/create.svg" alt="Add Product" style="width: 20px; height: 20px;">
+</a>
+</li> *@
