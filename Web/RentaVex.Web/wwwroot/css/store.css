@@ -37,3 +37,18 @@
 .btn-block {
     width: 100%;
 }
+
+.price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-price {
+    margin-bottom: 0;
+}
+
+.svg_image {
+    width: 25px;
+}
+

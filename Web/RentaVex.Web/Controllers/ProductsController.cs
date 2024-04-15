@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;

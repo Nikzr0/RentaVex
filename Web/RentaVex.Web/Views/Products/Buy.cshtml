@@ -5,14 +5,14 @@
     this.ViewData["Name"] = "Buy";
     string myString = new string('_', 160);
 }
-<link href="~/css/store.css" rel="stylesheet"/>
+<link href="~/css/store.css" rel="stylesheet" />
 
 <div class="container">
     <div class="row">
         @foreach (var product in Model.Products)
         {
             <div class="col-md-3 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 position-relative">
                     <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
 
                     <div class="card-body">
@@ -24,7 +24,10 @@
                             }
                             @description
                         </p>
-                        <p class="card-price">$@product.Price</p>
+                        <div class="price-container">
+                            <p class="card-price">$@product.Price</p>
+                            <img class="svg_image" src="~/svg/like.svg" alt="Like Icon" />
+                        </div>
                     </div>
 
                     <div class="card-footer">
