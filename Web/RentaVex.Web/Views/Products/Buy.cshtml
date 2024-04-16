@@ -26,7 +26,8 @@
                         </p>
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
-                            <img class="svg_image" src="~/svg/like.svg" alt="Like Icon" />
+                            <img class="svg_image like-button" src="~/svg/like.svg" alt="Like Icon" data-product-id="@product.Id" />
+
                         </div>
                     </div>
 
@@ -44,6 +45,17 @@
 
 <partial name="_PagingPartial" model="@Model"></partial>
 
+@section Scripts {
+    <script>
+        // JavaScript handle btn
+        $('.like-button').click(function () {
+            var productId = $(this).data('product-id');
+            $.post('/Products/LikeProduct', { productId: productId }, function (data) {
+                $(this).css('color', 'red');
+            });
+        });
+    </script>
+}
 @*    <div class="text-center">
         <p>@myString</p>
     </div>

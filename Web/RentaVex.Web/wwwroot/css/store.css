@@ -8,7 +8,7 @@
 }
 
 .card-img-top {
-    max-height: 200px; /* Adjust the max height as needed */
+    max-height: 200px;
     object-fit: contain;
 }
 
@@ -25,7 +25,7 @@
 
 .card-price {
     font-weight: bold;
-    color: #007bff; /* Change this to your desired price color */
+    color: #007bff;
 }
 
 .card-footer {

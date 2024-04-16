@@ -1,6 +1,7 @@
 ﻿namespace RentaVex.Web.Controllers
 {
     using System;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -56,7 +57,31 @@
 
             try
             {
+                var product = new Product();
+
+                product.Name = input.Name;
+                product.Description = input.Description;
+                product.IsForRent = input.IsForRent;
+                product.IsForSale = input.IsForSale;
+                product.Price = input.Price;
+                product.Location = input.Location;
+                product.Contact = input.Contact;
+                product.CategoryId = input.CategoryId;
+                product.UserId = user.Id;
+
+                product.CourierDelivery = input.CourierDelivery;
+
+                product.CategoryId = input.CategoryId;
+
+                product.Condition = input.Condition;
+
+                product.IsWarned = input.IsWarned;
+                product.WarningMessage = input.WarningMessage;
+
                 await this.productService.CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
+
+                user.MyProducts.Add(product);
+                await this.userManager.UpdateAsync(user);
             }
             catch (Exception ex)
             {
@@ -65,7 +90,7 @@
                 return this.View(input);
             }
 
-            return this.Redirect("/");
+            return this.RedirectToAction("Index", "Home");
         }
 
         public IActionResult Buy(int id = 1)
@@ -101,7 +126,7 @@
         //    {
         //        ItemsPerPage = itemsPerPage,
         //        PageNumber = id,
-        //        Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
+        //        MyProducts = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
         //        ProductsCount = this.productService.GetCount(),
         //    };
 
@@ -159,5 +184,17 @@
 
             return this.View(model);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> LikeProduct(int productId)
+        //{
+        //    // Get the current user ID (You may need to modify this based on your authentication mechanism)
+        //    var userId = this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        //    // Call the service method to like the product
+        //    await this.productService.LikeProductAsync(productId, userId);
+
+        //    return this.Ok();
+        //}
     }
 }

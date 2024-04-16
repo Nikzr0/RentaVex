@@ -21,5 +21,8 @@
         Product GetProduct(int id);
 
         Task SetProductUnavailableDates(Product product, DateTime start, DateTime end);
+
+        // Selected product, me
+        // Task LikeProductAsync(int productId, string userId);
     }
 }

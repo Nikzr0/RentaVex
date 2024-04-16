@@ -8,6 +8,7 @@ namespace RentaVex.Services.Data
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,18 @@ namespace RentaVex.Services.Data
     {
         private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Product> productRepository;
+        private readonly IDeletableEntityRepository<User> userRepository;
 
-        public ProductsService(IDeletableEntityRepository<Product> productRepository)
+        public ProductsService(IDeletableEntityRepository<Product> productRepository, IDeletableEntityRepository<User> userRepository)
         {
             this.productRepository = productRepository;
+            this.userRepository = userRepository;
+        }
+
+        public User GetUserById(string userId)
+        {
+            return this.userRepository.AllAsNoTracking()
+                                      .FirstOrDefault(x => x.Id.ToString() == userId);
         }
 
         public async Task CreateAsync(CreateProducViewModel inputInfo, string userId, string imagePath)
@@ -73,6 +82,18 @@ namespace RentaVex.Services.Data
                 {
                     await image.CopyToAsync(fileStream);
                 }
+            }
+
+            var user = this.GetUserById(userId);
+
+            if (user != null)
+            {
+                user.MyProducts.Add(product);
+            }
+            else
+            {
+                // Handle case where user is not found
+                // For example, throw an exception or log an error
             }
 
             await this.productRepository.AddAsync(product);
@@ -132,5 +153,27 @@ namespace RentaVex.Services.Data
 
             await this.productRepository.SaveChangesAsync();
         }
+
+        //public async Task<Product> GetProductAsync(int productId)
+        //{
+        //    return await Task.Run(() => GetProduct(productId));
+        //}
+
+        //TODO
+        //public async Task LikeProductAsync(int productId, string userId)
+        //{
+        //    // Get the product by its ID asynchronously
+        //    var product = await GetProductAsync(productId);
+
+        //    if (product == null)
+        //    {
+        //        throw new ArgumentException("Product not found");
+        //    }
+
+        //    // Add the user's ID to the liked products
+        //    product.LikedByUsers.Add(userId);
+
+        //    await productRepository.SaveChangesAsync();
+        //}
     }
 }

@@ -8,8 +8,8 @@
     {
         public User()
         {
-            this.Likes = new HashSet<Like>();
-            this.Products = new HashSet<Product>();
+            //this.Likes = new HashSet<Like>();
+            this.MyProducts = new HashSet<Product>();
             this.LikedProducts = new HashSet<Product>();
         }
 
@@ -19,9 +19,10 @@
 
         public string Email { get; set; }
 
-        public ICollection<Like> Likes { get; set; }
+        //User likes
+        //public ICollection<Like> Likes { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product> MyProducts { get; set; }
 
         public ICollection<Product> LikedProducts { get; set; }
     }

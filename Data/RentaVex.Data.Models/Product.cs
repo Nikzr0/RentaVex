@@ -47,7 +47,9 @@
 
         public string WarningMessage { get; set; }
 
-        public ICollection<Like> Likes { get; set; }
+        public int NumberOfLikes { get; set; }
+
+        //public ICollection<Like> Likes { get; set; }
 
         public ICollection<UnavailableDate> UnavailableDates { get; set; }
     }

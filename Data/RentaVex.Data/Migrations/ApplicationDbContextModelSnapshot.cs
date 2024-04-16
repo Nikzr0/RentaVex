@@ -420,7 +420,7 @@ namespace RentaVex.Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Products");
+                    b.ToTable("MyProducts");
                 });
 
             modelBuilder.Entity("RentaVex.Data.Models.ProductAvailability", b =>
@@ -670,7 +670,7 @@ namespace RentaVex.Data.Migrations
             modelBuilder.Entity("RentaVex.Data.Models.Product", b =>
                 {
                     b.HasOne("RentaVex.Data.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany("MyProducts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -737,7 +737,7 @@ namespace RentaVex.Data.Migrations
 
             modelBuilder.Entity("RentaVex.Data.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("MyProducts");
                 });
 
             modelBuilder.Entity("RentaVex.Data.Models.Product", b =>
