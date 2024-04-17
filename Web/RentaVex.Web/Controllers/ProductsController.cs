@@ -57,31 +57,33 @@
 
             try
             {
-                var product = new Product();
+                //var product = new Product();
 
-                product.Name = input.Name;
-                product.Description = input.Description;
-                product.IsForRent = input.IsForRent;
-                product.IsForSale = input.IsForSale;
-                product.Price = input.Price;
-                product.Location = input.Location;
-                product.Contact = input.Contact;
-                product.CategoryId = input.CategoryId;
-                product.UserId = user.Id;
+                await this.productService
+                    .CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
 
-                product.CourierDelivery = input.CourierDelivery;
+                //product.Name = input.Name;
+                //product.Description = input.Description;
+                //product.IsForRent = input.IsForRent;
+                //product.IsForSale = input.IsForSale;
+                //product.Price = input.Price;
+                //product.Location = input.Location;
+                //product.Contact = input.Contact;
+                //product.CategoryId = input.CategoryId;
+                //product.UserId = user.Id;
 
-                product.CategoryId = input.CategoryId;
+                //product.CourierDelivery = input.CourierDelivery;
 
-                product.Condition = input.Condition;
+                //product.CategoryId = input.CategoryId;
 
-                product.IsWarned = input.IsWarned;
-                product.WarningMessage = input.WarningMessage;
+                //product.Condition = input.Condition;
 
-                await this.productService.CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
+                //product.IsWarned = input.IsWarned;
+                //product.WarningMessage = input.WarningMessage;
 
-                user.MyProducts.Add(product);
-                await this.userManager.UpdateAsync(user);
+
+                //user.MyProducts.Add(product);
+                //await this.userManager.UpdateAsync(user);
             }
             catch (Exception ex)
             {
@@ -196,5 +198,28 @@
 
         //    return this.Ok();
         //}
+
+
+        // Show Dropdown Pages
+
+        public IActionResult Free(int id = 1)
+        {
+            const int itemsPerPage = 24;
+
+            if (id < 1)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = new AllProductsViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
+                ProductsCount = this.productService.GetCount(),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

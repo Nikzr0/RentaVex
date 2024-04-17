@@ -12,8 +12,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\ContactUs.cshtml" />
-    <Content Remove="Views\Products\MyProducts.cshtml" />
-    <Content Remove="Views\User\MyProducts.cshtml" />
   </ItemGroup>
 	<ItemGroup>
 		<AdditionalFiles Include="..\..\stylecop.json" />
@@ -57,18 +55,12 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\ContactUs.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Products\MyProducts.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Home\ContactUs.cshtml" />
-    <None Include="Views\User\MyProducts.cshtml" />
     <None Include="wwwroot\fonts\.DS_Store" />
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Products\MyProducts.cshtml" />
   </ItemGroup>
 </Project>

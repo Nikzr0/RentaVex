@@ -1,15 +1,22 @@
-﻿@using RentaVex.Web.ViewModels.User;
-@model MyProductsViewModel;
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@using Microsoft.AspNetCore.Http.Extensions
+
+@using RentaVex.Web.ViewModels.AllProducts;
+@model AllProductsViewModel;
 
 @{
-    this.ViewData["Name"] = "My Products";
     string myString = new string('_', 160);
+    string currentPageUrl = HttpContextAccessor.HttpContext.Request.GetDisplayUrl();
+    ViewData["Name"] = currentPageUrl; 
 }
+
 <link href="~/css/store.css" rel="stylesheet" />
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model.Products.Where(x => x.Price == 0))
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 position-relative">
@@ -26,14 +33,14 @@
                         </p>
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
+                            <img class="svg_image like-button" src="~/svg/like.svg" alt="Like Icon" data-product-id="@product.Id" />
+
                         </div>
                     </div>
 
                     <div class="card-footer">
-                        @* TODO *@
-                        @* Create EditProduct page and logic *@
-                        <a asp-controller="Products" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
-                            Edit Product
+                        <a asp-controller="Products" asp-action="ProductPage" asp-route-id="@product.Id" class="btn btn-primary btn-block">
+                            Go to Product Page
                         </a>
                     </div>
                 </div>
@@ -42,13 +49,10 @@
     </div>
 </div>
 
+
 <partial name="_PagingPartial" model="@Model"></partial>
 
-
-@* TODO *@
-@* Change it to "Edit Product Info" *@
-
-@* @section Scripts {
+@section Scripts {
     <script>
         // JavaScript handle btn
         $('.like-button').click(function () {
@@ -58,4 +62,4 @@
             });
         });
     </script>
-} *@
+}

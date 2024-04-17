@@ -7,6 +7,5 @@
     public class MyProductsViewModel : PagingViewModel
     {
         public IEnumerable<ProductViewModel> Products { get; set; }
-
     }
 }
