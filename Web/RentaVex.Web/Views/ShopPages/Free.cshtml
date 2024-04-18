@@ -1,17 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
-
-@using Microsoft.AspNetCore.Http.Extensions
-
-@using RentaVex.Web.ViewModels.AllProducts;
-@model AllProductsViewModel;
+@using RentaVex.Common
+@using RentaVex.Services.Data
+@using RentaVex.Web.ViewModels.AllProducts
+@model AllProductsViewModel
 
 @{
-    string myString = new string('_', 160);
-    string currentPageUrl = HttpContextAccessor.HttpContext.Request.Path;
-
-    int index = currentPageUrl.IndexOf("Products/");
-    string pageName = index != -1 && index + "/Products".Length < currentPageUrl.Length ? currentPageUrl.Substring(index + "/Products".Length) : "Default Page Name";
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
     ViewData["Name"] = pageName;
 }
 

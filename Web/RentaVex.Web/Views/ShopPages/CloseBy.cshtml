@@ -1,15 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
-
-@using Microsoft.AspNetCore.Http.Extensions
-
-@using RentaVex.Web.ViewModels.AllProducts;
-@model AllProductsViewModel;
+@using RentaVex.Common
+@using RentaVex.Services.Data
+@using RentaVex.Web.ViewModels.AllProducts
+@model AllProductsViewModel
 
 @{
-    string myString = new string('_', 160);
-    string currentPageUrl = HttpContextAccessor.HttpContext.Request.GetDisplayUrl();
-    ViewData["Name"] = currentPageUrl; 
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
+    ViewData["Name"] = pageName;
 }
 
 <link href="~/css/store.css" rel="stylesheet" />
@@ -34,7 +33,6 @@
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
                             <img class="svg_image like-button" src="~/svg/like.svg" alt="Like Icon" data-product-id="@product.Id" />
-
                         </div>
                     </div>
 
@@ -49,16 +47,18 @@
     </div>
 </div>
 
-
-<partial name="_PagingPartial" model="@Model"></partial>
+<partial name="_PagingPartial" model="@Model" />
 
 @section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // JavaScript handle btn
-        $('.like-button').click(function () {
-            var productId = $(this).data('product-id');
-            $.post('/Products/LikeProduct', { productId: productId }, function (data) {
-                $(this).css('color', 'red');
+        $(document).ready(function () {
+            // JavaScript handle btn
+            $('.like-button').click(function () {
+                var productId = $(this).data('product-id');
+                $.post('/Products/LikeProduct', { productId: productId }, function (data) {
+                    $(this).css('color', 'red');
+                });
             });
         });
     </script>

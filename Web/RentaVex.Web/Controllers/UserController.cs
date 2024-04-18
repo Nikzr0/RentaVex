@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using RentaVex.Common;
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
@@ -19,6 +20,7 @@
 
         public IActionResult MyProducts(int id = 1)
         {
+            string pageName = GlobalService.GetPageName(this.HttpContext);
             const int itemsPerPage = 24;
 
             if (id < 1)

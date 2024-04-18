@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
+    using RentaVex.Common;
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
@@ -201,25 +201,5 @@
 
 
         // Show Dropdown Pages
-
-        public IActionResult Free(int id = 1)
-        {
-            const int itemsPerPage = 24;
-
-            if (id < 1)
-            {
-                return this.NotFound();
-            }
-
-            var viewModel = new AllProductsViewModel
-            {
-                ItemsPerPage = itemsPerPage,
-                PageNumber = id,
-                Products = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
-                ProductsCount = this.productService.GetCount(),
-            };
-
-            return this.View(viewModel);
-        }
     }
 }
