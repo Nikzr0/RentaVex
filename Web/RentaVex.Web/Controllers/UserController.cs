@@ -1,5 +1,9 @@
 ﻿namespace RentaVex.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -7,15 +11,18 @@
     using RentaVex.Data.Models;
     using RentaVex.Services.Data;
     using RentaVex.Web.ViewModels.AllProducts;
+    using RentaVex.Web.ViewModels.Products;
     using RentaVex.Web.ViewModels.User;
 
     public class UserController : Controller
     {
         private readonly IProductsService productService;
+        private readonly ICategoriesService categoriesService;
 
-        public UserController(IProductsService productService)
+        public UserController(IProductsService productService, ICategoriesService categoriesService)
         {
             this.productService = productService;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult MyProducts(int id = 1)
@@ -37,6 +44,42 @@
             };
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult EditProduct()
+        {
+            var viewModel = new EditProductViewModel();
+            viewModel.CategoriesItems = this.categoriesService.GetCategories();
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(int id, EditProductViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            try
+            {
+                await this.productService.EditProductAsync(id, input);
+            }
+            catch (ArgumentException ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "An error occurred while editing the product.");
+                return this.View(input);
+            }
+
+            return this.RedirectToAction("MyProducts", "User");
         }
 
         public IActionResult Message()

@@ -17,6 +17,7 @@ namespace RentaVex.Services.Data
     using RentaVex.Services.Mapping;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.Products;
+    using RentaVex.Web.ViewModels.User;
 
     public class ProductsService : IProductsService
     {
@@ -28,12 +29,6 @@ namespace RentaVex.Services.Data
         {
             this.productRepository = productRepository;
             this.userRepository = userRepository;
-        }
-
-        public User GetUserById(string userId)
-        {
-            return this.userRepository.AllAsNoTracking()
-                                      .FirstOrDefault(x => x.Id.ToString() == userId);
         }
 
         public async Task CreateAsync(CreateProducViewModel inputInfo, string userId, string imagePath)
@@ -100,6 +95,36 @@ namespace RentaVex.Services.Data
             await this.productRepository.SaveChangesAsync();
         }
 
+        public async Task EditProductAsync(int productId, EditProductViewModel inputInfo)
+        {
+            var productToEdit = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (productToEdit == null)
+            {
+                throw new ArgumentException($"Product with ID {productId} not found.");
+            }
+
+            if (true)
+            {
+
+            }
+
+            productToEdit.Name = inputInfo.Name;
+            productToEdit.Description = inputInfo.Description;
+            productToEdit.IsForRent = inputInfo.IsForRent;
+            productToEdit.IsForSale = inputInfo.IsForSale;
+            productToEdit.Price = inputInfo.Price;
+            productToEdit.Location = inputInfo.Location;
+            productToEdit.Contact = inputInfo.Contact;
+            productToEdit.CategoryId = inputInfo.CategoryId;
+            productToEdit.CourierDelivery = inputInfo.CourierDelivery;
+            productToEdit.Condition = inputInfo.Condition;
+            productToEdit.IsWarned = inputInfo.IsWarned;
+            productToEdit.WarningMessage = inputInfo.WarningMessage;
+
+            await this.productRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             var products = this.productRepository.AllAsNoTracking()
@@ -115,6 +140,12 @@ namespace RentaVex.Services.Data
         public int GetCount()
         {
             return this.productRepository.All().Count();
+        }
+
+        public User GetUserById(string userId)
+        {
+            return this.userRepository.AllAsNoTracking()
+                                      .FirstOrDefault(x => x.Id.ToString() == userId);
         }
 
         public ProductViewModel GetProductById(int id)

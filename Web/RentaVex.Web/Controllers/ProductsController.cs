@@ -23,8 +23,12 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment environment;
 
-        public ProductsController(ICategoriesService categoriesService, IProductsService productService,
-            IRentOrSaleService rentOrSale, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
+        public ProductsController(
+            ICategoriesService categoriesService,
+            IProductsService productService,
+            IRentOrSaleService rentOrSale,
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment environment)
         {
             this.categoriesService = categoriesService;
             this.productService = productService;
@@ -57,33 +61,8 @@
 
             try
             {
-                //var product = new Product();
-
                 await this.productService
                     .CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
-
-                //product.Name = input.Name;
-                //product.Description = input.Description;
-                //product.IsForRent = input.IsForRent;
-                //product.IsForSale = input.IsForSale;
-                //product.Price = input.Price;
-                //product.Location = input.Location;
-                //product.Contact = input.Contact;
-                //product.CategoryId = input.CategoryId;
-                //product.UserId = user.Id;
-
-                //product.CourierDelivery = input.CourierDelivery;
-
-                //product.CategoryId = input.CategoryId;
-
-                //product.Condition = input.Condition;
-
-                //product.IsWarned = input.IsWarned;
-                //product.WarningMessage = input.WarningMessage;
-
-
-                //user.MyProducts.Add(product);
-                //await this.userManager.UpdateAsync(user);
             }
             catch (Exception ex)
             {

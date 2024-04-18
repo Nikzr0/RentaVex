@@ -7,6 +7,7 @@
     using RentaVex.Data.Models;
     using RentaVex.Web.ViewModels.AllProducts;
     using RentaVex.Web.ViewModels.Products;
+    using RentaVex.Web.ViewModels.User;
 
     public interface IProductsService
     {
@@ -21,6 +22,8 @@
         Product GetProduct(int id);
 
         Task SetProductUnavailableDates(Product product, DateTime start, DateTime end);
+
+        Task EditProductAsync(int id, EditProductViewModel input);
 
         // Selected product, me
         // Task LikeProductAsync(int productId, string userId);

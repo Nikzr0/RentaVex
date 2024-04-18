@@ -1,4 +1,4 @@
-﻿namespace RentaVex.Web.ViewModels.Products
+﻿namespace RentaVex.Web.ViewModels.User
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,11 @@
     using Microsoft.AspNetCore.Http;
     using RentaVex.Data.Models;
 
-    public class CreateProducViewModel
+    public class EditProductViewModel
     {
-        public CreateProducViewModel()
-        {
-
-        }
-
-        [Required(ErrorMessage = "The product name is required.")]
         [MaxLength(35, ErrorMessage = "The product name must be no more than 35 characters.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "A description is required.")]
         [MaxLength(1800, ErrorMessage = "The description must be no more than 1800 characters.")]
         public string Description { get; set; }
 
@@ -40,7 +33,6 @@
 
         public bool CourierDelivery { get; set; }
 
-        [Required(ErrorMessage = "At least one image is required.")]
         public IEnumerable<IFormFile> Images { get; set; }
 
         public ConditionType Condition { get; set; }
