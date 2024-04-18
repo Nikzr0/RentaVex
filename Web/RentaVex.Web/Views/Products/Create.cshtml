@@ -4,9 +4,8 @@
 @model CreateProducViewModel;
 
 @{
-    this.ViewData["Name"] = "Add Ptoduct";
+    this.ViewData["Name"] = "Add Product";
 
-    var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
@@ -59,7 +58,7 @@
 
     <div class="form-group mt-2">
         <label asp-for="CategoryId">Category*</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="categoriesItems">
+        <select asp-for="CategoryId" class="form-control" asp-items="@Model.Categories.Select(x => new SelectListItem(x.Value, x.Key))">
             <option value="">Select Category</option>
         </select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>

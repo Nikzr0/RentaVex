@@ -41,7 +41,7 @@
         public IActionResult Create()
         {
             var viewModel = new CreateProducViewModel();
-            viewModel.CategoriesItems = this.categoriesService.GetCategories();
+            viewModel.Categories = this.categoriesService.GetCategories();
 
             return this.View(viewModel);
         }
@@ -52,7 +52,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                input.CategoriesItems = this.categoriesService.GetCategories();
+                input.Categories = this.categoriesService.GetCategories();
                 return this.View(input);
             }
 
@@ -67,7 +67,7 @@
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
-                input.CategoriesItems = this.categoriesService.GetCategories();
+                input.Categories = this.categoriesService.GetCategories();
                 return this.View(input);
             }
 

@@ -109,18 +109,18 @@ namespace RentaVex.Services.Data
 
             }
 
-            productToEdit.Name = inputInfo.Name;
-            productToEdit.Description = inputInfo.Description;
-            productToEdit.IsForRent = inputInfo.IsForRent;
-            productToEdit.IsForSale = inputInfo.IsForSale;
-            productToEdit.Price = inputInfo.Price;
-            productToEdit.Location = inputInfo.Location;
-            productToEdit.Contact = inputInfo.Contact;
-            productToEdit.CategoryId = inputInfo.CategoryId;
-            productToEdit.CourierDelivery = inputInfo.CourierDelivery;
-            productToEdit.Condition = inputInfo.Condition;
-            productToEdit.IsWarned = inputInfo.IsWarned;
-            productToEdit.WarningMessage = inputInfo.WarningMessage;
+            productToEdit.Name = inputInfo.Product.Name;
+            productToEdit.Description = inputInfo.Product.Description;
+            productToEdit.IsForRent = inputInfo.Product.IsForRent;
+            productToEdit.IsForSale = inputInfo.Product.IsForSale;
+            productToEdit.Price = inputInfo.Product.Price;
+            productToEdit.Location = inputInfo.Product.Location;
+            productToEdit.Contact = inputInfo.Product.Contact;
+            productToEdit.CategoryId = inputInfo.Product.CategoryId;
+            productToEdit.CourierDelivery = inputInfo.Product.CourierDelivery;
+            productToEdit.Condition = inputInfo.Product.Condition;
+            productToEdit.IsWarned = inputInfo.Product.IsWarned;
+            productToEdit.WarningMessage = inputInfo.Product.WarningMessage;
 
             await this.productRepository.SaveChangesAsync();
         }

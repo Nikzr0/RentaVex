@@ -47,11 +47,15 @@
         }
 
         [Authorize]
-        public IActionResult EditProduct()
+        public IActionResult EditProduct(int id)
         {
-            var viewModel = new EditProductViewModel();
-            viewModel.CategoriesItems = this.categoriesService.GetCategories();
+            var product = this.productService.GetProduct(id);
 
+            var categories = this.categoriesService.GetCategories();
+
+            var viewModel = new EditProductViewModel();
+            viewModel.Product = product;
+            viewModel.Categories = categories;
             return this.View(viewModel);
         }
 
@@ -61,7 +65,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(input);
+                return this.View(id);
             }
 
             try

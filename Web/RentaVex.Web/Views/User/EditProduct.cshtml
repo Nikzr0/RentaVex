@@ -5,8 +5,6 @@
 
 @{
     this.ViewData["Name"] = "Edit Product";
-
-    var categoriesItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 
@@ -16,80 +14,80 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
-        <label asp-for="Images">Images</label>
-        <input asp-for="Images" type="file" class="form-control" multiple />
-        <span asp-validation-for="Images" class="text-danger"></span>
+        <label asp-for="Product.Images">Images</label>
+        <input asp-for="Product.Images" type="file" class="form-control" multiple />
+        <span asp-validation-for="Product.Images" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="Name">Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="Product.Name">Name</label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="Description">Description</label>
-        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+        <label asp-for="Product.Description">Description</label>
+        <textarea asp-for="Product.Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
     </div>
 
 
     <div class="form-group mt-2">
-        <label asp-for="IsForRent">Is it for rent?</label>
-        <input asp-for="IsForRent" type="checkbox" />
-        <span asp-validation-for="IsForRent" class="text-danger"></span>
+        <label asp-for="Product.IsForRent">Is it for rent?</label>
+        <input asp-for="Product.IsForRent" type="checkbox" />
+        <span asp-validation-for="Product.IsForRent" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="Price">Price</label>
-        <input asp-for="Price" type="number" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+        <label asp-for="Product.Price">Price</label>
+        <input asp-for="Product.Price" type="number" class="form-control" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="Location">Location</label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
+        <label asp-for="Product.Location">Location</label>
+        <input asp-for="Product.Location" class="form-control" />
+        <span asp-validation-for="Product.Location" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="Contact">Contact</label>
-        <input asp-for="Contact" class="form-control" />
-        <span asp-validation-for="Contact" class="text-danger"></span>
+        <label asp-for="Product.Contact">Contact</label>
+        <input asp-for="Product.Contact" class="form-control" />
+        <span asp-validation-for="Product.Contact" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2">
-        <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="categoriesItems">
+        <label asp-for="Product.CategoryId">Category</label>
+        <select asp-for="Product.CategoryId" class="form-control" asp-items="@Model.Categories.Select(x => new SelectListItem(x.Value, x.Key))">
             <option value="">Select Category</option>
         </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-3">
-        <label asp-for="CourierDelivery">Courier Delivery?</label>
-        <input asp-for="CourierDelivery" type="checkbox" />
-        <span asp-validation-for="CourierDelivery" class="text-danger"></span>
+        <label asp-for="Product.CourierDelivery">Courier Delivery?</label>
+        <input asp-for="Product.CourierDelivery" type="checkbox" />
+        <span asp-validation-for="Product.CourierDelivery" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-3">
-        <label asp-for="Condition">Condition</label>
-        <select asp-for="Condition" asp-items="Html.GetEnumSelectList<ConditionType>()" class="form-control">
+        <label asp-for="Product.Condition">Condition</label>
+        <select asp-for="Product.Condition" asp-items="Html.GetEnumSelectList<ConditionType>()" class="form-control">
             <option value="">Select Condition</option>
         </select>
-        <span asp-validation-for="Condition" class="text-danger"></span>
+        <span asp-validation-for="Product.Condition" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-3">
-        <label asp-for="IsWarned">Are there any warnings?</label>
-        <input asp-for="IsWarned" type="checkbox" id="isWarnedCheckbox" />
-        <span asp-validation-for="IsWarned" class="text-danger"></span>
+        <label asp-for="Product.IsWarned">Are there any warnings?</label>
+        <input asp-for="Product.IsWarned" type="checkbox" id="isWarnedCheckbox" />
+        <span asp-validation-for="Product.IsWarned" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-2" id="warningMessageGroup" style="display:none;">
-        <label asp-for="WarningMessage">Warning Message</label>
-        <textarea asp-for="WarningMessage" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="WarningMessage" class="text-danger"></span>
+        <label asp-for="Product.WarningMessage">Warning Message</label>
+        <textarea asp-for="Product.WarningMessage" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Product.WarningMessage" class="text-danger"></span>
     </div>
 
     <div class="form-group mt-3">

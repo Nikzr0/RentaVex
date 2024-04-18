@@ -49,6 +49,6 @@
 
         public string WarningMessage { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }
     }
 }
