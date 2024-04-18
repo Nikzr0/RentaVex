@@ -1,10 +1,8 @@
-﻿@using RentaVex.Web.ViewModels.AllProducts;
-@model AllProductsViewModel;
-
-@{
+﻿@{
     this.ViewData["Name"] = "Buy";
     string myString = new string('_', 160);
 }
+
 <link href="~/css/store.css" rel="stylesheet" />
 
 <div class="container">
@@ -27,7 +25,6 @@
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
                             <img class="svg_image like-button" src="~/svg/like.svg" alt="Like Icon" data-product-id="@product.Id" />
-
                         </div>
                     </div>
 
@@ -43,10 +40,8 @@
 </div>
 
 
-@if (Model.Products.Count() >= 1)
-{
-    <partial name="_PagingPartial" model="@Model"></partial>
-}
+<partial name="_PagingPartial" model="@Model"></partial>
+
 
 @section Scripts {
     <script>
@@ -59,16 +54,3 @@
         });
     </script>
 }
-@*    <div class="text-center">
-        <p>@myString</p>
-    </div>
-
-    <div>
-        <h6>PageNumber: @Model.PageNumber</h6>
-        <h6>Products: @Model.ProductsCount</h6>
-        <h6>PageCount: @Model.PagesCount</h6>
-        <h6>NextPage: @Model.NextPage</h6>
-        <h6>PreviousPage: @Model.PreviousPage</h6>
-        <h6>HasNext: @Model.HasNextPage</h6>
-        <h6>HasPrevious: @Model.HasPreviousPage</h6>
-    </div> *@
