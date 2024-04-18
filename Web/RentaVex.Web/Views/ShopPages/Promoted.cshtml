@@ -14,7 +14,9 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products.Where(x => x.Price == 0))
+
+        @* Temp solution for wrong value *@
+        @foreach (var product in Model.Products.Where(x => x.Id == -100))
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 position-relative">
@@ -48,7 +50,10 @@
 </div>
 
 
-<partial name="_PagingPartial" model="@Model"></partial>
+@if (Model.Products.Count() >= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+}
 
 @section Scripts {
     <script>

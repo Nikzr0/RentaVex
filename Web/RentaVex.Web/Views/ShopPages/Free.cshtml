@@ -49,7 +49,10 @@
 </div>
 
 
-<partial name="_PagingPartial" model="@Model"></partial>
+@if (Model.Products.Where(x=>x.Price == 0).Count() >= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+}
 
 @section Scripts {
     <script>

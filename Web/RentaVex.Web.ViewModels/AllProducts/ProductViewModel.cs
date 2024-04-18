@@ -1,8 +1,10 @@
 ﻿namespace RentaVex.Web.ViewModels.AllProducts
 {
+    using System;
     using System.Linq;
 
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
 
@@ -20,13 +22,18 @@
 
         public decimal Price { get; set; }
 
+        public string Location { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Product, ProductViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                 opt.MapFrom(x => x.Images.FirstOrDefault().ImageUrl != null ?
                 x.Images.FirstOrDefault().ImageUrl :
-                "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extention));
+                "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extention))
+                .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn));
         }
     }
 }

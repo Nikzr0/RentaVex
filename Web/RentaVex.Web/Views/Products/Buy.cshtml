@@ -43,7 +43,10 @@
 </div>
 
 
-<partial name="_PagingPartial" model="@Model"></partial>
+@if (Model.Products.Count() >= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+}
 
 @section Scripts {
     <script>
