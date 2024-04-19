@@ -86,6 +86,14 @@
             return this.RedirectToAction("MyProducts", "User");
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Remove(int id)
+        {
+            await this.productService.RemoveProductAsync(id);
+            return this.RedirectToAction("MyProducts", "User");
+        }
+
         public IActionResult Message()
         {
             return this.View();

@@ -25,6 +25,7 @@
 
         Task EditProductAsync(int id, EditProductViewModel input);
 
+        Task RemoveProductAsync(int id);
         // Selected product, me
         // Task LikeProductAsync(int productId, string userId);
     }

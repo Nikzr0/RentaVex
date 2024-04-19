@@ -125,6 +125,21 @@ namespace RentaVex.Services.Data
             await this.productRepository.SaveChangesAsync();
         }
 
+        public async Task RemoveProductAsync(int id)
+        {
+            var productToRemove = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == id);
+
+            if (productToRemove != null)
+            {
+                this.productRepository.Delete(productToRemove);
+                await this.productRepository.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Product not found!");
+            }
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
         {
             var products = this.productRepository.AllAsNoTracking()

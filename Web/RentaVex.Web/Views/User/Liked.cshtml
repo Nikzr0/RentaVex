@@ -7,3 +7,8 @@
 }
 
 <p>Here are all liked products!</p>
+
+@* @if (Model.Products.Count() >= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+} *@

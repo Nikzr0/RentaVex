@@ -39,6 +39,11 @@
                         <a asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
                             Edit Product
                         </a>
+
+                        <form asp-controller="User" asp-action="Remove" method="post">
+                            <input type="hidden" name="id" value="@product.Id" />
+                            <button type="submit" class="btn btn-danger btn-block" style="margin-top: 10px;">Remove Product</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -46,20 +51,8 @@
     </div>
 </div>
 
-<partial name="_PagingPartial" model="@Model"></partial>
+@if (Model.Products.Count()>= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+}
 
-
-@* TODO *@
-@* Change it to "Edit Product Info" *@
-
-@* @section Scripts {
-    <script>
-        // JavaScript handle btn
-        $('.like-button').click(function () {
-            var productId = $(this).data('product-id');
-            $.post('/Products/LikeProduct', { productId: productId }, function (data) {
-                $(this).css('color', 'red');
-            });
-        });
-    </script>
-} *@
