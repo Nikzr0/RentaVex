@@ -71,7 +71,7 @@
                 return this.View(input);
             }
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Buy", "Products");
         }
 
         public IActionResult Buy(int id = 1)
@@ -94,26 +94,6 @@
             return this.View(viewModel);
         }
 
-        //public IActionResult Rent(int id = 1)
-        //{
-        //    const int itemsPerPage = 24;
-
-        //    if (id < 1)
-        //    {
-        //        return this.NotFound();
-        //    }
-
-        //    var viewModel = new AllProductsViewModel
-        //    {
-        //        ItemsPerPage = itemsPerPage,
-        //        PageNumber = id,
-        //        MyProducts = this.productService.GetAll<ProductViewModel>(id, itemsPerPage),
-        //        ProductsCount = this.productService.GetCount(),
-        //    };
-
-        //    return this.View(viewModel);
-        //}
-
         public IActionResult ProductPage(int id)
         {
             var product = new ProductPageViewModel
@@ -134,17 +114,6 @@
 
             return this.View(product);
         }
-
-        //[HttpPost]
-        //public IActionResult RentProduct(RentProductViewModel model)
-        //{
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        return this.Redirect("/");
-        //    }
-
-        //    return this.View(model);
-        //}
 
         [HttpPost]
         public async Task<IActionResult> RentProduct(RentProductViewModel model)

@@ -4,6 +4,7 @@
 @using RentaVex.Common
 @using RentaVex.Services.Data
 @using RentaVex.Web.ViewModels.User
+@using System.Security.Claims
 @model MyProductsViewModel
 
 @{
@@ -15,7 +16,9 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model.Products
+        .Where(x => x.UserId == HttpContextAccessor.HttpContext.User
+        .FindFirst(ClaimTypes.NameIdentifier)?.Value))
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 position-relative">

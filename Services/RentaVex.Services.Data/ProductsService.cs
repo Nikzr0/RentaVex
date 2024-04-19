@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RentaVex.Data.Models;
-using System;
-
-namespace RentaVex.Services.Data
+﻿namespace RentaVex.Services.Data
 {
     using System;
     using System.Collections.Generic;

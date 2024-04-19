@@ -39,10 +39,9 @@
     </div>
 </div>
 
-@if (Model.Products.Count() >= 1)
-{
-    <partial name="_PagingPartial" model="@Model"></partial>
-}
+
+<partial name="_PagingPartial" model="@Model"></partial>
+
 
 @section Scripts {
     <script>

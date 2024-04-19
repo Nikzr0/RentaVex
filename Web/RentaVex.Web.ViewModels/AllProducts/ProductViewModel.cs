@@ -4,7 +4,6 @@
     using System.Linq;
 
     using AutoMapper;
-    using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
 
@@ -25,6 +24,8 @@
         public string Location { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string UserId { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
