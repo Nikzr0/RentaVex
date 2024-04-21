@@ -100,14 +100,26 @@
             return this.View();
         }
 
-        public IActionResult Liked()
-        {
-            return this.View();
-        }
+    //    [Authorize]
+    //    [HttpPost]
+    //    public async Task<IActionResult> Liked(int productId)
+    //    {
+    //        var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public IActionResult AddProduct()
-        {
-            return this.View();
-        }
+    //        try
+    //        {
+    //            await this.productService.LikeProductAsync(productId, userId);
+    //        }
+    //        catch (ArgumentException ex)
+    //        {
+    //            return this.BadRequest(ex.Message);
+    //        }
+    //        catch (Exception)
+    //        {
+    //            return this.StatusCode(500, "An error occurred while liking the product.");
+    //        }
+
+    //        return this.RedirectToAction("Message", "User");
+    //    }
     }
 }

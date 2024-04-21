@@ -8,7 +8,7 @@
 
     public class GetCountService : IGetCountService
     {
-        private readonly IRepository<User> userRepository;
+        private readonly IRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
         private readonly IRepository<Image> imagesRepository;
         private readonly IRepository<Product> productsRepository;
@@ -17,7 +17,7 @@
             IDeletableEntityRepository<Category> categoriesRepository,
             IRepository<Image> imagesRepository,
             IRepository<Product> productsRepository,
-            IRepository<User> userRepository)
+            IRepository<ApplicationUser> userRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.imagesRepository = imagesRepository;

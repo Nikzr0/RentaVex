@@ -29,8 +29,6 @@
 
         public string UserId { get; set; }
 
-        //public virtual User User { get; set; }
-
         public virtual Category Category { get; set; }
 
         public bool IsForSale { get; set; }
@@ -49,7 +47,9 @@
 
         public int NumberOfLikes { get; set; }
 
-        //public ICollection<Like> Likes { get; set; }
+        public virtual ApplicationUser ProductOwner { get; set; }
+
+        public virtual ICollection<ApplicationUser> UserLikes { get; set; }
 
         public ICollection<UnavailableDate> UnavailableDates { get; set; }
     }

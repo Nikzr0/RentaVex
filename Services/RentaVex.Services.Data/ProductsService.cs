@@ -19,9 +19,9 @@
     {
         private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Product> productRepository;
-        private readonly IDeletableEntityRepository<User> userRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
 
-        public ProductsService(IDeletableEntityRepository<Product> productRepository, IDeletableEntityRepository<User> userRepository)
+        public ProductsService(IDeletableEntityRepository<Product> productRepository, IDeletableEntityRepository<ApplicationUser> userRepository)
         {
             this.productRepository = productRepository;
             this.userRepository = userRepository;
@@ -153,10 +153,10 @@
             return this.productRepository.All().Count();
         }
 
-        public User GetUserById(string userId)
+        public ApplicationUser GetUserById(string userId)
         {
             return this.userRepository.AllAsNoTracking()
-                                      .FirstOrDefault(x => x.Id.ToString() == userId);
+                                      .FirstOrDefault(x => x.Id == userId);
         }
 
         public ProductViewModel GetProductById(int id)
@@ -199,23 +199,36 @@
         //public async Task<Product> GetProductAsync(int productId)
         //{
         //    return await Task.Run(() => GetProduct(productId));
-        //}
+        //
 
-        //TODO
-        //public async Task LikeProductAsync(int productId, string userId)
+        //public void IncreaseNumverOfLikes(int productId)
         //{
-        //    // Get the product by its ID asynchronously
-        //    var product = await GetProductAsync(productId);
-
-        //    if (product == null)
-        //    {
-        //        throw new ArgumentException("Product not found");
-        //    }
-
-        //    // Add the user's ID to the liked products
-        //    product.LikedByUsers.Add(userId);
-
-        //    await productRepository.SaveChangesAsync();
+        //    var product = GetProduct();
         //}
+
+        public async Task LikeProductAsync(int productId, string userId)
+        {
+            var product = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (product == null)
+            {
+                throw new ArgumentException($"Product with ID {productId} is not found.");
+            }
+
+            //var user = await this.userRepository.All().FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+            var users = await this.userRepository.All().ToListAsync();
+
+            var user = this.GetUserById(userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {userId} is not found.");
+            }
+
+           // user.Likes.Add(product);
+
+            await this.userRepository.SaveChangesAsync();
+        }
+
     }
 }

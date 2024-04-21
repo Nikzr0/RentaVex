@@ -50,7 +50,7 @@
 
             var image1 = new Image
             {
-                AddedByUser = user.Username,
+                AddedByUser = user.UserName,
                 ImageUrl = "/images/products/b27f9d81-1cbb-4df3-9b20-53e0b254bd6c.jpg",
                 Extention = ".jpg",
                 ProductId = product1.Id,
@@ -82,7 +82,7 @@
 
             var image2 = new Image
             {
-                AddedByUser = user.Username,
+                AddedByUser = user.UserName,
                 ImageUrl = "/images/products/53570dc1-c653-4340-9863-44e323eb9e5f.jpg",
                 Extention = ".png",
                 ProductId = product2.Id,
@@ -114,7 +114,7 @@
 
             var image3 = new Image
             {
-                AddedByUser = user.Username,
+                AddedByUser = user.UserName,
                 ImageUrl = "/images/products/b27f9d81-1cbb-4df3-9b20-53e0b254bd6c.jpg",
                 Extention = ".jpg",
                 ProductId = product3.Id,
@@ -146,7 +146,7 @@
 
             var image4 = new Image
             {
-                AddedByUser = user.Username,
+                AddedByUser = user.UserName,
                 ImageUrl = "/images/products/b27f9d81-1cbb-4df3-9b20-53e0b254bd6c.jpg",
                 Extention = ".jpg",
                 ProductId = product4.Id,

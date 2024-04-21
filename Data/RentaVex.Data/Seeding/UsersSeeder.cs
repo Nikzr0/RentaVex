@@ -13,8 +13,9 @@
                 return;
             }
 
-            await dbContext.Users.AddAsync(new Models.User { Username = "Selena", Password = "SelenaProdanovapassword1", Email = "selena@gmail.com" });
-            await dbContext.Users.AddAsync(new Models.User { Username = "Nikola", Password = "NIko2301321028", Email = "n@gpepelovmail.com" });
+            // Check out user seeding in google - problem is password hashing algorithm here
+            await dbContext.Users.AddAsync(new Models.ApplicationUser { UserName = "Selena", PasswordHash = "SelenaProdanovapassword1", Email = "selena@gmail.com" });
+            await dbContext.Users.AddAsync(new Models.ApplicationUser { UserName = "Nikola", PasswordHash = "NIko2301321028", Email = "n@gpepelovmail.com" });
 
             await dbContext.SaveChangesAsync();
         }
