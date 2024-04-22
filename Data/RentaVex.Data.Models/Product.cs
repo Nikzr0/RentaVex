@@ -51,6 +51,8 @@
 
         public virtual ICollection<ApplicationUser> UserLikes { get; set; }
 
+        public virtual ICollection<ProductRating> ProductRatings { get; set; }
+
         public ICollection<UnavailableDate> UnavailableDates { get; set; }
     }
 }

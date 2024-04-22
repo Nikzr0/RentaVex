@@ -102,27 +102,34 @@
         }
 
 
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> Liked(int productId)
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> Liked(int productId)
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    try
+        //    {
+        //        await this.productService.LikeProductAsync(productId, userId);
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        return this.BadRequest(ex.Message);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return this.StatusCode(500, "An error occurred while liking the product.");
+        //    }
+
+        //    return this.RedirectToAction("Liked", "User");
+        //}
+
+        public IActionResult Liked()
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            try
-            {
-                await this.productService.LikeProductAsync(productId, userId);
-            }
-            catch (ArgumentException ex)
-            {
-                return this.BadRequest(ex.Message);
-            }
-            catch (Exception)
-            {
-                return this.StatusCode(500, "An error occurred while liking the product.");
-            }
-
-            return this.RedirectToAction("Liked", "User");
+            return this.View();
         }
+
+
 
         //[Authorize]
         //[HttpPost]

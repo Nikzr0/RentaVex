@@ -27,13 +27,15 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<UnavailableDate> UnavailableDates { get; set; }
-
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<UnavailableDate> UnavailableDates { get; set; }
+
+        public DbSet<ProductRating> ProductRatings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -59,12 +61,17 @@
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Product>()
-                        .HasOne(product => product.ProductOwner)
-                        .WithMany(user => user.MyProducts);
+                        .HasMany(product => product.ProductRatings)
+                .WithOne(ratig => ratig.Product)
+                .HasForeignKey(rating => rating.ProductId);
 
             modelBuilder.Entity<Product>()
                 .HasMany(x => x.UserLikes)
                 .WithMany(x => x.LikedProducts);
+
+            modelBuilder.Entity<Product>()
+                      .HasOne(product => product.ProductOwner)
+                      .WithMany(user => user.MyProducts);
 
             this.ConfigureUserIdentityRelations(modelBuilder);
 

@@ -1,6 +1,10 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using RentaVex.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
+
 @using RentaVex.Services.Data
 @{
     string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
@@ -35,6 +39,11 @@
                                 </button>
                             </form>
                         </div>
+
+                        @if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            <partial name="_RatingPartial" model="@Model"></partial>
+                        }
                     </div>
 
                     <div class="card-footer">

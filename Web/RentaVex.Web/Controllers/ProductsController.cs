@@ -135,6 +135,14 @@
             return this.View(model);
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Rate(RatingViewModel model, int productId, int ratingStars)
+        {
+            await this.productService.RateProductById(model, productId, ratingStars);
+            return this.RedirectToAction("Buy", "Products");
+        }
+
         //[HttpPost]
         //public async Task<IActionResult> LikeProduct(int productId)
         //{

@@ -28,5 +28,8 @@
         Task RemoveProductAsync(int id);
 
         Task LikeProductAsync(int productId, string userId);
+
+        Task RateProductById(RatingViewModel model, int productId, int ratingStars);
+
     }
 }

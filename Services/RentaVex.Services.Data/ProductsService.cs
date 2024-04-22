@@ -15,6 +15,7 @@
     using RentaVex.Web.ViewModels.Products;
     using RentaVex.Web.ViewModels.User;
 
+
     public class ProductsService : IProductsService
     {
         private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
@@ -170,6 +171,11 @@
                                          .FirstOrDefault(x => x.Id == productId);
         }
 
+        //public ProductRating GetRating(int productId)
+        //{
+        //    return _context.ProductRatings.FirstOrDefault(r => r.ProductId == productId);
+        //}
+
         public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
             if (product == null)
@@ -220,6 +226,22 @@
             user.LikedProducts.Add(product);
 
             await this.userRepository.SaveChangesAsync();
+        }
+
+        public async Task RateProductById(RatingViewModel model, int productId, int ratingStars)
+        {
+            // Using the ViewModel = ?
+            model.NumberOfStarts = 2;
+            model.AverageRating = 2;
+
+            var product = this.GetProduct(productId);
+            var rating = new ProductRating { ProductId = productId, Product = product, NumberOfStars = ratingStars};
+
+            rating.NumberOfStars = model.NumberOfStarts;
+            rating.AverageRating = model.AverageRating;
+
+            product.ProductRatings.Add(rating);
+            await this.productRepository.SaveChangesAsync();
         }
     }
 }

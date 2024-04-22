@@ -1,24 +1,17 @@
-﻿namespace RentaVex.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+using RentaVex.Data.Models;
+
+public class ProductRating
 {
-    using RentaVex.Data.Common.Models;
+    public int Id { get; set; }
 
-    public class ProductRating : BaseDeletableModel<int>
-    {
-        public int RatingCount { get; set; }
+    [Range(0, int.MaxValue)]
+    public int NumberOfStars { get; set; }
 
-        public double Sum { get; set; }
+    public double AverageRating { get; set; }
 
-        public double AverageRating
-        {
-            get
-            {
-                if (this.RatingCount == 0)
-                {
-                    return 0;
-                }
+    public int ProductId { get; set; }
 
-                return (double)this.Sum / this.RatingCount;
-            }
-        }
-    }
+    public Product Product { get; set; }
 }
