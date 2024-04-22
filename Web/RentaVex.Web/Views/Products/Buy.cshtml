@@ -1,6 +1,10 @@
-﻿@{
-    this.ViewData["Name"] = "Buy";
-    string myString = new string('_', 160);
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHttpContextAccessor HttpContextAccessor
+@using RentaVex.Services.Data
+@{
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
+    ViewData["Name"] = pageName;
 }
 
 <link href="~/css/store.css" rel="stylesheet" />

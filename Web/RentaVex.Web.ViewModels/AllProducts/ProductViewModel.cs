@@ -1,6 +1,7 @@
 ﻿namespace RentaVex.Web.ViewModels.AllProducts
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using AutoMapper;
@@ -26,6 +27,10 @@
         public DateTime CreatedOn { get; set; }
 
         public string UserId { get; set; }
+
+        //public ICollection<Product> LikedProducts { get; set; }
+
+
 
         public void CreateMappings(IProfileExpression configuration)
         {

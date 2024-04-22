@@ -26,7 +26,7 @@
             return this.View();
         }
 
-        public IActionResult ContactUs()
+        public IActionResult ContactUs(int id)
         {
             return this.View();
         }

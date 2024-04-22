@@ -1,7 +1,14 @@
-﻿@section Styles {
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHttpContextAccessor HttpContextAccessor
+@using RentaVex.Services.Data
+
+@section Styles {
 }
+
 @{
-    this.ViewData["Name"] = "Home Page";
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
+    ViewData["Name"] = pageName;
 }
 
 <div>

@@ -18,7 +18,7 @@
             }
             else
             {
-                return "Products";
+                return "RentaVex";
             }
         }
     }

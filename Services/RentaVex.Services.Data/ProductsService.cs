@@ -100,11 +100,6 @@
                 throw new ArgumentException($"Product with ID {productId} not found.");
             }
 
-            if (true)
-            {
-
-            }
-
             productToEdit.Name = inputInfo.Product.Name;
             productToEdit.Description = inputInfo.Product.Description;
             productToEdit.IsForRent = inputInfo.Product.IsForRent;
@@ -215,9 +210,6 @@
                 throw new ArgumentException($"Product with ID {productId} is not found.");
             }
 
-            //var user = await this.userRepository.All().FirstOrDefaultAsync(u => u.Id.ToString() == userId);
-            var users = await this.userRepository.All().ToListAsync();
-
             var user = this.GetUserById(userId);
 
             if (user == null)
@@ -225,10 +217,9 @@
                 throw new ArgumentException($"User with ID {userId} is not found.");
             }
 
-           // user.Likes.Add(product);
+            user.LikedProducts.Add(product);
 
             await this.userRepository.SaveChangesAsync();
         }
-
     }
 }

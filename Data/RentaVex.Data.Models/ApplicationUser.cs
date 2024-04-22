@@ -16,17 +16,9 @@
             this.Logins = new HashSet<IdentityUserLogin<string>>();
 
             this.MyProducts = new HashSet<Product>();
-            //this.Products = new HashSet<Product>();
 
-            //this.UserLikedProducts = new HashSet<UserLikedProduct>();
             this.LikedProducts = new HashSet<Product>();
         }
-
-        public ICollection<Product> MyProducts { get; set; }
-
-
-        //public ICollection<Product> Products { get; set; }
-        public ICollection<Product> LikedProducts { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
@@ -35,6 +27,10 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public ICollection<Product> MyProducts { get; set; }
+
+        public ICollection<Product> LikedProducts { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

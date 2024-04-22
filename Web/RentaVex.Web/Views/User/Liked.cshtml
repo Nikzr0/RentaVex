@@ -1,53 +1,50 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
-@using RentaVex.Common
 @using RentaVex.Services.Data
-@using RentaVex.Web.ViewModels.User
-@using System.Security.Claims
-@model MyProductsViewModel
-
 @{
     string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
     ViewData["Name"] = pageName;
 }
 
-<link href="~/css/store.css" rel="stylesheet" />
+@* @model LikedProductsViewModel *@
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products)
+        @if (Model.LikedProducts.Any())
         {
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 position-relative">
-                    <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+            foreach (var product in Model.LikedProducts)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 position-relative">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
 
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
 
-                        <p class="card-description">
-                            @{
-                                string description = product.Description.Length > 140 ? product.Description.Substring(0, 140) + "..." : product.Description;
-                            }
-                            @description
-                        </p>
-                        <div class="price-container">
-                            <p class="card-price">$@product.Price</p>
+                            <p class="card-description">
+                                @{
+                                    string description = product.Description.Length > 140 ? product.Description.Substring(0, 140) + "..." : product.Description;
+                                }
+                                @description
+                            </p>
+                            <div class="price-container">
+                                <p class="card-price">$@product.Price</p>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <a asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
+                                Edit Product
+                            </a>
                         </div>
                     </div>
-
-                    <div class="card-footer">
-                        <a asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
-                            Edit Product
-                        </a>
-
-                        <form asp-controller="User" asp-action="Remove" method="post">
-                            <input type="hidden" name="id" value="@product.Id" />
-                            <button type="submit" class="btn btn-danger btn-block" style="margin-top: 10px;">Remove Product</button>
-                        </form>
-                    </div>
                 </div>
-            </div>
+            }
+        }
+        else
+        {
+            <p>You haven't liked any products yet.</p>
         }
     </div>
 </div>
