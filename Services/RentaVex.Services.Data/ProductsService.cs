@@ -171,11 +171,6 @@
                                          .FirstOrDefault(x => x.Id == productId);
         }
 
-        //public ProductRating GetRating(int productId)
-        //{
-        //    return _context.ProductRatings.FirstOrDefault(r => r.ProductId == productId);
-        //}
-
         public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
             if (product == null)
@@ -183,13 +178,14 @@
                 throw new ArgumentNullException(nameof(product), "The product is null.");
             }
 
-            var unavailableDates = Enumerable.Range(0, (end - start).Days + 1)
-                                       .Select(offset => start.AddDays(offset))
-                                       .ToList();
+            var unavailableDays = Enumerable.Range(0, (end - start).Days + 1)
+                                      .Select(offset => start.AddDays(offset))
+                                      .ToList();
 
-            product.UnavailableDates.Clear();
+            var newUnavailableDates = unavailableDays.Where(date => !product.UnavailableDates.Any(ud => ud.Date == date))
+                                              .ToList();
 
-            foreach (var date in unavailableDates)
+            foreach (var date in newUnavailableDates)
             {
                 product.UnavailableDates.Add(new UnavailableDate { Date = date });
             }
@@ -197,16 +193,8 @@
             await this.productRepository.SaveChangesAsync();
         }
 
-        //public async Task<Product> GetProductAsync(int productId)
-        //{
-        //    return await Task.Run(() => GetProduct(productId));
-        //
 
-        //public void IncreaseNumverOfLikes(int productId)
-        //{
-        //    var product = GetProduct();
-        //}
-
+        //Not Ready
         public async Task LikeProductAsync(int productId, string userId)
         {
             var product = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
@@ -224,21 +212,14 @@
             }
 
             user.LikedProducts.Add(product);
-
             await this.userRepository.SaveChangesAsync();
         }
 
-        public async Task RateProductById(RatingViewModel model, int productId, int ratingStars)
+        //Not Ready
+        public async Task RateProductById(RatingViewModel model, int numberOfStars)
         {
-            // Using the ViewModel = ?
-            model.NumberOfStarts = 2;
-            model.AverageRating = 2;
-
-            var product = this.GetProduct(productId);
-            var rating = new ProductRating { ProductId = productId, Product = product, NumberOfStars = ratingStars};
-
-            rating.NumberOfStars = model.NumberOfStarts;
-            rating.AverageRating = model.AverageRating;
+            var product = this.GetProduct(model.ProductId);
+            var rating = new ProductRating { ProductId = model.ProductId, Product = product, NumberOfStars = numberOfStars };
 
             product.ProductRatings.Add(rating);
             await this.productRepository.SaveChangesAsync();

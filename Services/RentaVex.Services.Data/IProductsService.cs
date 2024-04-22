@@ -29,7 +29,7 @@
 
         Task LikeProductAsync(int productId, string userId);
 
-        Task RateProductById(RatingViewModel model, int productId, int ratingStars);
+        Task RateProductById(RatingViewModel model, int ratingStars);
 
     }
 }

@@ -105,14 +105,27 @@
         }
 
         [HttpGet]
-        public IActionResult RentProduct(int id)
+        public IActionResult RentProduct(int productId)
         {
             var product = new RentProductViewModel
             {
-                Product = this.productService.GetProductById(id),
+                Product = this.productService.GetProductById(productId),
             };
 
             return this.View(product);
+        }
+
+        [HttpGet]
+        public IActionResult RentProduct(int productId, DateTime start, DateTime end)
+        {
+            var viewModel = new RentProductViewModel
+            {
+                Product = this.productService.GetProductById(productId),
+                PickupTime = start,
+                ReturnTime = end,
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -137,25 +150,10 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Rate(RatingViewModel model, int productId, int ratingStars)
+        public async Task<IActionResult> Rate(RatingViewModel model, int ratingStars)
         {
-            await this.productService.RateProductById(model, productId, ratingStars);
+            await this.productService.RateProductById(model, ratingStars);
             return this.RedirectToAction("Buy", "Products");
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> LikeProduct(int productId)
-        //{
-        //    // Get the current user ID (You may need to modify this based on your authentication mechanism)
-        //    var userId = this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        //    // Call the service method to like the product
-        //    await this.productService.LikeProductAsync(productId, userId);
-
-        //    return this.Ok();
-        //}
-
-
-        // Show Dropdown Pages
     }
 }

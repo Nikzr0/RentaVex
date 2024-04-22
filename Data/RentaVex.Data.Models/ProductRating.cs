@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using RentaVex.Data.Common.Models;
+using RentaVex.Data.Common.Repositories;
 using RentaVex.Data.Models;
 
-public class ProductRating
+public class ProductRating : BaseDeletableModel<int>
 {
-    public int Id { get; set; }
-
-    [Range(0, int.MaxValue)]
     public int NumberOfStars { get; set; }
 
     public double AverageRating { get; set; }

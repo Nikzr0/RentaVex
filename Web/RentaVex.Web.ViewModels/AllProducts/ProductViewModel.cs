@@ -31,9 +31,9 @@
 
         //public ICollection<Product> LikedProducts { get; set; }
 
-        public int NumberOfStarts { get; set; }
+        //public int NumberOfStarts { get; set; }
 
-        public double AverageRating { get; set; }
+        //public double AverageRating { get; set; }
 
 
         public void CreateMappings(IProfileExpression configuration)

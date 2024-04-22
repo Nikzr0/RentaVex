@@ -1,13 +1,14 @@
 ﻿namespace RentaVex.Web.ViewModels.Products
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class RatingViewModel
     {
+        [Range(0, 6)]
         public int NumberOfStarts { get; set; }
 
-        public double AverageRating { get; set; }
-
+        public int ProductId { get; set; }
 
         //public int PagesCount => (int)Math.Ceiling((double)this.ProductsCount / this.ItemsPerPage);
 

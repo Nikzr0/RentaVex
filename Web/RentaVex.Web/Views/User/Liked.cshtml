@@ -2,12 +2,13 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
 @using RentaVex.Services.Data
+
+
 @{
     string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
     ViewData["Name"] = pageName;
 }
 
-@* @model LikedProductsViewModel *@
 
 <div class="container">
     <div class="row">

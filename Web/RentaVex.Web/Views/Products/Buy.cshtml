@@ -4,8 +4,9 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
-
+@using RentaVex.Web.ViewModels.Products
 @using RentaVex.Services.Data
+
 @{
     string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
     ViewData["Name"] = pageName;
@@ -34,16 +35,22 @@
                             <p class="card-price">$@product.Price</p>
                             <form asp-controller="User" asp-action="Liked" method="post">
                                 <input type="hidden" name="productId" value="@product.Id" />
-                                <button type="submit" class="btn btn-link">
+                              @*   <button type="submit" class="btn btn-link">
+                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image" />
+                                </button> *@
+
+                                <button type="button" class="btn btn-link likeButton" data-product-id="@product.Id">
                                     <img src="~/svg/like.svg" alt="Like Icon" class="svg_image" />
                                 </button>
+
                             </form>
                         </div>
 
                         @if (this.SignInManager.IsSignedIn(this.User))
                         {
-                            <partial name="_RatingPartial" model="@Model"></partial>
+                            @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
                         }
+
                     </div>
 
                     <div class="card-footer">
@@ -58,3 +65,29 @@
 </div>
 
 <partial name="_PagingPartial" model="@Model"></partial>
+
+@section scripts {
+    <script>
+        function likeProduct(productId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/User/Liked?productId=" + productId, true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    window.location.href = "/User/Message";
+                } else {
+                    console.error(xhr.responseText);
+                }
+            };
+            xhr.send();
+        }
+
+        var likeButtons = document.querySelectorAll(".likeButton");
+        likeButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var productId = button.dataset.productId;
+                likeProduct(productId);
+            });
+        });
+    </script>
+}

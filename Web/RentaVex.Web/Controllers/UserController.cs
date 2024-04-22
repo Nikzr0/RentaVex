@@ -101,78 +101,27 @@
             return this.View();
         }
 
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> Liked(int productId)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    try
-        //    {
-        //        await this.productService.LikeProductAsync(productId, userId);
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        return this.BadRequest(ex.Message);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return this.StatusCode(500, "An error occurred while liking the product.");
-        //    }
-
-        //    return this.RedirectToAction("Liked", "User");
-        //}
-
-        public IActionResult Liked()
+        //Not Ready
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Liked(int productId)
         {
-            return this.View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await this.productService.LikeProductAsync(productId, userId);
+            }
+            catch (ArgumentException ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(500, "An error occurred while liking the product.");
+            }
+
+            return this.RedirectToAction("Liked", "User");
         }
-
-
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> Liked(int productId)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    try
-        //    {
-        //        var product = this.productService.GetProduct(productId);
-        //        if (product == null)
-        //        {
-        //            return this.NotFound();
-        //        }
-
-        //        // Check if the user has already liked the product
-        //        var alreadyLiked = product.LikedProducts.Any(p => p.Id == productId && p.UserId == userId);
-
-        //        if (alreadyLiked)
-        //        {
-        //            // If the user has already liked the product, remove it from liked products
-        //            await this.productService.UnlikeProductAsync(productId, userId);
-        //        }
-        //        else
-        //        {
-        //            // If the user hasn't liked the product, like it
-        //            await this.productService.LikeProductAsync(productId, userId);
-        //        }
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        return this.BadRequest(ex.Message);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return this.StatusCode(500, "An error occurred while liking/unliking the product.");
-        //    }
-
-        //    return this.RedirectToAction("Message", "User");
-        //}
-
-
-
-
     }
 }
