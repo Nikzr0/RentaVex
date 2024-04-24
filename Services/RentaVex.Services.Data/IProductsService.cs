@@ -31,5 +31,8 @@
 
         Task RateProductById(RatingViewModel model, int ratingStars);
 
+        IEnumerable<ProductViewModel> GetLikedProductsForUser(string userId);
+
+        int GetLikedProductsCountForUser(string userId);
     }
 }

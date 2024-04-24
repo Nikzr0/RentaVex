@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Data\RentaVex.Data.Common\RentaVex.Data.Common.csproj" />
 		<ProjectReference Include="..\..\Data\RentaVex.Data.Models\RentaVex.Data.Models.csproj" />
+		<ProjectReference Include="..\..\Data\RentaVex.Data\RentaVex.Data.csproj" />
 		<ProjectReference Include="..\..\Web\RentaVex.Web.ViewModels\RentaVex.Web.ViewModels.csproj" />
 		<ProjectReference Include="..\RentaVex.Services.Mapping\RentaVex.Services.Mapping.csproj" />
 	</ItemGroup>

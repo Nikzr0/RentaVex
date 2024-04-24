@@ -17,7 +17,6 @@
     <link href="~/css/styles.css" rel="stylesheet" />
 
     @RenderSection("Styles", required: false)
-    @RenderSection("Scripts", required: false)
 
 </head>
 <body>
@@ -145,7 +144,7 @@
 </body>
 </html>
 
-
+@RenderSection("Scripts", required: false)
 @* This should be added for mobile version only *@
 @*<li class="nav-item" style="margin-right: 10px;">
     <a class="nav-link text-dark" asp-controller="User" asp-action="Create">

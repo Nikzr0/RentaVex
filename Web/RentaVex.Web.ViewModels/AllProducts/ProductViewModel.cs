@@ -29,8 +29,6 @@
 
         public string UserId { get; set; }
 
-        //public ICollection<Product> LikedProducts { get; set; }
-
         //public int NumberOfStarts { get; set; }
 
         //public double AverageRating { get; set; }

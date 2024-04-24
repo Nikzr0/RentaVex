@@ -1,7 +1,120 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using RentaVex.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHttpContextAccessor HttpContextAccessor
+@using RentaVex.Web.ViewModels.Products
+@using RentaVex.Services.Data
+
+@{
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
+    ViewData["Name"] = pageName;
+}
+
+<link href="~/css/store.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 position-relative">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+
+                        <p class="card-description">
+                            @{
+                                string description = product.Description.Length > 140 ? product.Description.Substring(0, 140) + "..." : product.Description;
+                            }
+                            @description
+                        </p>
+                        <div class="price-container">
+                            <p class="card-price">$@product.Price</p>
+                            <form asp-controller="Products" asp-action="Like" method="post">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                            </form>
+                        </div>
+
+                        @if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
+                        }
+
+                    </div>
+
+                    <div class="card-footer">
+                        <a asp-controller="Products" asp-action="ProductPage" asp-route-id="@product.Id" class="btn btn-primary btn-block">
+                            Go to Product Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<partial name="_PagingPartial" model="@Model"></partial>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject IHttpContextAccessor HttpContextAccessor
 @using RentaVex.Services.Data
+@using RentaVex.Web.ViewModels.Products
 
 
 @{
@@ -53,4 +166,4 @@
 @if (Model.Products.Count() >= 1)
 {
     <partial name="_PagingPartial" model="@Model"></partial>
-} 
+}  *@

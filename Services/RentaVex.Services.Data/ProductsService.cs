@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using RentaVex.Data;
     using RentaVex.Data.Common.Repositories;
     using RentaVex.Data.Models;
     using RentaVex.Services.Mapping;
@@ -21,11 +22,15 @@
         private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Product> productRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
+        private readonly ApplicationDbContext dbContext;
 
-        public ProductsService(IDeletableEntityRepository<Product> productRepository, IDeletableEntityRepository<ApplicationUser> userRepository)
+        public ProductsService(IDeletableEntityRepository<Product> productRepository,
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            ApplicationDbContext dbContext)
         {
             this.productRepository = productRepository;
             this.userRepository = userRepository;
+            this.dbContext = dbContext;
         }
 
         public async Task CreateAsync(CreateProducViewModel inputInfo, string userId, string imagePath)
@@ -193,8 +198,6 @@
             await this.productRepository.SaveChangesAsync();
         }
 
-
-        //Not Ready
         public async Task LikeProductAsync(int productId, string userId)
         {
             var product = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
@@ -211,11 +214,21 @@
                 throw new ArgumentException($"User with ID {userId} is not found.");
             }
 
-            user.LikedProducts.Add(product);
-            await this.userRepository.SaveChangesAsync();
+            if (product.UserId != userId)
+            {
+                if (!user.LikedProducts.Any(p => p.Id == productId))
+                {
+                    //user.LikedProducts.Add(product);
+                    this.dbContext.Users.Find(userId).LikedProducts.Add(product);
+                    await this.dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Product with ID {productId} is already liked by user with ID {userId}.");
+                }
+            }
         }
 
-        //Not Ready
         public async Task RateProductById(RatingViewModel model, int numberOfStars)
         {
             var product = this.GetProduct(model.ProductId);
@@ -223,6 +236,38 @@
 
             product.ProductRatings.Add(rating);
             await this.productRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<ProductViewModel> GetLikedProductsForUser(string userId)
+        {
+            var likedProducts = this.userRepository.All()
+                            .Where(u => u.Id == userId)
+                            .OrderByDescending(p => p.Id)
+                            .SelectMany(u => u.LikedProducts)
+                            .Select(x => new ProductViewModel
+                            {
+                                Id = x.Id,
+                                Name = x.Name,
+                                Description = x.Description,
+                                Price = x.Price,
+                                Category = x.Category.Name,
+                                Location = x.Location,
+                                UserId = x.UserId,
+                                ImageUrl = x.Images.FirstOrDefault().ImageUrl,
+                            })
+                            .ToList();
+
+            return likedProducts;
+        }
+
+        public int GetLikedProductsCountForUser(string userId)
+        {
+            var likedProductsCount = this.userRepository.All()
+                .Where(u => u.Id == userId)
+                .SelectMany(u => u.LikedProducts)
+                .Count();
+
+            return likedProductsCount;
         }
     }
 }

@@ -94,6 +94,30 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Like(int productId)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await this.productService.LikeProductAsync(productId, userId);
+            }
+            catch (ArgumentException ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(500, "An error occurred while liking the product.");
+            }
+
+            //await this.productService.LikeProductAsync(productId, userId);
+
+            return this.RedirectToAction("Buy", "Products");
+        }
+
         public IActionResult ProductPage(int id)
         {
             var product = new ProductPageViewModel

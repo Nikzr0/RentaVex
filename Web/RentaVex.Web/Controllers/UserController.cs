@@ -101,27 +101,38 @@
             return this.View();
         }
 
-        //Not Ready
+        //[Authorize]
+        //public async Task<IActionResult> Liked()
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    //context.users.Find(x=>x.id = userId).LikedProducts.ToList();
+        //    return this.View();
+        //}
+
         [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> Liked(int productId)
+        public IActionResult Liked(int pageNumver = 1)
         {
+            const int itemsPerPage = 24;
+
+            if (pageNumver < 1)
+            {
+                return this.NotFound();
+            }
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            try
-            {
-                await this.productService.LikeProductAsync(productId, userId);
-            }
-            catch (ArgumentException ex)
-            {
-                return this.BadRequest(ex.Message);
-            }
-            catch (Exception)
-            {
-                return this.StatusCode(500, "An error occurred while liking the product.");
-            }
+            var likedProducts = this.productService.GetLikedProductsForUser(userId);
 
-            return this.RedirectToAction("Liked", "User");
+            var viewModel = new AllProductsViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = pageNumver,
+                Products = likedProducts,
+                ProductsCount = this.productService.GetLikedProductsCountForUser(userId),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

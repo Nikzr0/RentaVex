@@ -33,13 +33,10 @@
                         </p>
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
-                            <form asp-controller="User" asp-action="Liked" method="post">
+                            <form asp-controller="Products" asp-action="Like" method="post">
                                 <input type="hidden" name="productId" value="@product.Id" />
-                              @*   <button type="submit" class="btn btn-link">
-                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image" />
-                                </button> *@
 
-                                <button type="button" class="btn btn-link likeButton" data-product-id="@product.Id">
+                                <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id">
                                     <img src="~/svg/like.svg" alt="Like Icon" class="svg_image" />
                                 </button>
 
@@ -66,7 +63,7 @@
 
 <partial name="_PagingPartial" model="@Model"></partial>
 
-@section scripts {
+@section Scripts {
     <script>
         function likeProduct(productId) {
             var xhr = new XMLHttpRequest();
