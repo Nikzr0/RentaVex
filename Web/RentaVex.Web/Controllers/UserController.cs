@@ -101,15 +101,6 @@
             return this.View();
         }
 
-        //[Authorize]
-        //public async Task<IActionResult> Liked()
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    //context.users.Find(x=>x.id = userId).LikedProducts.ToList();
-        //    return this.View();
-        //}
-
         [Authorize]
         public IActionResult Liked(int pageNumver = 1)
         {

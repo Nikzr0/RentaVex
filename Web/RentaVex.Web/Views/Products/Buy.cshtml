@@ -14,6 +14,7 @@
 
 <link href="~/css/store.css" rel="stylesheet" />
 
+
 <div class="container">
     <div class="row">
         @foreach (var product in Model.Products)
@@ -36,8 +37,9 @@
                             <form asp-controller="Products" asp-action="Like" method="post">
                                 <input type="hidden" name="productId" value="@product.Id" />
 
-                                <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id">
-                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image" />
+                                <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id" onclick="toggleLikeImage('@product.Id', this)">
+                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image dark-like-image" id="darkLikeImage_@product.Id" />
+                                    <img src="~/svg/redLike.svg" alt="Like Icon" class="svg_image red-like-image" id="redLikeImage_@product.Id" style="display: none;" />
                                 </button>
 
                             </form>
@@ -46,6 +48,7 @@
                         @if (this.SignInManager.IsSignedIn(this.User))
                         {
                             @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
+                            //@Html.Partial("_SuccessToastPartial");
                         }
 
                     </div>
@@ -57,34 +60,32 @@
                     </div>
                 </div>
             </div>
+
         }
     </div>
 </div>
 
 <partial name="_PagingPartial" model="@Model"></partial>
+@Html.Partial("_SuccessToastPartial");
 
-@section Scripts {
+@section scripts {
     <script>
-        function likeProduct(productId) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/User/Liked?productId=" + productId, true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onload = function () {
-                if (xhr.status == 200) {
-                    window.location.href = "/User/Message";
-                } else {
-                    console.error(xhr.responseText);
-                }
-            };
-            xhr.send();
-        }
+        function toggleLikeImage(productId, button) {
+            var darkLikeImage = document.getElementById('darkLikeImage_' + productId);
+            var redLikeImage = document.getElementById('redLikeImage_' + productId);
 
-        var likeButtons = document.querySelectorAll(".likeButton");
-        likeButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                var productId = button.dataset.productId;
-                likeProduct(productId);
-            });
-        });
+            // Toggle the visibility of the SVG images
+            if (darkLikeImage.style.display === 'none') {
+                darkLikeImage.style.display = 'inline-block';
+                redLikeImage.style.display = 'none';
+            } else {
+                darkLikeImage.style.display = 'none';
+                redLikeImage.style.display = 'inline-block';
+
+                // Remove the click event listener from the button
+                button.removeAttribute('onclick');
+            }
+        }
     </script>
 }
+

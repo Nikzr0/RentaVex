@@ -207,25 +207,31 @@
                 throw new ArgumentException($"Product with ID {productId} is not found.");
             }
 
-            var user = this.GetUserById(userId);
+            //var user = this.GetUserById(userId);
 
-            if (user == null)
+            //if (user == null)
+            //{
+            //    throw new ArgumentException($"User with ID {userId} is not found.");
+            //}
+
+            var user = await this.dbContext.Users
+                .Include(u => u.LikedProducts)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+
+            if (user.LikedProducts.Any(p => p.Id == productId))
             {
-                throw new ArgumentException($"User with ID {userId} is not found.");
+                throw new InvalidOperationException($"Product with ID {productId} is already liked by user with ID {userId}.");
             }
-
-            if (product.UserId != userId)
+            else if (product.UserId == userId)
             {
-                if (!user.LikedProducts.Any(p => p.Id == productId))
-                {
-                    //user.LikedProducts.Add(product);
-                    this.dbContext.Users.Find(userId).LikedProducts.Add(product);
-                    await this.dbContext.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new InvalidOperationException($"Product with ID {productId} is already liked by user with ID {userId}.");
-                }
+                throw new InvalidOperationException($"You can't like your own products");
+            }
+            else
+            {
+                //user.LikedProducts.Add(product);
+                this.dbContext.Users.Find(userId).LikedProducts.Add(product);
+                await this.dbContext.SaveChangesAsync();
             }
         }
 

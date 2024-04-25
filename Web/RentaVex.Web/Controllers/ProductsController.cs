@@ -103,11 +103,14 @@
             try
             {
                 await this.productService.LikeProductAsync(productId, userId);
+                return this.NoContent();
             }
             catch (ArgumentException ex)
             {
                 return this.BadRequest(ex.Message);
             }
+            catch (InvalidOperationException)
+            { }
             catch (Exception)
             {
                 return this.StatusCode(500, "An error occurred while liking the product.");
