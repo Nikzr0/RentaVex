@@ -121,6 +121,28 @@
             return this.RedirectToAction("Buy", "Products");
         }
 
+        public async Task<IActionResult> UnLike(int productId)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await this.productService.UnLikeProductAsync(productId, userId);
+            }
+            catch (ArgumentException ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException)
+            { }
+            catch (Exception)
+            {
+                return this.StatusCode(500, "An error occurred while liking the product.");
+            }
+
+            return this.RedirectToAction("Liked", "User");
+        }
+
         public IActionResult ProductPage(int id)
         {
             var product = new ProductPageViewModel

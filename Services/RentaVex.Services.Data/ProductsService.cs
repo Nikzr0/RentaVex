@@ -235,6 +235,23 @@
             }
         }
 
+        public async Task UnLikeProductAsync(int productId, string userId)
+        {
+            var product = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (product == null)
+            {
+                throw new ArgumentException($"Product with ID {productId} is not found.");
+            }
+
+            var user = await this.dbContext.Users
+                .Include(u => u.LikedProducts)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            this.dbContext.Users.Find(userId).LikedProducts.Remove(product);
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task RateProductById(RatingViewModel model, int numberOfStars)
         {
             var product = this.GetProduct(model.ProductId);

@@ -125,5 +125,15 @@
 
             return this.View(viewModel);
         }
+
+        //[Authorize]
+        //public IActionResult UnLike(int pageNumber = 1)
+        //{
+        //    return this.View();
+        //}        //[Authorize]
+        //public IActionResult UnLike(int pageNumber = 1)
+        //{
+        //    return this.View();
+        //}
     }
 }

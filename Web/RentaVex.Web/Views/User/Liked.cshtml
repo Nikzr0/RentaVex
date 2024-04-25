@@ -33,8 +33,13 @@
                         </p>
                         <div class="price-container">
                             <p class="card-price">$@product.Price</p>
-                            <form asp-controller="Products" asp-action="Like" method="post">
+                            <form asp-controller="Products" asp-action="Unlike" method="post">
                                 <input type="hidden" name="productId" value="@product.Id" />
+
+                                <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id" onclick="toggleLikeImage('@product.Id', this)">
+                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image dark-like-image" id="darkLikeImage_@product.Id" style="display: none"/>
+                                    <img src="~/svg/redLike.svg" alt="Like Icon" class="svg_image red-like-image" id="redLikeImage_@product.Id" style="display: inline-block;" />
+                                </button>
                             </form>
                         </div>
 
@@ -59,111 +64,21 @@
 <partial name="_PagingPartial" model="@Model"></partial>
 
 
+@section scripts {
+    <script>
+        function toggleLikeImage(productId, button) {
+            var darkLikeImage = document.getElementById('darkLikeImage_' + productId);
+            var redLikeImage = document.getElementById('redLikeImage_' + productId);
 
+            if (darkLikeImage.style.display === 'none') {
+                darkLikeImage.style.display = 'none';
+                redLikeImage.style.display = 'inline-block';
+            } else {
+                darkLikeImage.style.display = 'inline-block';
+                redLikeImage.style.display = 'none';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@* @using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Mvc.Rendering
-@inject IHttpContextAccessor HttpContextAccessor
-@using RentaVex.Services.Data
-@using RentaVex.Web.ViewModels.Products
-
-
-@{
-    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
-    ViewData["Name"] = pageName;
-}
-
-
-<div class="container">
-    <div class="row">
-        @if (Model.LikedProducts.Any())
-        {
-            foreach (var product in Model.LikedProducts)
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 position-relative">
-                        <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
-
-                        <div class="card-body">
-                            <h5 class="card-title">@product.Name</h5>
-
-                            <p class="card-description">
-                                @{
-                                    string description = product.Description.Length > 140 ? product.Description.Substring(0, 140) + "..." : product.Description;
-                                }
-                                @description
-                            </p>
-                            <div class="price-container">
-                                <p class="card-price">$@product.Price</p>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <a asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
-                                Edit Product
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                button.removeAttribute('onclick');
             }
         }
-        else
-        {
-            <p>You haven't liked any products yet.</p>
-        }
-    </div>
-</div>
-
-@if (Model.Products.Count() >= 1)
-{
-    <partial name="_PagingPartial" model="@Model"></partial>
-}  *@
+    </script>
+}
