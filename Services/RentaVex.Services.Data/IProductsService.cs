@@ -31,10 +31,12 @@
 
         Task UnLikeProductAsync(int productId, string userId);
 
-        Task RateProductById(RatingViewModel model, int ratingStars);
+        Task RateProductById(int productId, int ratingValue);
 
         IEnumerable<ProductViewModel> GetLikedProductsForUser(string userId);
 
         int GetLikedProductsCountForUser(string userId);
+
+        double GetAverageRating(int productId);
     }
 }

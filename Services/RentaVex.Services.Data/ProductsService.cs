@@ -16,7 +16,6 @@
     using RentaVex.Web.ViewModels.Products;
     using RentaVex.Web.ViewModels.User;
 
-
     public class ProductsService : IProductsService
     {
         private readonly string[] allowedExtentions = new[] { "jpg", "png", "gif", "jpeg" };
@@ -97,6 +96,21 @@
             await this.productRepository.SaveChangesAsync();
         }
 
+        public async Task RemoveProductAsync(int id)
+        {
+            var productToRemove = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == id);
+
+            if (productToRemove != null)
+            {
+                this.productRepository.Delete(productToRemove);
+                await this.productRepository.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Product not found!");
+            }
+        }
+
         public async Task EditProductAsync(int productId, EditProductViewModel inputInfo)
         {
             var productToEdit = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == productId);
@@ -122,19 +136,26 @@
             await this.productRepository.SaveChangesAsync();
         }
 
-        public async Task RemoveProductAsync(int id)
+        public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
         {
-            var productToRemove = await this.productRepository.All().FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "The product is null.");
+            }
 
-            if (productToRemove != null)
+            var unavailableDays = Enumerable.Range(0, (end - start).Days + 1)
+                                      .Select(offset => start.AddDays(offset))
+                                      .ToList();
+
+            var newUnavailableDates = unavailableDays.Where(date => !product.UnavailableDates.Any(ud => ud.Date == date))
+                                              .ToList();
+
+            foreach (var date in newUnavailableDates)
             {
-                this.productRepository.Delete(productToRemove);
-                await this.productRepository.SaveChangesAsync();
+                product.UnavailableDates.Add(new UnavailableDate { Date = date });
             }
-            else
-            {
-                throw new Exception("Product not found!");
-            }
+
+            await this.productRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
@@ -174,28 +195,6 @@
         {
             return this.productRepository.AllAsNoTracking()
                                          .FirstOrDefault(x => x.Id == productId);
-        }
-
-        public async Task SetProductUnavailableDates(Product product, DateTime start, DateTime end)
-        {
-            if (product == null)
-            {
-                throw new ArgumentNullException(nameof(product), "The product is null.");
-            }
-
-            var unavailableDays = Enumerable.Range(0, (end - start).Days + 1)
-                                      .Select(offset => start.AddDays(offset))
-                                      .ToList();
-
-            var newUnavailableDates = unavailableDays.Where(date => !product.UnavailableDates.Any(ud => ud.Date == date))
-                                              .ToList();
-
-            foreach (var date in newUnavailableDates)
-            {
-                product.UnavailableDates.Add(new UnavailableDate { Date = date });
-            }
-
-            await this.productRepository.SaveChangesAsync();
         }
 
         public async Task LikeProductAsync(int productId, string userId)
@@ -252,15 +251,6 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task RateProductById(RatingViewModel model, int numberOfStars)
-        {
-            var product = this.GetProduct(model.ProductId);
-            var rating = new ProductRating { ProductId = model.ProductId, Product = product, NumberOfStars = numberOfStars };
-
-            product.ProductRatings.Add(rating);
-            await this.productRepository.SaveChangesAsync();
-        }
-
         public IEnumerable<ProductViewModel> GetLikedProductsForUser(string userId)
         {
             var likedProducts = this.userRepository.All()
@@ -291,6 +281,40 @@
                 .Count();
 
             return likedProductsCount;
+        }
+
+        public async Task RateProductById(int productId, int ratingValue)
+        {
+            var product = this.GetProduct(productId);
+
+            if (product == null)
+            {
+                throw new ArgumentException($"Product with ID {productId} is not found.");
+            }
+
+            var productRating = new ProductRating
+            {
+                ProductId = productId,
+                NumberOfStars = ratingValue,
+            };
+
+            product.ProductRatings.Add(productRating);
+            product.AverageRating = this.GetAverageRating(productId);
+            await this.productRepository.SaveChangesAsync();
+        }
+
+        public double GetAverageRating(int productId)
+        {
+            var ratings = this.dbContext.ProductRatings.Where(r => r.ProductId == productId).Select(r => r.NumberOfStars).ToList();
+
+            if (ratings.Any())
+            {
+                return ratings.Average();
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

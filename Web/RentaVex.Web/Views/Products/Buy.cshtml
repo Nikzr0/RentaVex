@@ -13,7 +13,7 @@
 }
 
 <link href="~/css/store.css" rel="stylesheet" />
-
+<link href="~/css/rating.css" rel="stylesheet" />
 
 <div class="container">
     <div class="row">
@@ -45,10 +45,29 @@
                             </form>
                         </div>
 
+                      @*   @if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            <form asp-controller="Products" asp-action="Rate" method="post">
+                                @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
+                            </form>
+                            //@Html.Partial("_SuccessToastPartial");
+                        } *@
+
                         @if (this.SignInManager.IsSignedIn(this.User))
                         {
-                            @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
-                            //@Html.Partial("_SuccessToastPartial");
+                            <form id="rateForm-@product.Id" asp-controller="Products" asp-action="Rate" method="post">
+                                <div class="rating-container">
+                                    <div class="rating">
+                                        <input type="radio" name="@("rating" + product.Id)" value="5" id="@("5" + product.Id)"><label for="@("5" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="4" id="@("4" + product.Id)"><label for="@("4" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="3" id="@("3" + product.Id)"><label for="@("3" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="2" id="@("2" + product.Id)"><label for="@("2" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="1" id="@("1" + product.Id)"><label for="@("1" + product.Id)">☆</label>
+                                    </div>
+                                    <span class="product-rating">@product.AverageRating / 5</span>
+                                </div>
+                                <input type="hidden" id="ratingValue-@product.Id" name="ratingValue" value="">
+                            </form>
                         }
 
                     </div>
@@ -60,21 +79,22 @@
                     </div>
                 </div>
             </div>
-
         }
     </div>
 </div>
 
 <partial name="_PagingPartial" model="@Model"></partial>
-@Html.Partial("_SuccessToastPartial");
+@* <partial name="_SuccessToastPartial"></partial>
+@Html.Partial("_SuccessToastPartial"); *@
 
-@section scripts {
+
+@section Scripts {
+    @* <script src="~/js/rating_partial.js"></script> *@
     <script>
         function toggleLikeImage(productId, button) {
             var darkLikeImage = document.getElementById('darkLikeImage_' + productId);
             var redLikeImage = document.getElementById('redLikeImage_' + productId);
 
-            // Toggle the visibility of the SVG images
             if (darkLikeImage.style.display === 'none') {
                 darkLikeImage.style.display = 'inline-block';
                 redLikeImage.style.display = 'none';
@@ -82,7 +102,6 @@
                 darkLikeImage.style.display = 'none';
                 redLikeImage.style.display = 'inline-block';
 
-                // Remove the click event listener from the button
                 button.removeAttribute('onclick');
             }
         }

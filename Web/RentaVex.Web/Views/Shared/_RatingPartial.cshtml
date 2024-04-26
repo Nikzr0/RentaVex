@@ -1,46 +1,19 @@
-﻿@using RentaVex.Web.ViewModels.Products
+﻿@* @using RentaVex.Web.ViewModels.Products
 @model RatingViewModel
 
 <link href="~/css/rating.css" rel="stylesheet" />
 
 <div class="rating-container">
-    <form class="rating-form" action="@Url.Action("Rate", "Products")" method="post">
-        <div class="rating">
-            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-        </div>
-        <span class="product-rating">@Model.NumberOfStarts / 5</span>
-
-        @*<span>Place for user icon</span><span class="product-rating">@Model.NumberOfStarts</span>*@
-    </form>
+    <div class="rating">
+        <input type="radio" name="@("rating" + Model.ProductId)" value="5" id="@("5" + Model.ProductId)"><label for="@("5" + Model.ProductId)">☆</label>
+        <input type="radio" name="@("rating" + Model.ProductId)" value="4" id="@("4" + Model.ProductId)"><label for="@("4" + Model.ProductId)">☆</label>
+        <input type="radio" name="@("rating" + Model.ProductId)" value="3" id="@("3" + Model.ProductId)"><label for="@("3" + Model.ProductId)">☆</label>
+        <input type="radio" name="@("rating" + Model.ProductId)" value="2" id="@("2" + Model.ProductId)"><label for="@("2" + Model.ProductId)">☆</label>
+        <input type="radio" name="@("rating" + Model.ProductId)" value="1" id="@("1" + Model.ProductId)"><label for="@("1" + Model.ProductId)">☆</label>
+    </div>
+    <span class="product-rating">@Model.NumberOfStars / 5</span>
 </div>
 
-<script>
-    document.querySelectorAll('.rating input[type="radio"]').forEach(function (star) {
-        star.addEventListener('click', function () {
-            var ratingValue = this.value;
-
-            fetch('@Url.Action("Rate", "Products")', {
-                method: 'POST',
-                body: JSON.stringify({ rating: ratingValue }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Rating submitted successfully!');
-                    } else {
-                        alert('Failed to submit rating. Please try again later.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again later.');
-                });
-        });
-    });
-</script>
+@section Scripts {
+<script src="~/js/rating_partial.js"></script>
+} *@

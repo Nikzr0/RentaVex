@@ -116,8 +116,6 @@
                 return this.StatusCode(500, "An error occurred while liking the product.");
             }
 
-            //await this.productService.LikeProductAsync(productId, userId);
-
             return this.RedirectToAction("Buy", "Products");
         }
 
@@ -199,9 +197,9 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Rate(RatingViewModel model, int ratingStars)
+        public async Task<IActionResult> Rate(int productId, int ratingValue)
         {
-            await this.productService.RateProductById(model, ratingStars);
+            await this.productService.RateProductById(productId, ratingValue);
             return this.RedirectToAction("Buy", "Products");
         }
     }

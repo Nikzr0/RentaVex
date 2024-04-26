@@ -12,6 +12,7 @@
         {
             this.Images = new HashSet<Image>();
             this.UnavailableDates = new HashSet<UnavailableDate>();
+            this.ProductRatings = new HashSet<ProductRating>();
         }
 
         public string Name { get; set; }
@@ -46,6 +47,8 @@
         public string WarningMessage { get; set; }
 
         public int NumberOfLikes { get; set; }
+
+        public double AverageRating { get; set; }
 
         public virtual ApplicationUser ProductOwner { get; set; }
 

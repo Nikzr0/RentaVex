@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using AutoMapper;
@@ -29,10 +30,16 @@
 
         public string UserId { get; set; }
 
-        //public int NumberOfStarts { get; set; }
+        //[Range(0, 6)]
+        //public int NumberOfStars { get; set; }
+
+        //public int ProductId { get; set; }
 
         //public double AverageRating { get; set; }
 
+        public ICollection<ProductRating> ProductRatings { get; set; }
+
+        public double AverageRating { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -41,7 +48,9 @@
                 opt.MapFrom(x => x.Images.FirstOrDefault().ImageUrl != null ?
                 x.Images.FirstOrDefault().ImageUrl :
                 "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extention))
-                .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn));
+                .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn))
+                .ForMember(dest => dest.AverageRating, opt => opt.MapFrom(src =>
+                    src.ProductRatings.Any() ? src.ProductRatings.Average(r => r.NumberOfStars) : 0));
         }
     }
 }
