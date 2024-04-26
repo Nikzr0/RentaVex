@@ -199,8 +199,15 @@
         [HttpPost]
         public async Task<IActionResult> Rate(int productId, int ratingValue)
         {
-            await this.productService.RateProductById(productId, ratingValue);
-            return this.RedirectToAction("Buy", "Products");
+            try
+            {
+                await this.productService.RateProductById(productId, ratingValue);
+                return this.Json(new { success = true, rating = this.productService.GetAverageRating(productId) });
+            }
+            catch (Exception ex)
+            {
+                return this.Json(new { success = false, error = ex.Message });
+            }
         }
     }
 }

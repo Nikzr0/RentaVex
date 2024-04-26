@@ -30,13 +30,6 @@
 
         public string UserId { get; set; }
 
-        //[Range(0, 6)]
-        //public int NumberOfStars { get; set; }
-
-        //public int ProductId { get; set; }
-
-        //public double AverageRating { get; set; }
-
         public ICollection<ProductRating> ProductRatings { get; set; }
 
         public double AverageRating { get; set; }

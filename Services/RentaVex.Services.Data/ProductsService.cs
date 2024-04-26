@@ -298,9 +298,15 @@
                 NumberOfStars = ratingValue,
             };
 
-            product.ProductRatings.Add(productRating);
-            product.AverageRating = this.GetAverageRating(productId);
-            await this.productRepository.SaveChangesAsync();
+            //product.ProductRatings.Add(productRating);
+            //product.AverageRating = this.GetAverageRating(productId);
+
+            //this.dbContext.Products.Find(productId).ProductRatings.Add(productRating);
+            this.dbContext.ProductRatings.Add(productRating);
+            await this.dbContext.SaveChangesAsync();
+
+            this.dbContext.Products.Find(productId).AverageRating = this.GetAverageRating(productId);
+            await this.dbContext.SaveChangesAsync();
         }
 
         public double GetAverageRating(int productId)
@@ -309,7 +315,10 @@
 
             if (ratings.Any())
             {
-                return ratings.Average();
+                double averageRating = ratings.Select(r => (double)r).Average();
+                double roundedRating = Math.Round(averageRating, 1);
+                double output = roundedRating;
+                return output;
             }
             else
             {

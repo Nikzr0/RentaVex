@@ -36,37 +36,41 @@
                             <p class="card-price">$@product.Price</p>
                             <form asp-controller="Products" asp-action="Like" method="post">
                                 <input type="hidden" name="productId" value="@product.Id" />
-
-                                <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id" onclick="toggleLikeImage('@product.Id', this)">
-                                    <img src="~/svg/like.svg" alt="Like Icon" class="svg_image dark-like-image" id="darkLikeImage_@product.Id" />
-                                    <img src="~/svg/redLike.svg" alt="Like Icon" class="svg_image red-like-image" id="redLikeImage_@product.Id" style="display: none;" />
-                                </button>
-
+                                @if (this.SignInManager.IsSignedIn(this.User))
+                                {
+                                    <button type="submit" class="btn btn-link likeButton" data-product-id="@product.Id" onclick="toggleLikeImage('@product.Id', this)">
+                                        <img src="~/svg/like.svg" alt="Like Icon" class="svg_image dark-like-image" id="darkLikeImage_@product.Id" />
+                                        <img src="~/svg/redLike.svg" alt="Like Icon" class="svg_image red-like-image" id="redLikeImage_@product.Id" style="display: none;" />
+                                    </button>
+                                }
                             </form>
                         </div>
 
-                      @*   @if (this.SignInManager.IsSignedIn(this.User))
-                        {
-                            <form asp-controller="Products" asp-action="Rate" method="post">
-                                @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
-                            </form>
-                            //@Html.Partial("_SuccessToastPartial");
-                        } *@
+                        @*   @if (this.SignInManager.IsSignedIn(this.User))
+                    {
+                    <form asp-controller="Products" asp-action="Rate" method="post">
+                    @Html.Partial("_RatingPartial", new RatingViewModel { ProductId = product.Id })
+                    </form>
+                    //@Html.Partial("_SuccessToastPartial");
+                    } *@
 
                         @if (this.SignInManager.IsSignedIn(this.User))
                         {
                             <form id="rateForm-@product.Id" asp-controller="Products" asp-action="Rate" method="post">
                                 <div class="rating-container">
                                     <div class="rating">
-                                        <input type="radio" name="@("rating" + product.Id)" value="5" id="@("5" + product.Id)"><label for="@("5" + product.Id)">☆</label>
-                                        <input type="radio" name="@("rating" + product.Id)" value="4" id="@("4" + product.Id)"><label for="@("4" + product.Id)">☆</label>
-                                        <input type="radio" name="@("rating" + product.Id)" value="3" id="@("3" + product.Id)"><label for="@("3" + product.Id)">☆</label>
-                                        <input type="radio" name="@("rating" + product.Id)" value="2" id="@("2" + product.Id)"><label for="@("2" + product.Id)">☆</label>
-                                        <input type="radio" name="@("rating" + product.Id)" value="1" id="@("1" + product.Id)"><label for="@("1" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="5" id="@("5" + product.Id)" onclick="updateRating('@product.Id', '5')"><label for="@("5" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="4" id="@("4" + product.Id)" onclick="updateRating('@product.Id', '4')"><label for="@("4" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="3" id="@("3" + product.Id)" onclick="updateRating('@product.Id', '3')"><label for="@("3" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="2" id="@("2" + product.Id)" onclick="updateRating('@product.Id', '2')"><label for="@("2" + product.Id)">☆</label>
+                                        <input type="radio" name="@("rating" + product.Id)" value="1" id="@("1" + product.Id)" onclick="updateRating('@product.Id', '1')"><label for="@("1" + product.Id)">☆</label>
                                     </div>
-                                    <span class="product-rating">@product.AverageRating / 5</span>
+                                  @*   <span class="@("product-rating" + product.Id)">@product.AverageRating / 5</span> *@
+                                    <span class="@("product-rating" + product.Id)">@product.AverageRating.ToString("0.##") / 5</span>
+
                                 </div>
                                 <input type="hidden" id="ratingValue-@product.Id" name="ratingValue" value="">
+                                <input type="hidden" name="productId" value="@product.Id">
                             </form>
                         }
 
@@ -91,6 +95,34 @@
 @section Scripts {
     @* <script src="~/js/rating_partial.js"></script> *@
     <script>
+        function updateRating(productId, rating) {
+            var t = $("input[name='__RequestVerificationToken']").val();
+            document.getElementById("ratingValue-" + productId).value = rating;
+            var formData = $('#ratingForm').serialize();
+
+            $.ajax({
+                headers:
+                {
+                    "RequestVerificationToken": t
+                },
+                type: 'POST',
+                url: '/Products/Rate',
+                data: { "productId": productId, "ratingValue": rating },
+                dataType: 'json',
+                success: function (response) {
+                    console.log('Rating submitted successfully');
+                    if (response.success) {
+                        $('.product-rating' + productId).text(response.rating.toFixed(2) + " / 5");
+                    } else {
+                        console.error('Rating submission failed:', response.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error submitting rating:', error);
+                }
+            });
+        }
+
         function toggleLikeImage(productId, button) {
             var darkLikeImage = document.getElementById('darkLikeImage_' + productId);
             var redLikeImage = document.getElementById('redLikeImage_' + productId);
@@ -107,4 +139,3 @@
         }
     </script>
 }
-
