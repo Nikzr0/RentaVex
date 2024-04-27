@@ -102,6 +102,7 @@
 
             if (productToRemove != null)
             {
+                await Task.Delay(1500);
                 this.productRepository.Delete(productToRemove);
                 await this.productRepository.SaveChangesAsync();
             }
@@ -246,6 +247,8 @@
             var user = await this.dbContext.Users
                 .Include(u => u.LikedProducts)
                 .FirstOrDefaultAsync(u => u.Id == userId);
+
+            await Task.Delay(1500);
 
             this.dbContext.Users.Find(userId).LikedProducts.Remove(product);
             await this.dbContext.SaveChangesAsync();

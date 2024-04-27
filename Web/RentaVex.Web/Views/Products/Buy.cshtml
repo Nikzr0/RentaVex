@@ -46,7 +46,8 @@
                             </form>
                         </div>
 
-                        <partial name="_RatingPartial" model="product"></partial>                 
+                        <partial name="_RatingPartial" model="product"></partial>
+
                     </div>
 
                     <div class="card-footer">
@@ -62,6 +63,9 @@
 
 <partial name="_PagingPartial" model="@Model"></partial>
 
+<div id="successToastContainer" style="display: none; transition: opacity 0.5s ease; position: fixed; top: 20px; right: 20px;">
+    <partial name="_SuccessToastPartial" />
+</div>
 
 
 @section Scripts {

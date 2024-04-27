@@ -40,8 +40,6 @@
             }
         });
     });
-
-
 }
 
 function toggleLikeImage(productId, button) {
@@ -54,7 +52,20 @@ function toggleLikeImage(productId, button) {
     } else {
         darkLikeImage.style.display = 'none';
         redLikeImage.style.display = 'inline-block';
-
         button.removeAttribute('onclick');
+
+        $('#successToastContainer').html('<div class="alert alert-success" role="alert" style="border: 2px solid #28a745; border-radius: 5px; padding: 10px; background-color: #d4edda; color: #155724;">' +
+            '<strong>Success! </strong> You added this product to your favorites!' +
+            '</div>');
+
+        $('#successToastContainer').css('opacity', '1');
+        $('#successToastContainer').show();
+
+        setTimeout(function () {
+            $('#successToastContainer').css('opacity', '0');
+            setTimeout(function () {
+                $('#successToastContainer').hide();
+            }, 500);
+        }, 3000);
     }
 }
