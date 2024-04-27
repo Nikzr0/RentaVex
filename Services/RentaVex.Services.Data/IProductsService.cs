@@ -31,7 +31,7 @@
 
         Task UnLikeProductAsync(int productId, string userId);
 
-        Task RateProductById(int productId, int ratingValue);
+        Task RateProductById(int productId, int ratingValue, string userId);
 
         IEnumerable<ProductViewModel> GetLikedProductsForUser(string userId);
 

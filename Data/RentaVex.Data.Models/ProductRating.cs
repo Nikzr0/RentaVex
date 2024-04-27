@@ -7,7 +7,9 @@ public class ProductRating : BaseDeletableModel<int>
 {
     public int NumberOfStars { get; set; }
 
-    //public double AverageRating { get; set; }
+    public ApplicationUser RatingOwner { get; set; }
+
+    public string OwnerId { get; set; }
 
     public int ProductId { get; set; }
 

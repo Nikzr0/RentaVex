@@ -60,10 +60,15 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Product>()
-                        .HasMany(product => product.ProductRatings)
-                .WithOne(ratig => ratig.Product)
-                .HasForeignKey(rating => rating.ProductId);
+            //modelBuilder.Entity<Product>()
+            //            .HasMany(product => product.ProductRatings)
+            //    .WithOne(ratig => ratig.Product)
+            //    .HasForeignKey(rating => rating.ProductId);
+
+            modelBuilder.Entity<ProductRating>()
+                .HasOne(pr => pr.RatingOwner)
+                .WithMany()
+                .HasForeignKey(pr => pr.OwnerId);
 
             modelBuilder.Entity<Product>()
                 .HasMany(x => x.UserLikes)

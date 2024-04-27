@@ -283,30 +283,48 @@
             return likedProductsCount;
         }
 
-        public async Task RateProductById(int productId, int ratingValue)
+        public async Task RateProductById(int productId, int ratingValue, string userId)
         {
             var product = this.GetProduct(productId);
+            var user = this.GetUserById(userId);
 
             if (product == null)
             {
                 throw new ArgumentException($"Product with ID {productId} is not found.");
             }
 
-            var productRating = new ProductRating
+                bool existingRating = await this.dbContext.ProductRatings
+            .AnyAsync(r => r.ProductId == productId && r.OwnerId == userId);
+
+            if (!existingRating)
             {
-                ProductId = productId,
-                NumberOfStars = ratingValue,
-            };
+                var productRating = new ProductRating
+                {
+                    ProductId = productId,
+                    NumberOfStars = ratingValue,
+                    OwnerId = userId,
+                };
 
-            //product.ProductRatings.Add(productRating);
-            //product.AverageRating = this.GetAverageRating(productId);
+                this.dbContext.ProductRatings.Add(productRating);
+                await this.dbContext.SaveChangesAsync();
 
-            //this.dbContext.Products.Find(productId).ProductRatings.Add(productRating);
-            this.dbContext.ProductRatings.Add(productRating);
-            await this.dbContext.SaveChangesAsync();
+                this.dbContext.Products.Find(productId).AverageRating = this.GetAverageRating(productId);
+                await this.dbContext.SaveChangesAsync();
+            }
 
-            this.dbContext.Products.Find(productId).AverageRating = this.GetAverageRating(productId);
-            await this.dbContext.SaveChangesAsync();
+            //User can give more than one rating
+            //var productRating = new ProductRating
+            //{
+            //    ProductId = productId,
+            //    NumberOfStars = ratingValue,
+            //    OwnerId = userId,
+            //};
+
+            //this.dbContext.ProductRatings.Add(productRating);
+            //await this.dbContext.SaveChangesAsync();
+
+            //this.dbContext.Products.Find(productId).AverageRating = this.GetAverageRating(productId);
+            //await this.dbContext.SaveChangesAsync();
         }
 
         public double GetAverageRating(int productId)
@@ -317,8 +335,7 @@
             {
                 double averageRating = ratings.Select(r => (double)r).Average();
                 double roundedRating = Math.Round(averageRating, 1);
-                double output = roundedRating;
-                return output;
+                return roundedRating;
             }
             else
             {

@@ -199,9 +199,11 @@
         [HttpPost]
         public async Task<IActionResult> Rate(int productId, int ratingValue)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             try
             {
-                await this.productService.RateProductById(productId, ratingValue);
+                await this.productService.RateProductById(productId, ratingValue, userId);
                 return this.Json(new { success = true, rating = this.productService.GetAverageRating(productId) });
             }
             catch (Exception ex)
