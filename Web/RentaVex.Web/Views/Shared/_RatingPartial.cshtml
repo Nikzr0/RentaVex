@@ -1,19 +1,30 @@
-﻿@* @using RentaVex.Web.ViewModels.Products
-@model RatingViewModel
+﻿@using RentaVex.Web.ViewModels.AllProducts
+@model ProductViewModel
 
-<link href="~/css/rating.css" rel="stylesheet" />
+@section Styles {
+    <style>
+        .rating-container {
+            display: flex;
+            align-items: center;
+        }
 
-<div class="rating-container">
-    <div class="rating">
-        <input type="radio" name="@("rating" + Model.ProductId)" value="5" id="@("5" + Model.ProductId)"><label for="@("5" + Model.ProductId)">☆</label>
-        <input type="radio" name="@("rating" + Model.ProductId)" value="4" id="@("4" + Model.ProductId)"><label for="@("4" + Model.ProductId)">☆</label>
-        <input type="radio" name="@("rating" + Model.ProductId)" value="3" id="@("3" + Model.ProductId)"><label for="@("3" + Model.ProductId)">☆</label>
-        <input type="radio" name="@("rating" + Model.ProductId)" value="2" id="@("2" + Model.ProductId)"><label for="@("2" + Model.ProductId)">☆</label>
-        <input type="radio" name="@("rating" + Model.ProductId)" value="1" id="@("1" + Model.ProductId)"><label for="@("1" + Model.ProductId)">☆</label>
+        .rating {
+            margin-right: 10px;
+        }
+    </style>
+}
+
+<form id="rateForm-@Model.Id" asp-controller="Products" asp-action="Rate" method="post">
+    <div class="rating-container">
+        <div class="rating">
+            <input type="radio" name="@("rating" + Model.Id)" value="5" id="@("5" + Model.Id)" onclick="updateRating('@Model.Id', '5')"><label for="@("5" + Model.Id)">☆</label>
+            <input type="radio" name="@("rating" + Model.Id)" value="4" id="@("4" + Model.Id)" onclick="updateRating('@Model.Id', '4')"><label for="@("4" + Model.Id)">☆</label>
+            <input type="radio" name="@("rating" + Model.Id)" value="3" id="@("3" + Model.Id)" onclick="updateRating('@Model.Id', '3')"><label for="@("3" + Model.Id)">☆</label>
+            <input type="radio" name="@("rating" + Model.Id)" value="2" id="@("2" + Model.Id)" onclick="updateRating('@Model.Id', '2')"><label for="@("2" + Model.Id)">☆</label>
+            <input type="radio" name="@("rating" + Model.Id)" value="1" id="@("1" + Model.Id)" onclick="updateRating('@Model.Id', '1')"><label for="@("1" + Model.Id)">☆</label>
+        </div>
+        <span class="@("product-rating" + Model.Id)">@Model.AverageRating.ToString("0.#") / 5</span>
     </div>
-    <span class="product-rating">@Model.NumberOfStars / 5</span>
-</div>
-
-@section Scripts {
-<script src="~/js/rating_partial.js"></script>
-} *@
+    <input type="hidden" id="ratingValue-@Model.Id" name="ratingValue" value="">
+    <input type="hidden" name="productId" value="@Model.Id">
+</form>

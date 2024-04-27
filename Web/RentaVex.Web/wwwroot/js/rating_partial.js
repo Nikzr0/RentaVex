@@ -1,34 +1,60 @@
-﻿document.querySelectorAll('.rating input[type="radio"]').forEach(function (star) {
-    star.addEventListener('click', function () {
-        var ratingValue = this.value;
+﻿function updateRating(productId, rating) {
+    var t = $("input[name='__RequestVerificationToken']").val();
+    document.getElementById("ratingValue-" + productId).value = rating;
 
-        fetch('@Url.Action("Rate", "Products")', {
-            method: 'POST',
-            body: JSON.stringify({ model: { ProductId: @Model.ProductId, NumberOfStars: ratingValue } }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Rating submitted successfully!');
+    $(document).ready(function () {
+        function showSuccessToast() {
+            $('#successToastContainer').css('opacity', '1');
+            $('#successToastContainer').show();
+
+            setTimeout(function () {
+                $('#successToastContainer').css('opacity', '0');
+                setTimeout(function () {
+                    $('#successToastContainer').hide();
+                }, 500);
+            }, 3000);
+        }
+
+        $.ajax({
+            headers:
+            {
+                "RequestVerificationToken": t
+            },
+            type: 'POST',
+            url: '/Products/Rate',
+            data: { "productId": productId, "ratingValue": rating },
+            dataType: 'json',
+            success: function (response) {
+
+                console.log('Rating submitted successfully');
+                if (response.success) {
+                    $('.product-rating' + productId).text(response.rating.toFixed(2) + " / 5");
+                    showSuccessToast();
+
                 } else {
-                    alert('Failed to submit rating. Please try again later.');
+                    console.error('Rating submission failed:', response.error);
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again later.');
-            });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error submitting rating:', error);
+            }
+        });
     });
-});
-document.querySelectorAll('.rating input[type="radio"]').forEach(function (star) {
-    star.addEventListener('click', function () {
-        var ratingValue = this.value;
-        var productId = this.id.substring(1);
 
-        document.getElementById('ratingValue-' + productId).value = ratingValue;
 
-        document.getElementById('rateForm-' + productId).submit();
-    });
-});
+}
+
+function toggleLikeImage(productId, button) {
+    var darkLikeImage = document.getElementById('darkLikeImage_' + productId);
+    var redLikeImage = document.getElementById('redLikeImage_' + productId);
+
+    if (darkLikeImage.style.display === 'none') {
+        darkLikeImage.style.display = 'inline-block';
+        redLikeImage.style.display = 'none';
+    } else {
+        darkLikeImage.style.display = 'none';
+        redLikeImage.style.display = 'inline-block';
+
+        button.removeAttribute('onclick');
+    }
+}
