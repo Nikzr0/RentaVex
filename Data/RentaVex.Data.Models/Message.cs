@@ -1,15 +1,10 @@
 ﻿namespace RentaVex.Data.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using RentaVex.Data.Common.Models;
 
-    public class Message
+    public class Message : BaseDeletableModel<int>
     {
-        public int MessageId { get; set; }
-
         public int SenderId { get; set; }
 
         public int ReceiverId { get; set; }
