@@ -16,7 +16,7 @@
             <h2 class="text-center">Rent @Model.Product.Name.ToLower()</h2>
             <hr />
 
-            <form method="post" class="col-md-8 offset-md-2" enctype="multipart/form-data">
+            <form method="post" asp-controller="Products" asp-action="RentProduct" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
 
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -38,9 +38,7 @@
                     </div>
                 </div>
 
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary mt-3" type="button">Submit</button>
-                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
             </form>
 
             @if (!this.SignInManager.IsSignedIn(this.User))

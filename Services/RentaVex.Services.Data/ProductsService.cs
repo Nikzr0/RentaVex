@@ -153,10 +153,14 @@
 
             foreach (var date in newUnavailableDates)
             {
-                product.UnavailableDates.Add(new UnavailableDate { Date = date });
+                //this.dbContext.Users.Find(userId).LikedProducts.Add(product);
+                //await this.dbContext.SaveChangesAsync();
+                this.dbContext.UnavailableDates.Add(new UnavailableDate { Date = date,  ProductId = product.Id, Product = product});
+                //product.UnavailableDates.Add(new UnavailableDate { Date = date });
             }
 
-            await this.productRepository.SaveChangesAsync();
+            //await this.productRepository.SaveChangesAsync();
+            await this.dbContext.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)

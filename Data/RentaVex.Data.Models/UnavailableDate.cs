@@ -3,10 +3,10 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class UnavailableDate
-    {
-        public int Id { get; set; }
+    using RentaVex.Data.Common.Models;
 
+    public class UnavailableDate : BaseDeletableModel<int>
+    {
         public DateTime Date { get; set; }
 
         public int ProductId { get; set; }

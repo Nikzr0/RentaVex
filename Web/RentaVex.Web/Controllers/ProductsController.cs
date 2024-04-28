@@ -152,35 +152,22 @@
         }
 
         [HttpGet]
-        public IActionResult RentProduct(int productId)
+        public IActionResult RentProduct(int id)
         {
             var product = new RentProductViewModel
             {
-                Product = this.productService.GetProductById(productId),
+                Product = this.productService.GetProductById(id),
             };
 
             return this.View(product);
         }
 
-        [HttpGet]
-        public IActionResult RentProduct(int productId, DateTime start, DateTime end)
-        {
-            var viewModel = new RentProductViewModel
-            {
-                Product = this.productService.GetProductById(productId),
-                PickupTime = start,
-                ReturnTime = end,
-            };
-
-            return this.View(viewModel);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> RentProduct(RentProductViewModel model)
+        public async Task<IActionResult> RentProduct(int id, RentProductViewModel model)
         {
             if (this.ModelState.IsValid)
             {
-                var product = this.productService.GetProduct(model.Product.Id);
+                var product = this.productService.GetProduct(id);
 
                 if (product == null)
                 {
@@ -189,7 +176,7 @@
 
                 await this.productService.SetProductUnavailableDates(product, model.PickupTime, model.ReturnTime);
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("Buy", "Products");
             }
 
             return this.View(model);
