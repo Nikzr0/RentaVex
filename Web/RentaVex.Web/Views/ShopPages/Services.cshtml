@@ -15,7 +15,7 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products.Where(x => x.Price == 0))
+        @foreach (var product in Model.Products.Where(x => x.Category == "Books"))
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 position-relative">

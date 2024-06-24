@@ -21,6 +21,7 @@
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Books" });
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Furniture" });
             await dbContext.Categories.AddAsync(new Models.Category { Name = "Sports Gear" });
+            await dbContext.Categories.AddAsync(new Models.Category { Name = "Services" });
 
             await dbContext.SaveChangesAsync();
         }

@@ -58,10 +58,9 @@
 <partial name="_PagingPartial" model="@Model"></partial>
 
 
-<div id="removeProductFromLiked" style="display: none; transition: opacity 0.5s ease; position: fixed; top: 20px; right: 20px;">
+@* <div id="removeProductFromLiked" style="display: none; transition: opacity 0.5s ease; position: fixed; top: 20px; right: 20px;">
     <partial name="_DangerRemoveProductPartial" />
 </div>
-
 
 @section scripts {
     <script>
@@ -82,14 +81,14 @@
                         $('#removeProductFromLiked').hide();
                     }, 500);
                 }, 3000);
-              
+
             } else {
 
                 darkLikeImage.style.display = 'inline-block';
                 redLikeImage.style.display = 'none';
-          
+
                 button.removeAttribute('onclick');
             }
         }
     </script>
-}
+} *@

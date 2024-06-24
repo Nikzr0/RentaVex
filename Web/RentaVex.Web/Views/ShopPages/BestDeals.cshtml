@@ -15,7 +15,7 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var product in Model.Products.OrderBy(x=>x.Price))
+        @foreach (var product in Model.Products.Where(x=>x.Price <= 100))
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 position-relative">

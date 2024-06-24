@@ -48,7 +48,7 @@
 
             product.CourierDelivery = inputInfo.CourierDelivery;
 
-            product.CategoryId = inputInfo.CategoryId;
+            product.Category = inputInfo.Category;
 
             product.Condition = inputInfo.Condition;
 
@@ -102,7 +102,6 @@
 
             if (productToRemove != null)
             {
-                await Task.Delay(1500);
                 this.productRepository.Delete(productToRemove);
                 await this.productRepository.SaveChangesAsync();
             }
@@ -234,6 +233,8 @@
             else
             {
                 //user.LikedProducts.Add(product);
+                //await this.userRepository.SaveChangesAsync();
+
                 this.dbContext.Users.Find(userId).LikedProducts.Add(product);
                 await this.dbContext.SaveChangesAsync();
             }
