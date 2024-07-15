@@ -179,6 +179,17 @@
             return this.productRepository.All().Count();
         }
 
+        public ApplicationUser GetUserByProductId(ProductViewModel product)
+        {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            return this.userRepository.AllAsNoTracking()
+                .FirstOrDefault(x => x.Id == product.UserId);
+        }
+
         public ApplicationUser GetUserById(string userId)
         {
             return this.userRepository.AllAsNoTracking()
@@ -228,7 +239,7 @@
             }
             else if (product.UserId == userId)
             {
-                throw new InvalidOperationException($"You can't like your own products");
+                //throw new InvalidOperationException($"You can't like your own products");
             }
             else
             {
@@ -253,7 +264,7 @@
                 .Include(u => u.LikedProducts)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            await Task.Delay(1500);
+            //await Task.Delay(1500);
 
             this.dbContext.Users.Find(userId).LikedProducts.Remove(product);
             await this.dbContext.SaveChangesAsync();

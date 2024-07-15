@@ -48,6 +48,11 @@
             return this.View(viewModel);
         }
 
+        public IActionResult MyRentings()
+        {
+            return this.View();
+        }
+
         [Authorize]
         public IActionResult EditProduct(int id)
         {

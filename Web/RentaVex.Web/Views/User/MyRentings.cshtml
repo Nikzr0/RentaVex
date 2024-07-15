@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHttpContextAccessor HttpContextAccessor
+@using RentaVex.Common
+@using RentaVex.Services.Data
+@using RentaVex.Web.ViewModels.User
+@using System.Security.Claims
+@model MyProductsViewModel
+
+@{
+    string pageName = GlobalService.GetPageName(HttpContextAccessor.HttpContext);
+    ViewData["Name"] = pageName;
+}
+
+<p> Hello from MyRentings page! Next feature to be added: Showing all the products I rented along with their info and the duration of the renting</p>
+
+@* <link href="~/css/store.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Products
+        .Where(x => x.UserId == HttpContextAccessor.HttpContext.User
+        .FindFirst(ClaimTypes.NameIdentifier)?.Value))
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 position-relative">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+
+                        <p class="card-description">
+                            @{
+                                string description = product.Description.Length > 140 ? product.Description.Substring(0, 140) + "..." : product.Description;
+                            }
+                            @description
+                        </p>
+                        <div class="price-container">
+                            <p class="card-price">$@product.Price</p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <a asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-block">
+                            Edit Product
+                        </a>
+
+                        <form asp-controller="User" asp-action="Remove" method="post">
+                            <input type="hidden" name="id" value="@product.Id" />
+                            <button type="submit" class="btn btn-danger btn-block" style="margin-top: 10px;">Remove Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Products.Count() >= 1)
+{
+    <partial name="_PagingPartial" model="@Model"></partial>
+}
+
+<div id="removeProductFromLiked" style="display: none; transition: opacity 0.5s ease; position: fixed; top: 20px; right: 20px;">
+    <partial name="_DangerRemoveProductPartial" />
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('form[action="/User/Remove"]').submit(function (event) {
+
+                $('#removeProductFromLiked').css('opacity', '1');
+                $('#removeProductFromLiked').show();
+
+                setTimeout(function () {
+                    $('#removeProductFromLiked').css('opacity', '0');
+                    setTimeout(function () {
+                        $('#removeProductFromLiked').hide();
+                    }, 500);
+                }, 3000);
+            });
+        });
+    </script>
+} *@
